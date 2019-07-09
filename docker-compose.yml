@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    image: naresh1318/topaz:latest
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:5000"
+    networks:
+      - webnet
+networks:
+  webnet:
