@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY . /app
 
-EXPOSE 4000
+EXPOSE 5000
 
 ENV FLASK_APP app.py
 
