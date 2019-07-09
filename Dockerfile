@@ -2,7 +2,6 @@ FROM python:3.6-slim
 
 # Put require here to use cached layers when possible
 ADD requirements.txt /tmp/requirements.txt
-
 RUN pip install --trusted-host pypi.python.org -r /tmp/requirements.txt
 
 WORKDIR /app
