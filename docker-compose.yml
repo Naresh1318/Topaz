@@ -3,7 +3,7 @@ services:
   web:
     image: naresh1318/topaz:latest
     deploy:
-      replicas: 5
+      replicas: 3
       resources:
         limits:
           cpus: "0.1"
@@ -11,7 +11,7 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "80:5000"
+      - "4000:5000"
     networks:
       - webnet
 networks:

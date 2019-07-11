@@ -1,1 +1,3 @@
+wheel
 Flask==1.0.3
+uWSGI==2.0.18
