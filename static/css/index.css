@@ -1,0 +1,17 @@
+.v-sheet {
+    display: block;
+    border-radius: 0;
+    position: relative;
+    transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
+    will-change: box-shadow;
+}
+
+.btn-text {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+}
+
+.nav-foot-icon {
+    color: white;
+    font-size: 1.5rem;
+}
