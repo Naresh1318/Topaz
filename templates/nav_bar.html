@@ -1,22 +1,22 @@
 <v-navigation-drawer app style="width: 20%">
-    <v-card dark color="#101010" raised height="100%">
+    <v-card dark color="#101010" raised height="100%" style="border-radius: 0;">
         <v-container grid-list-lg style="height: 70vh">
             <!-- Navigation buttons -->
             <v-layout justify-center align-center column style="margin-top: 30vh">
                 <v-flex>
-                    <v-btn class="btn-text" text>Home</v-btn>
+                    <v-btn class="btn-text" text v-on:click="navigate_to('home')">Home</v-btn>
                 </v-flex>
                 <v-flex>
-                    <v-btn class="btn-text" text>Projects</v-btn>
+                    <v-btn class="btn-text" text v-on:click="navigate_to('projects')">Projects</v-btn>
                 </v-flex>
                 <v-flex>
-                    <v-btn class="btn-text" text>Blog</v-btn>
+                    <v-btn class="btn-text" text v-on:click="navigate_to('blog')">Blog</v-btn>
                 </v-flex>
                 <v-flex>
-                    <v-btn class="btn-text" text>Publications</v-btn>
+                    <v-btn class="btn-text" text v-on:click="navigate_to('publications')">Publications</v-btn>
                 </v-flex>
                 <v-flex>
-                    <v-btn class="btn-text" text>About me</v-btn>
+                    <v-btn class="btn-text" text v-on:click="navigate_to('about_me')">About me</v-btn>
                 </v-flex>
             </v-layout>
         </v-container>

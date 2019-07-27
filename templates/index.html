@@ -25,6 +25,14 @@
         new Vue({
             el: '#app',
             vuetify: new Vuetify(),
+            data: {
+                current_page: "home"
+            },
+            methods: {
+                navigate_to: function(page) {
+                    this.current_page = page
+                }
+            }
         })
     </script>
 </body>
