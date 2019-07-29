@@ -13,5 +13,5 @@ def hello():
 
 @bp.route("/public_repos")
 def public_repos():
-    repos = get_public_repos()
-    return jsonify({"repos": repos})
+    repos, updated = get_public_repos()
+    return jsonify({"repos": repos, "updated": updated})

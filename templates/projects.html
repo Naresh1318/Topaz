@@ -1,3 +1,23 @@
-<div v-for="(project, index) in projects">
-    {{ index }} - {{ project.nameWithOwner }}
-</div>
+<v-layout wrap>
+    <v-flex xs12 xl12>
+        <v-layout wrap>
+            <v-flex xs10>
+                <h2>Projects</h2>
+            </v-flex>
+            <v-flex>
+                Updated: {{ updated }}
+            </v-flex>
+        </v-layout>
+    </v-flex>
+    <v-flex v-for="(project, index) in projects" :key="index" xs12>
+        <v-card color="#f1f1f1" max-width="40%" style="margin: auto" v-on:click="open_link(project.url)">
+            <v-card-title>
+                {{ project.name }}
+            </v-card-title>
+
+            <v-card-text>
+                {{ project.description }}
+            </v-card-text>
+        </v-card>
+    </v-flex>
+</v-layout>

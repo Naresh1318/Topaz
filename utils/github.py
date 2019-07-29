@@ -45,9 +45,21 @@ def cache_public_repos_request():
         repositories(privacy: PUBLIC, first: 100, orderBy: {field: PUSHED_AT, direction: DESC}) {
           totalCount
           nodes {
-            nameWithOwner
+            name
             url
             description
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history(first: 1) {
+                    nodes {
+                      committedDate
+                      message
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -66,4 +78,5 @@ def get_public_repos():
         cache_public_repos_request()
     with open(cached_path, "rb") as f:
         repos = pickle.load(f)
-    return repos
+    updated_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))
+    return repos, updated_time

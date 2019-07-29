@@ -1,13 +1,21 @@
 <v-layout wrap>
     <v-flex xs12 xl12>
-        <h2>What I am upto now</h2>
-        <v-card color="#f1f1f1" max-width="40%" style="margin: auto">
+        <v-layout wrap>
+            <v-flex xs10>
+                <h2>What I am upto now</h2>
+            </v-flex>
+            <v-flex>
+                Updated: {{ updated }}
+            </v-flex>
+        </v-layout>
+        <v-card color="#f1f1f1" max-width="40%" style="margin: auto" v-on:click="open_link(latest_project.url)">
             <v-card-title>
-                Topaz
+                {{ latest_project.name }}
             </v-card-title>
 
             <v-card-text>
-                A litt'l bit about topaz
+                {{ latest_project.description }} <br>
+                Latest Commit: {{ latest_project.defaultBranchRef.target.history.nodes[0].message }}
             </v-card-text>
         </v-card>
     </v-flex>
