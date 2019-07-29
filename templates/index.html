@@ -12,6 +12,9 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <link href="/static/css/index.css" rel="stylesheet">
 </head>
 <body style="font-family: 'Source Sans Pro', sans-serif;">
@@ -44,19 +47,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
-            vuetify: new Vuetify(),
-            data: {
-                current_page: "home"
-            },
-            methods: {
-                navigate_to: function(page) {
-                    this.current_page = page
-                }
-            }
-        })
-    </script>
+    <script src="/static/js/index.js"></script>
 </body>
 </html>
