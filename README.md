@@ -3,3 +3,4 @@ My website
 
 1. Change flask secret
 2. change google analytics
+3. Add github keys
