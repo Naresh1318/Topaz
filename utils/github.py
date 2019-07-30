@@ -1,3 +1,4 @@
+import os
 import time
 import pickle
 import requests
@@ -6,6 +7,9 @@ from flask import current_app
 
 
 cached_path = "./cached/repos_cached.pkl"
+if not os.path.exists(cached_path):
+    raise FileNotFoundError(f"{cached_path}: not found. "
+                            f"Ensure that your github key is saved in the first line of this file")
 github_key = open("keys.txt", "r").readlines()[0]
 headers = {"Authorization": github_key}
 
@@ -72,6 +76,13 @@ def cache_public_repos_request():
 
 
 def get_public_repos():
+    """
+    Returns a list of public repos and the update time
+
+    Returns: repos -> a list of repos with attributes
+             updated_time -> time list was updated
+
+    """
     start_time = current_app.config["CACHED_TIME"]
     if time.time() - start_time > cache_rate:
         current_app.config.from_mapping(CACHED_TIME=time.time())

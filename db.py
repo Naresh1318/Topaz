@@ -1,23 +1,34 @@
 # Reference: https://flask.palletsprojects.com/en/1.0.x/tutorial/database/
 
+import os
 import sqlite3
 
-from flask import current_app, g
+database_path = "./topaz.sqlite"
+
+
+def init_db():
+    """
+    Create database and tables if it isn't present
+
+    """
+    if os.path.exists(database_path):
+        return
+    # Create database and tables
+    db = get_db()
+    c = db.cursor()
+    c.execute("CREATE TABLE blogs (id INTEGER PRIMARY KEY, title TEXT, description TEXT, url TEXT, timestamp TEXT)")
+    c.execute("CREATE TABLE publications (id INTEGER PRIMARY KEY, title TEXT, description TEXT, url TEXT, timestamp TEXT)")
+    db.commit()
+    db.close()
 
 
 def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
+    """
+    Returns a database connection and sets output for be like dicts
 
-    return g.db
+    Returns (db object): sqlite3 db object
 
-
-def close_db():
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
+    """
+    db = sqlite3.connect(database_path)
+    db.row_factory = sqlite3.Row
+    return db

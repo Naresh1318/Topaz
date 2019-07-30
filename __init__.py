@@ -1,3 +1,4 @@
+import os
 import time
 from flask import Flask
 
@@ -21,6 +22,10 @@ def create_app():
     # Init github cache
     from utils.github import cache_public_repos_request
     cache_public_repos_request()
+
+    # Init database
+    import db
+    db.init_db()
 
     # Register blueprints
     import home
