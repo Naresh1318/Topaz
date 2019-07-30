@@ -4,3 +4,14 @@
 # Python cache
 __pycache__
 
+# keys
+keys.txt
+
+# Database
+topaz.sqlite
+
+# Envs
+.topaz/
+
+# cache
+cached/
