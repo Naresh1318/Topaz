@@ -7,22 +7,24 @@
     </v-flex>
 
     <v-flex v-for="(blog, index) in blogs" :key="index" xs12>
-        <v-card class="card-margin" color="#f1f1f1" max-width="40%" style="margin: auto" v-on:click="open_link(blog.url)">
-            <v-layout wrap>
-                <v-flex xs8 xl8>
-                    <v-card-title>
-                        {{ blog.title }}
-                    </v-card-title>
+        <v-hover v-slot:default="{ hover }">
+            <v-card class="card-margin rounded-card" color="#f1f1f1" max-width="40%" :elevation="hover ? 12 : 2" v-on:click="open_link(blog.url)">
+                <v-layout wrap>
+                    <v-flex xs8 xl8>
+                        <v-card-title>
+                            {{ blog.title }}
+                        </v-card-title>
 
-                    <v-card-text>
-                        {{ blog.description }}
-                    </v-card-text>
-                </v-flex>
-                <v-flex xs4 xl4 style="padding: 1rem">
-                    <v-img :src="blog.image_url" aspect-ratio="1" contain></v-img>
-                </v-flex>
-            </v-layout>
-        </v-card>
+                        <v-card-text>
+                            {{ blog.description }}
+                        </v-card-text>
+                    </v-flex>
+                    <v-flex xs4 xl4 style="padding: 1rem">
+                        <v-img :src="blog.image_url" aspect-ratio="1" contain></v-img>
+                    </v-flex>
+                </v-layout>
+            </v-card>
+        </v-hover>
     </v-flex>
 </v-layout>
 
