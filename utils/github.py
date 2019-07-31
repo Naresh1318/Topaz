@@ -26,7 +26,7 @@ def run_query(query):
 
 def update_public_repos(db_conn):
     """
-    List all public repos along with their links and descriptions from the authenticated user
+    List all public repos along with their links and descriptions from the authenticated user and update db if needed
 
     Args:
         db_conn: sqlite3 db connection

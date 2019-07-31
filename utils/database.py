@@ -9,6 +9,14 @@ cache_rate = 15 * 60  # sec
 
 
 def get_public_repos(db_conn):
+    """
+    Returns a list of public repos from github
+    Args:
+        db_conn: sqlite3 db connection object
+
+    Returns (repos, update_time): a list of repos and the last updated time
+
+    """
     c = db_conn.cursor()
     start_time = current_app.config["CACHED_TIME"]
     if time.time() - start_time > cache_rate:
