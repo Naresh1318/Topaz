@@ -12,7 +12,7 @@
     <v-flex v-for="(project, index) in projects" :key="index" xs12>
         <v-card color="#f1f1f1" max-width="40%" style="margin: auto" v-on:click="open_link(project.url)">
             <v-card-title>
-                {{ project.name }}
+                {{ project.title }}
             </v-card-title>
 
             <v-card-text>

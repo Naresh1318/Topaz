@@ -1,3 +1,27 @@
+import time
+from flask import current_app
+
+from utils.github import update_public_repos
+
+
+# Cache data once every 15 minutes
+cache_rate = 15 * 60  # sec
+
+
+def get_public_repos(db_conn):
+    c = db_conn.cursor()
+    start_time = current_app.config["CACHED_TIME"]
+    if time.time() - start_time > cache_rate:
+        current_app.config.from_mapping(CACHED_TIME=time.time())
+        update_public_repos(db_conn)
+
+    updated_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))
+    c.execute("SELECT * FROM public_repos")
+    all_rows = c.fetchall()
+    repos = [dict(row) for row in all_rows[::-1]]
+    return repos, updated_time
+
+
 def get_blogs(db_conn):
     """
     Returns a list of blogs from recent to old order

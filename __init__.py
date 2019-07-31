@@ -19,13 +19,14 @@ def create_app():
         CACHED_TIME=time.time()
     )
 
-    # Init github cache
-    from utils.github import cache_public_repos_request
-    cache_public_repos_request()
-
     # Init database
     import db
     db.init_db()
+
+    # Init github cache
+    from utils.github import update_public_repos
+    db_conn = db.get_db()
+    update_public_repos(db_conn)
 
     # Register blueprints
     import home

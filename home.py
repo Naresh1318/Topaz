@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, jsonify, request
 
 import db
 from utils import database
-from utils.github import get_public_repos
 
 
 bp = Blueprint("home", __name__)
@@ -25,8 +24,10 @@ def public_repos():
     Returns (JSON): a list of repos and updated timestamp
 
     """
-    repos, updated = get_public_repos()
-    return jsonify({"repos": repos, "updated": updated})
+    db_conn = db.get_db()
+    if request.method == "GET":
+        repos, updated = database.get_public_repos(db_conn)
+        return jsonify({"repos": repos, "updated": updated})
 
 
 @bp.route("/blogs", methods=["GET", "POST"])

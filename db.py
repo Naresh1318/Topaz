@@ -16,8 +16,12 @@ def init_db():
     # Create database and tables
     db = get_db()
     c = db.cursor()
-    c.execute("CREATE TABLE blogs (id INTEGER PRIMARY KEY, title TEXT, description TEXT, url TEXT, timestamp TEXT)")
-    c.execute("CREATE TABLE publications (id INTEGER PRIMARY KEY, title TEXT, description TEXT, url TEXT, timestamp TEXT)")
+    c.execute("CREATE TABLE public_repos (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
+              "latest_commit TEXT, url TEXT, timestamp TEXT)")
+    c.execute("CREATE TABLE blogs (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
+              "url TEXT, timestamp TEXT)")
+    c.execute("CREATE TABLE publications (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
+              "url TEXT, timestamp TEXT)")
     db.commit()
     db.close()
 
