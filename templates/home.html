@@ -1,14 +1,14 @@
 <v-layout wrap>
-    <v-flex xs12 xl12>
+    <v-flex xs2 xl2 offset-xs10 offset-xs10>
+        <span style="color: gray">Updated: {{ updated }}</span>
+    </v-flex>
+    <v-flex xs12 xl12 style="height: 40vh; margin-top: 1rem">
         <v-layout wrap>
             <v-flex xs10>
-                <h2>What I am upto now</h2>
-            </v-flex>
-            <v-flex>
-                Updated: {{ updated }}
+                <h1>What I am upto now?</h1>
             </v-flex>
         </v-layout>
-        <v-card color="#f1f1f1" max-width="40%" style="margin: auto" v-on:click="open_link(latest_project.url)">
+        <v-card color="#f1f1f1" max-width="40%" style="margin-left: auto; margin-right: auto; margin-top: 1rem" v-on:click="open_link(latest_project.url)">
             <v-card-title>
                 {{ latest_project.name }}
             </v-card-title>
@@ -21,9 +21,9 @@
     </v-flex>
 
     <v-flex xs12 xl12>
-        <h2>Recent Activity</h2>
-        <v-slide-group show-arrows>
-            <v-slide-item v-for="n in 15" :key="n">
+        <h1>Recent Activity</h1>
+        <v-layout wrap>
+            <v-flex xs4 v-for="n in 3" :key="n" style="margin-top: 1rem">
                 <v-card class="ma-4" color="#f1f1f1" height="300" min-width="15%">
                     <v-card-title>
                         Topaz
@@ -33,7 +33,7 @@
                         A litt'l bit about topaz
                     </v-card-text>
                 </v-card>
-            </v-slide-item>
-        </v-slide-group>
+            </v-flex>
+        </v-layout>
     </v-flex>
 </v-layout>
