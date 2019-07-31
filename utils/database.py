@@ -47,7 +47,7 @@ def get_blogs(db_conn):
     return all_rows
 
 
-def add_blog(db_conn, title, description, url):
+def add_blog(db_conn, title, description, url, image_url):
     """
     Adds entries as another row
     Args:
@@ -55,14 +55,16 @@ def add_blog(db_conn, title, description, url):
         title (str): blog title
         description (str): blog description
         url (str): blog link
+        image_url (str): image link
 
     Returns:
 
     """
     c = db_conn.cursor()
     try:
-        c.execute("INSERT INTO blogs (title, description, url, timestamp) VALUES (?, ?, ?, CURRENT_TIMESTAMP)",
-                  (title, description, url))
+        c.execute("INSERT INTO blogs (title, description, url, image_url, timestamp) VALUES "
+                  "(?, ?, ?, ?, CURRENT_TIMESTAMP)",
+                  (title, description, url, image_url))
         db_conn.commit()
         db_conn.close()
     except Exception as e:

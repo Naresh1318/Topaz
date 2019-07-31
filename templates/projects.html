@@ -10,14 +10,21 @@
         </v-layout>
     </v-flex>
     <v-flex v-for="(project, index) in projects" :key="index" xs12>
-        <v-card color="#f1f1f1" max-width="40%" style="margin: auto" v-on:click="open_link(project.url)">
-            <v-card-title>
-                {{ project.title }}
-            </v-card-title>
+        <v-card class="card-margin" color="#f1f1f1" max-width="40%"  v-on:click="open_link(project.url)">
+            <v-layout wrap>
+                <v-flex xs8 xl8>
+                    <v-card-title>
+                        {{ project.title }}
+                    </v-card-title>
 
-            <v-card-text>
-                {{ project.description }}
-            </v-card-text>
+                    <v-card-text>
+                        {{ project.description }}
+                    </v-card-text>
+                </v-flex>
+                <v-flex xs4 xl4 style="padding: 1rem">
+                    <v-img :src="project.image_url" aspect-ratio="1" contain></v-img>
+                </v-flex>
+            </v-layout>
         </v-card>
     </v-flex>
 </v-layout>

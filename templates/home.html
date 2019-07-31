@@ -8,15 +8,23 @@
                 <h1>What I am upto now?</h1>
             </v-flex>
         </v-layout>
-        <v-card color="#f1f1f1" max-width="40%" style="margin-left: auto; margin-right: auto; margin-top: 1rem" v-on:click="open_link(latest_project.url)">
-            <v-card-title>
-                {{ latest_project.title }}
-            </v-card-title>
+        <v-card class="card-margin" color="#f1f1f1" max-width="40%" v-on:click="open_link(latest_project.url)">
+            <v-layout wrap>
+                <v-flex xs8 xl8>
+                    <v-card-title>
+                        {{ latest_project.title }}
+                    </v-card-title>
 
-            <v-card-text>
-                {{ latest_project.description }} <br>
-                Latest Commit: {{ latest_project.latest_commit }}
-            </v-card-text>
+                    <v-card-text>
+                        {{ latest_project.description }} <br>
+                        Latest Commit: {{ latest_project.latest_commit }}
+                    </v-card-text>
+                </v-flex>
+                <v-flex xs4 xl4 style="padding: 1rem">
+                    <v-img :src="latest_project.image_url" aspect-ratio="1" contain></v-img>
+                </v-flex>
+            </v-layout>
+
         </v-card>
     </v-flex>
 

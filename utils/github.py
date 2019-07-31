@@ -1,8 +1,16 @@
+import re
 import requests
 
 
 github_key = open("keys.txt", "r").readlines()[0]
 headers = {"Authorization": github_key}
+
+
+def extract_first_image_url(readme):
+    s = re.search(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)", readme)
+    if s is None:
+        return "/static/images/personal-website-logo.png"
+    return s.group()
 
 
 def run_query(query):
@@ -55,6 +63,11 @@ def update_public_repos(db_conn):
                 }
               }
             }
+            object(expression: "master:README.md") {
+              ... on Blob {
+                text
+              }
+            }
           }
         }
       }
@@ -68,12 +81,15 @@ def update_public_repos(db_conn):
         for node in result["data"]["viewer"]["repositories"]["nodes"]:
             title = node["name"]
             description = node["description"]
+            readme = "" if node["object"] is None else node["object"]["text"]
+            image_url = extract_first_image_url(readme)
             url = node["url"]
             latest_commit = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["message"]
             timestamp = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["committedDate"]\
                 .replace("T", " ").replace("Z", "")  # Remove T and Z
-            c.execute("INSERT INTO public_repos (title, description, latest_commit, url, timestamp) VALUES (?, ?, ?, ? ,?)",
-                      (title, description, latest_commit, url, timestamp))
+            c.execute("INSERT INTO public_repos (title, description, readme, latest_commit, url, image_url, timestamp) "
+                      "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                      (title, description, readme, latest_commit, url, image_url, timestamp))
         db_conn.commit()
         db_conn.close()
     except Exception as e:

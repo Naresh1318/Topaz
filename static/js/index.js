@@ -10,7 +10,8 @@ let index = new Vue({
         updated: "",
         title: "",
         description: "",
-        url: ""
+        url: "",
+        image_url: ""
     },
     methods: {
         navigate_to: function(page) {
@@ -50,7 +51,8 @@ let index = new Vue({
             axios.post("/blogs", {
                 "title": index.title,
                 "description": index.description,
-                "url": index.url
+                "url": index.url,
+                "image_url": index.image_url
             })
                 .then(function(response) {
                     index.get_blogs()  // Refresh blogs list
