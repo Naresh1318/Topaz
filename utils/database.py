@@ -1,4 +1,5 @@
 import time
+import datetime
 from flask import current_app
 
 from utils.github import update_public_repos
@@ -68,3 +69,75 @@ def add_blog(db_conn, title, description, url):
         print(f"ERROR: {e}")
         return False
     return True
+
+
+def try_pop(l):
+    """
+    Try popping if not return a None dict
+    Args:
+        l: list to try popp'in
+
+    Returns: popped value and list
+
+    """
+    try:
+        value = l.pop(0)
+    except IndexError:
+        value = {"timestamp": None}
+    return value, l
+
+
+def max_times(times):
+    """
+    Returns the index of the max datetime
+    Args:
+        times (list): a list of datetimes in format 'YYYY-MM-DD HH:MM:SS'
+
+    Returns: index of latest time
+
+    """
+    date_times = []
+    for t in times:
+        if t is None:
+            date_times.append(datetime.datetime.now().replace(1970, 1, 1, 0, 0, 0))  # replace Nones with earliest date
+            continue
+        dt = []
+        t = t.split("-")
+        t = [i for i in t]
+        for i in t:
+            if ":" in i:
+                i = i.split(" ")
+                dt.append(i[0])
+                dt.extend([j.strip() for j in i[1].split(":")])
+            else:
+                dt.append(i.strip())
+        dt = list(map(int, dt))
+        date_times.append(datetime.datetime.now().replace(*dt))
+    return date_times.index(max(date_times))
+
+
+def get_top_k_entries(db_conn, k):
+    """
+    Returns a list of top k latest entries
+    Args:
+        db_conn: db connection object
+        k (int): top k
+
+    Returns: a list of top k entries
+
+    """
+    top_k = []
+    repos, _ = get_public_repos(db_conn)
+    blogs = get_blogs(db_conn)
+    repo, repos = try_pop(repos)
+    blog, blogs = try_pop(blogs)
+    for _ in range(k):
+        times = [repo["timestamp"], blog["timestamp"]]
+        latest_idx = max_times(times)
+        if latest_idx == 0:
+            top_k.append(repo)
+            repo, repos = try_pop(repos)
+        elif latest_idx == 1:
+            top_k.append(blog)
+            blog, blogs = try_pop(blogs)
+    return top_k

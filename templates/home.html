@@ -23,14 +23,14 @@
     <v-flex xs12 xl12>
         <h1>Recent Activity</h1>
         <v-layout wrap>
-            <v-flex xs4 v-for="n in 3" :key="n" style="margin-top: 1rem">
+            <v-flex xs4 v-for="k in top_k" :key="k.url" style="margin-top: 1rem">
                 <v-card class="ma-4" color="#f1f1f1" height="300" min-width="15%">
                     <v-card-title>
-                        Topaz
+                        {{ k.title }}
                     </v-card-title>
 
                     <v-card-text>
-                        A litt'l bit about topaz
+                        {{ k.description }}
                     </v-card-text>
                 </v-card>
             </v-flex>
