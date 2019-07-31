@@ -1,13 +1,9 @@
 <v-layout wrap>
+    <v-flex xs2 xl2 offset-xs10 offset-xs10>
+        <span style="color: gray">Updated: {{ updated }}</span>
+    </v-flex>
     <v-flex xs12 xl12>
-        <v-layout wrap>
-            <v-flex xs10>
-                <h2>Projects</h2>
-            </v-flex>
-            <v-flex>
-                Updated: {{ updated }}
-            </v-flex>
-        </v-layout>
+        <h1>Projects</h1>
     </v-flex>
     <v-flex v-for="(project, index) in projects" :key="index" xs12>
         <v-card class="card-margin" color="#f1f1f1" max-width="40%"  v-on:click="open_link(project.url)">
