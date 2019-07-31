@@ -36,19 +36,19 @@
             <v-content>
                 <!-- Provides the application the proper gutter -->
                 <v-container grid-list-lg style="margin-left: 8rem; width: 92%;">
-                    <div v-show="current_page==='home'" class="animated slideInUp animated-card">
+                    <div v-show="current_page==='home'" class="animated fadeIn animated-card">
                         {% include 'home.html' %}
                     </div>
-                    <div v-show="current_page==='projects'" class="animated slideInUp animated-card">
+                    <div v-show="current_page==='projects'" class="animated fadeIn animated-card">
                         {% include 'projects.html' %}
                     </div>
-                    <div v-show="current_page==='blog'" class="animated slideInUp animated-card">
+                    <div v-show="current_page==='blog'" class="animated fadeIn animated-card">
                         {% include 'blog.html' %}
                     </div>
-                    <div v-show="current_page==='publications'" class="animated slideInUp animated-card">
+                    <div v-show="current_page==='publications'" class="animated fadeIn animated-card">
                         {% include 'publications.html' %}
                     </div>
-                    <div v-show="current_page==='about_me'" class="animated slideInUp animated-card">
+                    <div v-show="current_page==='about_me'" class="animated fadeIn animated-card">
                         {% include 'about_me.html' %}
                     </div>
                 </v-container>
