@@ -64,6 +64,7 @@ def blogs():
     description = request.json["description"]
     url = request.json["url"]
     image_url = request.json["image_url"]
-    database.add_blog(db_conn, title, description, url, image_url)
+    time_stamp = request.json["time_stamp"] + " 00:00:00"
+    database.add_blog(db_conn, title, description, url, image_url, time_stamp)
     db_conn.close()
     return jsonify({"INFO": "Blog added"})

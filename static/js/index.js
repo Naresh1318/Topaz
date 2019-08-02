@@ -11,7 +11,8 @@ let index = new Vue({
         title: "",
         description: "",
         url: "",
-        image_url: ""
+        image_url: "",
+        time_stamp: ""
     },
     methods: {
         navigate_to: function(page) {
@@ -52,7 +53,8 @@ let index = new Vue({
                 "title": index.title,
                 "description": index.description,
                 "url": index.url,
-                "image_url": index.image_url
+                "image_url": index.image_url,
+                "time_stamp": index.time_stamp
             })
                 .then(function(response) {
                     index.get_blogs()  // Refresh blogs list
