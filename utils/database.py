@@ -1,12 +1,30 @@
 import time
 import datetime
 from flask import current_app
+from flask_login import UserMixin
 
 from utils.github import update_public_repos
 
 
 # Cache data once every 15 minutes
 cache_rate = 15 * 60  # sec
+
+
+class User(UserMixin):
+    pass
+
+
+def get_user(db_conn, username):
+    c = db_conn.cursor()
+    c.execute("SELECT * FROM users WHERE username=?", (username,))
+    user_row = c.fetchall()
+    if not user_row:
+        return None
+    user = User()
+    query_user = dict(user_row[0])
+    user.id = query_user["username"]
+    user.password = query_user["password"]
+    return user
 
 
 def get_public_repos(db_conn):

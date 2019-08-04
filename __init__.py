@@ -1,5 +1,8 @@
 import time
 from flask import Flask
+from flask_login import LoginManager
+
+from utils.database import get_user
 
 
 # Change jinja template syntax
@@ -30,5 +33,17 @@ def create_app():
     # Register blueprints
     import home
     app.register_blueprint(home.bp)
+
+    import auth
+    app.register_blueprint(auth.bp)
+
+    # Initialize login manager
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def user_loader(username):
+        db_conn = db.get_db()
+        return get_user(db_conn, username)
 
     return app

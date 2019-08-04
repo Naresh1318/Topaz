@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Admin {% endblock %}
+
+{% block content %}
+<div id="app">
+    <v-app>
+        <v-layout>
+            <v-flex xl12>
+                You are logged in as admin
+            </v-flex>
+            <v-flex xl12>
+                <v-btn href="/logout">Logout</v-btn>
+            </v-flex>
+        </v-layout>
+    </v-app>
+</div>
+<script src="/static/js/admin.js"></script>
+{% endblock %}

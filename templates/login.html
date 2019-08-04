@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<div id="app">
+    <v-app>
+        <v-container grid-list-xl fluid>
+            <v-layout>
+                <v-flex xl12>
+                    <v-text-field v-model="username" label="Name" required></v-text-field>
+                    <v-text-field v-model="password" type="password" label="Password">
+                    </v-text-field>
+                    <v-btn @click="login()">Login</v-btn>
+                </v-flex>
+                <v-flex xl12 v-if="show_alert">
+                      <v-alert color="error">
+                          Wrong username or password
+                      </v-alert>
+                </v-flex>
+            </v-layout>
+        </v-container>
+    </v-app>
+</div>
+
+<script src="/static/js/login.js"></script>
+{% endblock %}
