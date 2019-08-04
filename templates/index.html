@@ -1,33 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144577202-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+{% extends 'base.html' %}
 
-      gtag('config', 'UA-144577202-1');
-    </script>
+{% block title %} Naresh {% endblock %}
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Animate CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-
-    <!-- Axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <link href="/static/css/index.css" rel="stylesheet">
-</head>
-<body style="font-family: 'Source Sans Pro', sans-serif;">
+{% block content %}
     <div id="app">
         <v-app>
             {% include 'nav_bar.html' %}
@@ -52,11 +27,8 @@
                         {% include 'about_me.html' %}
                     </div>
                 </v-container>
-        </v-content>
+            </v-content>
         </v-app>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="/static/js/index.js"></script>
-</body>
-</html>
+{% endblock %}

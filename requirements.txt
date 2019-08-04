@@ -2,3 +2,4 @@ wheel
 Flask==1.0.3
 uWSGI==2.0.18
 requests==2.12.3
+Flask-Login==0.4.1
