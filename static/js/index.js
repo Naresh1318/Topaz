@@ -5,14 +5,10 @@ let index = new Vue({
         current_page: "home",
         projects: [],
         blogs: [],
+        publications: [],
         top_k: [],
         latest_project: {},
         updated: "",
-        title: "",
-        description: "",
-        url: "",
-        image_url: "",
-        time_stamp: ""
     },
     methods: {
         navigate_to: function(page) {
@@ -48,23 +44,18 @@ let index = new Vue({
                     index.blogs = response["data"]["blogs"]
                 })
         },
-        submit_blog: function() {
-            axios.post("/blogs", {
-                "title": index.title,
-                "description": index.description,
-                "url": index.url,
-                "image_url": index.image_url,
-                "time_stamp": index.time_stamp
-            })
+        get_publications: function() {
+            // Get all publications
+            axios.get("/publications")
                 .then(function(response) {
-                    index.get_blogs()  // Refresh blogs list
-                    console.log(response.data)
+                    index.publications = response["data"]["publications"]
                 })
-        }
+        },
     },
     created: function() {
         this.get_top_k()
         this.get_repos()
         this.get_blogs()
+        this.get_publications()
     }
 })

@@ -27,27 +27,3 @@
         </v-hover>
     </v-flex>
 </v-layout>
-
-<form>
-    <v-layout wrap>
-        <v-flex xl12>
-            <v-text-field v-model="title" label="title" required></v-text-field>
-        </v-flex>
-        <v-flex xl12>
-            <v-text-field v-model="description" label="description" required></v-text-field>
-        </v-flex>
-        <v-flex xl12>
-            <v-text-field v-model="url" label="url" required></v-text-field>
-        </v-flex>
-        <v-flex xl12>
-            <v-text-field v-model="image_url" label="image_url" required></v-text-field>
-        </v-flex>
-        <v-flex xl12>
-            <v-text-field v-model="time_stamp" label="Label Text" type="date" required></v-text-field>
-        </v-flex>
-        <v-flex xl12>
-            <v-btn @click="submit_blog()">Submit</v-btn>
-        </v-flex>
-    </v-layout>
-</form>
-

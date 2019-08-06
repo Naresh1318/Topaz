@@ -49,26 +49,28 @@ def get_public_repos(db_conn):
     return repos, updated_time
 
 
-def get_blogs(db_conn):
+def get_entries(table, db_conn):
     """
-    Returns a list of blogs from recent to old order
+    Returns a list of entries from recent to old order
     Args:
+        table (str): blogs, publications
         db_conn: sqlite3 db connection object
 
     Returns (list): a list of dicts with key as columns and values as table values
 
     """
     c = db_conn.cursor()
-    c.execute("SELECT * FROM blogs")
+    c.execute(f"SELECT * FROM {table}")
     all_rows = c.fetchall()
     all_rows = [dict(row) for row in all_rows[::-1]]
     return all_rows
 
 
-def add_blog(db_conn, title, description, url, image_url, time_stamp):
+def add_entry(table, db_conn, title, description, url, image_url, time_stamp):
     """
-    Adds entries as another row
+    Adds entry as another row
     Args:
+        table (str): blogs, publications
         db_conn: sqlite3 db connection object
         title (str): blog title
         description (str): blog description
@@ -76,12 +78,13 @@ def add_blog(db_conn, title, description, url, image_url, time_stamp):
         image_url (str): image link
         time_stamp (str): timestamp of the post
 
-    Returns:
+    Returns: True  -> entry added
+             False -> error occurred
 
     """
     c = db_conn.cursor()
     try:
-        c.execute("INSERT INTO blogs (title, description, url, image_url, timestamp) VALUES "
+        c.execute(f"INSERT INTO {table} (title, description, url, image_url, timestamp) VALUES "
                   "(?, ?, ?, ?, ?)",
                   (title, description, url, image_url, time_stamp))
         db_conn.commit()
@@ -149,11 +152,13 @@ def get_top_k_entries(db_conn, k):
     """
     top_k = []
     repos, _ = get_public_repos(db_conn)
-    blogs = get_blogs(db_conn)
+    blogs = get_entries("blogs", db_conn)
+    publications = get_entries("publications", db_conn)
     repo, repos = try_pop(repos)
     blog, blogs = try_pop(blogs)
+    publication, publications = try_pop(publications)
     for _ in range(k):
-        times = [repo["timestamp"], blog["timestamp"]]
+        times = [repo["timestamp"], blog["timestamp"], publication["timestamp"]]
         latest_idx = max_times(times)
         if latest_idx == 0:
             top_k.append(repo)
@@ -161,4 +166,7 @@ def get_top_k_entries(db_conn, k):
         elif latest_idx == 1:
             top_k.append(blog)
             blog, blogs = try_pop(blogs)
+        elif latest_idx == 2:
+            top_k.append(publication)
+            publication, publications = try_pop(publications)
     return top_k

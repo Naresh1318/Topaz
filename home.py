@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request
+from flask_login import login_required, current_user
 
 import db
 from utils import database
@@ -57,14 +58,42 @@ def blogs():
     """
     db_conn = db.get_db()
     if request.method == "GET":
-        all_blogs = database.get_blogs(db_conn)
+        all_blogs = database.get_entries("blogs", db_conn)
         db_conn.close()
         return jsonify({"blogs": all_blogs})
-    title = request.json["title"]
-    description = request.json["description"]
-    url = request.json["url"]
-    image_url = request.json["image_url"]
-    time_stamp = request.json["time_stamp"] + " 00:00:00"
-    database.add_blog(db_conn, title, description, url, image_url, time_stamp)
-    db_conn.close()
-    return jsonify({"INFO": "Blog added"})
+    if current_user.is_authenticated:
+        title = request.json["title"]
+        description = request.json["description"]
+        url = request.json["url"]
+        image_url = request.json["image_url"]
+        time_stamp = request.json["time_stamp"] + " 00:00:00"
+        database.add_entry("blogs", db_conn, title, description, url, image_url, time_stamp)
+        db_conn.close()
+        return jsonify({"INFO": "Blog added"})
+    return jsonify({"ERROR": "Unauthenticated"})
+
+
+@bp.route("/publications", methods=["GET", "POST"])
+def publications():
+    """
+    GET or POST publications
+
+    Returns (JSON): GET  -> a list of all publications
+                    POST -> INFO message
+
+    """
+    db_conn = db.get_db()
+    if request.method == "GET":
+        all_blogs = database.get_entries("publications", db_conn)
+        db_conn.close()
+        return jsonify({"publications": all_blogs})
+    if current_user.is_authenticated:
+        title = request.json["title"]
+        description = request.json["description"]
+        url = request.json["url"]
+        image_url = request.json["image_url"]
+        time_stamp = request.json["time_stamp"] + " 00:00:00"
+        database.add_entry("publications", db_conn, title, description, url, image_url, time_stamp)
+        db_conn.close()
+        return jsonify({"INFO": "Publication added"})
+    return jsonify({"ERROR": "Unauthenticated"})
