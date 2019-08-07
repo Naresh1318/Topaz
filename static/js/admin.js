@@ -9,9 +9,15 @@ let vue_admin = new Vue({
         image_url: "",
         time_stamp: "",
         type: "",
+        show_alert: false,
+        alert_text: ""
     },
     methods: {
         submit_entry: function() {
+            if (vue_admin.type === "") {
+                this.alert_text = "Fill all entries"
+                this.show_alert = true
+            }
             axios.post(`/${vue_admin.type}s`, {
                 "title": vue_admin.title,
                 "description": vue_admin.description,
@@ -20,8 +26,9 @@ let vue_admin = new Vue({
                 "time_stamp": vue_admin.time_stamp
             })
                 .then(function(response) {
-                    if (response.data["INFO"] === `${vue_admin.type} added`) {
-                        alert(`${vue_admin.type} added`)
+                    if (response.data["INFO"]) {
+                        vue_admin.alert_text = response.data["INFO"]
+                        vue_admin.show_alert = true
                     }
                 })
         },

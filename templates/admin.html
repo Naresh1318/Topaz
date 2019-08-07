@@ -5,48 +5,51 @@
 {% block content %}
 <div id="app">
     <v-app>
-        <v-container>
-             <v-layout>
-                 <v-flex xl12>
-                    You are logged in as admin
+        <v-container grid-list-md>
+             <v-layout wrap>
+                 <v-flex xl11>
+                     <h1> Logged in as admin! </h1>
                  </v-flex>
-                 <v-flex xl12>
-                     <v-btn href="/logout">Logout</v-btn>
+                 <v-flex xl1>
+                     <v-btn href="/logout" color="dark" dark>Logout</v-btn>
                  </v-flex>
             </v-layout>
-            <v-layout>
+            <v-layout wrap>
                 <v-flex xl12>
-                    Add Blog
+                    <h2 style="width:30%; margin: auto"> Add Entry </h2>
                 </v-flex>
                 <v-flex xl12>
-                    <form>
-                        <v-layout wrap>
-                            <v-flex xl12>
-                                <v-text-field v-model="title" label="title" required></v-text-field>
-                            </v-flex>
-                            <v-flex xl12>
-                                <v-text-field v-model="description" label="description" required></v-text-field>
-                            </v-flex>
-                            <v-flex xl12>
-                                <v-text-field v-model="url" label="url" required></v-text-field>
-                            </v-flex>
-                            <v-flex xl12>
-                                <v-text-field v-model="image_url" label="image_url" required></v-text-field>
-                            </v-flex>
-                            <v-flex xl12>
-                                <v-text-field v-model="time_stamp" label="Label Text" type="date" required></v-text-field>
-                            </v-flex>
-                            <v-flex>
-                                <v-select v-model="type" :items="types" label="type"></v-select>
-                            </v-flex>
-                            <v-flex xl12>
-                                <v-btn @click="submit_entry()">Submit</v-btn>
-                            </v-flex>
-                        </v-layout>
-                    </form>
+                    <v-card class="rounded-card" style="width: 30%; margin: auto">
+                        <v-container grid-list-md>
+                            <v-layout justify-center align-center wrap>
+                                <v-flex  xl12>
+                                    <v-text-field v-model="title" label="Title" required color="dark"></v-text-field>
+                                </v-flex>
+                                <v-flex xl12>
+                                    <v-textarea v-model="description" label="Description" required color="dark"></v-textarea>
+                                </v-flex>
+                                <v-flex>
+                                    <v-text-field v-model="url" label="URL" required color="dark"></v-text-field>
+                                </v-flex>
+                                <v-flex>
+                                    <v-text-field v-model="image_url" label="Image URL" required color="dark"></v-text-field>
+                                </v-flex>
+                                <v-flex xl6>
+                                    <v-text-field v-model="time_stamp" label="Label Text" type="date" required color="dark"></v-text-field>
+                                </v-flex>
+                                <v-flex xl6>
+                                    <v-select v-model="type" :items="types" label="Type" required color="dark"></v-select>
+                                </v-flex>
+                                <v-flex>
+                                    <v-btn @click="submit_entry()" color="dark" dark>Submit</v-btn>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card>
                 </v-flex>
             </v-layout>
         </v-container>
+        <v-snackbar v-model="show_alert"> {{ alert_text }} <v-btn color="#fff" text @click="show_alert=false">Close</v-btn></v-snackbar>
     </v-app>
 </div>
 <script src="/static/js/admin.js"></script>
