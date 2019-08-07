@@ -35,7 +35,7 @@
             <v-flex xs4 v-for="k in top_k" :key="k.url" style="margin-top: 1rem">
                 <v-hover v-slot:default="{ hover }">
                     <v-card class="ma-4 rounded-card" color="#f1f1f1" height="300px" min-width="15%" :elevation="hover ? 12 : 2" v-on:click="open_link(k.url)">
-                        <v-img height="200px" :src="k.image_url"></v-img>
+                        <v-img height="200px" :src="k.image_url" aspect-ratio="1"></v-img>
                         <v-card-title>
                             {{ k.title }}
                         </v-card-title>

@@ -5,21 +5,31 @@
 {% block content %}
 <div id="app">
     <v-app>
-        <v-container grid-list-xl fluid>
-            <v-layout>
-                <v-flex xl12>
-                    <v-text-field v-model="username" label="Name" required></v-text-field>
-                    <v-text-field v-model="password" type="password" label="Password">
-                    </v-text-field>
-                    <v-btn @click="login()">Login</v-btn>
-                </v-flex>
-                <v-flex xl12 v-if="show_alert">
-                      <v-alert color="error">
-                          Wrong username or password
-                      </v-alert>
-                </v-flex>
-            </v-layout>
-        </v-container>
+        <v-layout align-center>
+            <v-flex xl12>
+                <v-card style="width: 30%; margin: auto; padding: 2rem">
+                    <v-container grid-list-md>
+                        <v-layout justify-center wrap>
+                            <v-flex xl3>
+                                <h1>Topaz</h1>
+                            </v-flex>
+                            <v-flex xl10>
+                                <v-text-field v-model="username" label="Name" required color="dark"></v-text-field>
+                            </v-flex>
+                            <v-flex xl10>
+                                <v-text-field v-model="password" type="password" label="Password" required color="dark"></v-text-field>
+                            </v-flex>
+                            <v-flex xl3>
+                                <v-btn @click="login()" color="dark" dark>Login</v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+            </v-flex>
+        </v-layout>
+        <v-snackbar v-model="show_alert">
+            Wrong username or password <v-btn color="#fff" text @click="show_alert=false">Close</v-btn>
+        </v-snackbar>
     </v-app>
 </div>
 
