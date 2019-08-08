@@ -5,8 +5,6 @@ import sqlite3
 from werkzeug.security import generate_password_hash
 
 database_path = "./topaz.sqlite"
-username = "admin"  # TODO: Change these
-password = "test"
 
 
 def init_db():
@@ -28,7 +26,8 @@ def init_db():
               "url TEXT, image_url TEXT, timestamp TEXT)")
 
     # Create admin
-    c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, generate_password_hash(password)))
+    c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (os.getenv("USERNAME"),
+                                                                       generate_password_hash(os.getenv("PASSWORD"))))
     db.commit()
     db.close()
 
