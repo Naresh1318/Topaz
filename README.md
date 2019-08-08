@@ -8,7 +8,7 @@
 Live example: https://naresh1318.com
 
 After working on a project the last thing I usually think of is updating my personal website. 
-Including links, images, description and pushing changes to the server every single time I work 
+Adding links, images, description and pushing changes to the server every single time I work 
 on something new is kinda boring especially if you are lazy like me. What do we do when we're lazy?
 we automate things. Thereby giving us time to, idk, complain about our laziness. I designed Topaz 
 to automatically update as much of my website as possible. 
@@ -125,6 +125,9 @@ https://docs.docker.com/install/ or just google it for your os
    docker run -p 4000:5000 topaz:latest
 
 6. Finally, go to `localhost:<port forwarded to>` on your browser
+
+7. You can access the login page using `localhost:<port forwarded to>/login`. Example `localhost:4000\login`. 
+Login using the username and password you setup earlier.
 
 ## Concluding thoughts
 1. Feel free to do a pull request if you fix bugs
