@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, jsonify, request
+import json
+from flask import Blueprint, render_template, jsonify, request, current_app
 from flask_login import login_required, current_user
 
 import db
@@ -8,13 +9,30 @@ from utils import database
 bp = Blueprint("home", __name__)
 
 
-@bp.route("/")
+@bp.route("/", methods=["GET"])
 def home():
     """
     Render home page
 
     """
-    return render_template("index.html")
+    try:
+        with open(current_app.config["THEME_DIR"], "r") as f:
+            data = json.load(f)
+            formated_font = data["font_family"].replace(" ", "+")
+            return render_template("index.html", icon=data["icon"], formated_font=formated_font,
+                                   font_family=data["font_family"], name_font_family=data["name_font_family"])
+    except FileNotFoundError as e:
+        return jsonify({"ERROR": e})
+
+
+@bp.route("/theme", methods=["GET"])
+def theme():
+    try:
+        with open(current_app.config["THEME_DIR"], "r") as f:
+            data = json.load(f)
+        return jsonify({"theme": data})
+    except FileNotFoundError as e:
+        return jsonify({"ERROR": e})
 
 
 @bp.route("/top_k", methods=["GET"])

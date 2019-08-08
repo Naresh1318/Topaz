@@ -9,7 +9,7 @@ headers = {"Authorization": github_key}
 def extract_first_image_url(readme):
     s = re.search(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)", readme)
     if s is None:
-        return "/static/images/personal-website-logo.png"
+        return "/static/img/personal-website-logo.png"
     return s.group()
 
 

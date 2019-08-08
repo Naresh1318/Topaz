@@ -18,7 +18,8 @@ def create_app():
     app = CustomFlask(__name__)
     app.config.from_mapping(
         SECRET_KEY="dev",  # TODO: Change this
-        CACHED_TIME=time.time()
+        CACHED_TIME=time.time(),
+        THEME_DIR="./theme.json"
     )
 
     # Init database

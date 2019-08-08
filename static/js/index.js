@@ -3,6 +3,7 @@ let index = new Vue({
     vuetify: new Vuetify(),
     data: {
         current_page: "home",
+        theme: {},
         projects: [],
         blogs: [],
         publications: [],
@@ -17,6 +18,15 @@ let index = new Vue({
         open_link: function(url) {
             let win = window.open(url, "_blank")
             win.focus()
+        },
+        get_theme: function() {
+          axios.get("/theme")
+              .then(function(response) {
+                  if(response["data"]["theme"])
+                      index.theme = response["data"]["theme"]
+                  else
+                      console.log("ERROR: " + response["data"]["ERROR"])
+              })
         },
         get_top_k: function() {
             axios.get("/top_k", {
@@ -53,6 +63,7 @@ let index = new Vue({
         },
     },
     created: function() {
+        this.get_theme()
         this.get_top_k()
         this.get_repos()
         this.get_blogs()
