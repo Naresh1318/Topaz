@@ -10,6 +10,11 @@ bp = Blueprint("auth", __name__)
 
 @bp.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    GET -> Returns login page
+    POST -> Try authenticating user
+
+    """
     if request.method == "GET":
         return render_template("login.html")
     username = request.json["username"]
@@ -26,6 +31,10 @@ def login():
 
 @bp.route("/logout")
 def logout():
+    """
+    Logout current user
+
+    """
     if current_user.is_authenticated:
         logout_user()
         return redirect(url_for("home.home"))
@@ -35,4 +44,8 @@ def logout():
 @bp.route("/admin", methods=["GET"])
 @login_required
 def admin():
+    """
+    Render admin page
+
+    """
     return render_template("admin.html")

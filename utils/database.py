@@ -15,6 +15,15 @@ class User(UserMixin):
 
 
 def get_user(db_conn, username):
+    """
+    Returns UserMixin object if the username matches an entry in the database
+    Args:
+        db_conn: sqlite3 db connection object
+        username (str): username string
+
+    Returns (User): UserMixin Object with id set to username
+
+    """
     c = db_conn.cursor()
     c.execute("SELECT * FROM users WHERE username=?", (username,))
     user_row = c.fetchall()

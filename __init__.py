@@ -1,3 +1,4 @@
+import os
 import time
 from flask import Flask
 from flask_login import LoginManager
@@ -15,9 +16,13 @@ class CustomFlask(Flask):
 
 
 def create_app():
+    """
+    Initialize Flask and setup database
+
+    """
     app = CustomFlask(__name__)
     app.config.from_mapping(
-        SECRET_KEY="dev",  # TODO: Change this
+        SECRET_KEY=os.urandom(16),
         CACHED_TIME=time.time(),
         THEME_DIR="./theme.json"
     )

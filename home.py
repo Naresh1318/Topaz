@@ -27,6 +27,11 @@ def home():
 
 @bp.route("/theme", methods=["GET"])
 def theme():
+    """
+    Returns theme JSON object
+
+    Returns (JSON): theme JSON object
+    """
     try:
         with open(current_app.config["THEME_DIR"], "r") as f:
             data = json.load(f)

@@ -1,5 +1,3 @@
-# Reference: https://flask.palletsprojects.com/en/1.0.x/tutorial/database/
-
 import os
 import sqlite3
 from werkzeug.security import generate_password_hash
