@@ -2,7 +2,7 @@ import re
 import requests
 
 
-github_key = open("keys.txt", "r").readlines()[0]
+github_key = open("keys.txt", "r").readlines()[0].replace("\n", "")
 headers = {"Authorization": github_key}
 
 
