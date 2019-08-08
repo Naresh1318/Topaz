@@ -24,7 +24,7 @@
         <v-container>
             <v-layout justify-center>
                 <v-flex xl4>
-                    <v-btn class="btn-text" text href="https://files.naresh1318.com/public/Me/Naresh_Nagabushan.pdf">
+                    <v-btn class="btn-text" text :href="theme.resume_url">
                         <v-icon left>mdi-download</v-icon> Resume
                     </v-btn>
                 </v-flex>
@@ -36,29 +36,29 @@
             <v-layout justify-center text-center>
                 <v-container>
                     <v-flex xl12 xs12 style="font-family: '%%name_font_family%%', sans-serif;">
-                        Naresh Nagabushan
+                        {{ theme.name }}
                     </v-flex>
                 </v-container>
             </v-layout>
 
             <v-layout justify-center text-center>
                 <v-flex xs2>
-                    <a href="https://github.com/Naresh1318">
+                    <a :href="theme.github_url">
                         <i class="fa fa-github nav-foot-icon"></i>
                     </a>
                 </v-flex>
                 <v-flex xs2>
-                    <a href="https://medium.com/@rnaresh.n">
+                    <a :href="theme.medium_url">
                         <i class="fa fa-medium nav-foot-icon"></i>
                     </a>
                 </v-flex>
                 <v-flex xs2>
-                    <a href="https://www.linkedin.com/in/naresh-nagabushan-2946b013a">
+                    <a :href="theme.linkedin_url">
                         <i class="fa fa-linkedin nav-foot-icon"></i>
                     </a>
                 </v-flex>
                 <v-flex xs2>
-                    <a href="https://twitter.com/Naresh_Reddy_">
+                    <a :href="theme.twitter_url">
                         <i class="fa fa-twitter nav-foot-icon"></i>
                     </a>
                 </v-flex>
