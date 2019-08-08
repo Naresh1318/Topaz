@@ -2,10 +2,10 @@
 
 <p align=center>
     <img src="https://files.naresh1318.com/public/topaz/topaz.png" alt="simplyServe"/>
-    <p align="center"> A configurable, easy to maintain personal website </p>
+    <p align="center"> **A configurable, easy to maintain personal website** </p>
 </p>
 
-Live example: https://naresh1318.com
+**Live example**: https://naresh1318.com
 
 After working on a project the last thing I usually think of is updating my personal website. 
 Adding links, images, description and pushing changes to the server every single time I work 
@@ -19,14 +19,14 @@ to automatically update as much of my website as possible.
 
 <p align=center>
     <img src="https://files.naresh1318.com/public/topaz/projects.png" alt="simplyServe"/>
-    <p align="center"> Projects from github </p>
+    <p align="center"> **Projects from github** </p>
 </p>
 
 2. Admin page that lets you easily add blogs and publication details
 
 <p align=center>
     <img src="https://files.naresh1318.com/public/topaz/admin.png" alt="simplyServe"/>
-    <p align="center"> Add blogs and publications details </p>
+    <p align="center"> **Add blogs and publications details** </p>
 </p>
 
 3. Customize website by editing `theme.json` file
