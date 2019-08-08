@@ -13,6 +13,9 @@ let vue_admin = new Vue({
         alert_text: ""
     },
     methods: {
+        /**
+         * Try submitting entry
+         */
         submit_entry: function() {
             if (vue_admin.type === "") {
                 this.alert_text = "Fill all entries"

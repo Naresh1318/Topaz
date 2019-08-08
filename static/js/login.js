@@ -7,6 +7,9 @@ let vue_login = new Vue({
         password: "",
     },
     methods: {
+        /**
+         * Try logging in user
+         */
         login: function() {
             axios.post("/login", {
                 username: vue_login.username,

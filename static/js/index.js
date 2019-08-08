@@ -12,13 +12,24 @@ let index = new Vue({
         updated: "",
     },
     methods: {
+        /**
+         * Navigate to required page
+         * @param page, page name
+         */
         navigate_to: function(page) {
             this.current_page = page
         },
+        /**
+         * Open URL in a new window
+         * @param url
+         */
         open_link: function(url) {
             let win = window.open(url, "_blank")
             win.focus()
         },
+        /**
+         * Get theme object and set this.theme
+         */
         get_theme: function() {
           axios.get("/theme")
               .then(function(response) {
@@ -28,6 +39,9 @@ let index = new Vue({
                       console.log("ERROR: " + response["data"]["ERROR"])
               })
         },
+        /**
+         * Get top_k entries from the database and set this.top_k
+         */
         get_top_k: function() {
             axios.get("/top_k", {
                 params: {
@@ -38,15 +52,21 @@ let index = new Vue({
                     index.top_k = response["data"]["top_k"]
                 })
         },
+        /**
+         * Get all repos and set this.projects and this.latest_project
+         */
         get_repos: function() {
             // Get all public repos
             axios.get("/public_repos")
                 .then(function(response) {
-                    index.projects = response["data"]["repos"]  // TODO: Add error checking
+                    index.projects = response["data"]["repos"]
                     index.latest_project = index.projects[0]
                     index.updated = response["data"]["updated"]
                 })
         },
+        /**
+         * Get all blogs and set this.blogs
+         */
         get_blogs: function() {
             // Get all blogs
             axios.get("/blogs")
@@ -54,6 +74,9 @@ let index = new Vue({
                     index.blogs = response["data"]["blogs"]
                 })
         },
+        /**
+         * Get all publications and set this.publications
+         */
         get_publications: function() {
             // Get all publications
             axios.get("/publications")
