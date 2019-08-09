@@ -49,6 +49,12 @@ to automatically update as much of my website as possible.
   "twitter_url": "https://twitter.com/Naresh_Reddy_"
 }
 ```
+4. Mobile friendly (currently working on this)
+
+<p align=center>
+    <img src="https://files.naresh1318.com/public/topaz/mobile.png" alt="simplyServe"/>
+    <p align="center"> <b>Mobile friendly</b> </p>
+</p>
 
 ## Here are the things that I'm still working on:
 
