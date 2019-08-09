@@ -1,9 +1,9 @@
 <v-layout wrap style="font-family: '%%font_family%%', sans-serif;">
-    <v-flex xs7 xl2 offset-xl10 offset-xs5>
+    <v-flex xl2 offset-xl10>
         <span style="color: gray">Updated: {{ updated }}</span>
     </v-flex>
 
-    <v-flex xs12 xl12 style="height: 40vh; margin-top: 1rem">
+    <v-flex xs12 xl12 style="margin-top: 1rem">
         <v-layout wrap>
             <v-flex xs10>
                 <h1>What I am upto now?</h1>
@@ -13,7 +13,7 @@
             <v-card class="card-margin rounded-card" :color="theme.recent_activity_cards" :max-width="card_width()" max-height="100%" :elevation="hover ? 12 : 2" v-on:click="open_link(latest_project.url)">
                 <v-layout>
                     <v-flex xs12 xl8>
-                        <v-card-title>
+                        <v-card-title class="hide-overflow">
                             {{ latest_project.title }}
                         </v-card-title>
 
@@ -33,15 +33,15 @@
     <v-flex xs12 xl12>
         <h1>Recent Activity</h1>
         <v-layout wrap>
-            <v-flex xl4 v-for="k in top_k" :key="k.url" style="margin-top: 1rem">
+            <v-flex xl4 v-for="k in top_k" :key="k.url" style=" margin-top: 1rem">
                 <v-hover v-slot:default="{ hover }">
                     <v-card class="ma-4 rounded-card" :color="theme.recent_activity_cards" height="300px" min-width="15%" :elevation="hover ? 12 : 2" v-on:click="open_link(k.url)">
                         <v-img height="200px" :src="k.image_url" aspect-ratio="1"></v-img>
-                        <v-card-title>
+                        <v-card-title class="hide-overflow">
                             {{ k.title }}
                         </v-card-title>
 
-                        <v-card-text>
+                        <v-card-text class="hide-overflow">
                             {{ k.description }}
                         </v-card-text>
                     </v-card>

@@ -22,3 +22,9 @@
 .rounded-card {
     border-radius: 0.5rem;
 }
+
+.hide-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
