@@ -35,5 +35,19 @@ let vue_admin = new Vue({
                     }
                 })
         },
+        is_mobile: function() {
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            }
+            else {
+                return false
+            }
+        },
+        card_width: function() {
+            if (this.is_mobile())
+                return "90%"
+            else
+                return "40%"
+        },
     }
 })

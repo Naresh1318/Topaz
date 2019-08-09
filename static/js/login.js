@@ -25,6 +25,20 @@ let vue_login = new Vue({
                         window.location.href = "/admin";
                     }
                 })
-        }
+        },
+        is_mobile: function() {
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            }
+            else {
+                return false
+            }
+        },
+        card_width: function() {
+            if (this.is_mobile())
+                return "90%"
+            else
+                return "40%"
+        },
     }
 })
