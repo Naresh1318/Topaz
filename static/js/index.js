@@ -19,6 +19,8 @@ let index = new Vue({
          */
         navigate_to: function(page) {
             this.current_page = page
+            if (this.is_mobile())
+                this.drawer = false
         },
         /**
          * Open URL in a new window

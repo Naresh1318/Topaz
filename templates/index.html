@@ -7,7 +7,7 @@
         <v-app>
             {% include 'nav_bar.html' %}
 
-            <v-app-bar v-if="is_mobile()" app color="#101010" dark hide-on-scroll>
+            <v-app-bar v-if="is_mobile()" app color="#101010" dark>
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             </v-app-bar>
 
