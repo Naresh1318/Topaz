@@ -16,7 +16,7 @@ class User(UserMixin):
 
 def get_user(db_conn, username):
     """
-    Returns UserMixin object if the username matches an entry in the database
+    Returns UserMixin object if the username matches an entry in the data
     Args:
         db_conn: sqlite3 db connection object
         username (str): username string

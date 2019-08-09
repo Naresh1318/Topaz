@@ -17,14 +17,14 @@ class CustomFlask(Flask):
 
 def create_app():
     """
-    Initialize Flask and setup database
+    Initialize Flask and setup data
 
     """
     app = CustomFlask(__name__)
     app.config.from_mapping(
         SECRET_KEY=os.urandom(16),
         CACHED_TIME=time.time(),
-        THEME_DIR="./theme.json"
+        THEME_DIR="./data/theme.json"
     )
 
     # Init database

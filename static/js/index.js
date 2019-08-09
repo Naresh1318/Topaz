@@ -43,7 +43,7 @@ let index = new Vue({
               })
         },
         /**
-         * Get top_k entries from the database and set this.top_k
+         * Get top_k entries from the data and set this.top_k
          */
         get_top_k: function() {
             axios.get("/top_k", {

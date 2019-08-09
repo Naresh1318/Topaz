@@ -2,7 +2,7 @@ import os
 import sqlite3
 from werkzeug.security import generate_password_hash
 
-database_path = "./topaz.sqlite"
+database_path = "./data/topaz.sqlite"
 
 
 def init_db():
