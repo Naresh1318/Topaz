@@ -122,13 +122,13 @@ https://docs.docker.com/install/ or just google it for your os
 5. Run your image:
 
    ```bash
-   docker run -p <port to forward>:5000 <image name>:<tag>
+   docker run -p <port to forward>:5000 -v absolute path to data dir in project:/app/data/ <image name>:<tag>
    ```
 
    Here's mine:
 
    ```bash
-   docker run -p 4000:5000 topaz:latest
+   docker run -p 4000:5000 -v /home/naresh/Projects/Topaz/data/:/app/data/ topaz:latest
 
 6. Finally, go to `localhost:<port forwarded to>` on your browser
 
