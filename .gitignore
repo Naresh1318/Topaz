@@ -8,7 +8,7 @@ __pycache__
 keys.txt
 
 # Database
-topaz.sqlite
+./data/topaz.sqlite
 
 # Envs
 .topaz/
