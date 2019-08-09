@@ -3,7 +3,7 @@ let index = new Vue({
     vuetify: new Vuetify(),
     data: {
         current_page: "home",
-        drawer: null,
+        drawer: false,
         theme: {},
         projects: [],
         blogs: [],
