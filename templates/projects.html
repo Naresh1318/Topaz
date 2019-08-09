@@ -1,15 +1,17 @@
 <v-layout wrap style="font-family: '%%font_family%%', sans-serif;">
-    <v-flex xs2 xl2 offset-xs10 offset-xs10>
+    <v-flex xs7 xl2 offset-xl10 offset-xs5>
         <span style="color: gray">Updated: {{ updated }}</span>
     </v-flex>
+
     <v-flex xs12 xl12>
         <h1>Projects</h1>
     </v-flex>
+
     <v-flex v-for="(project, index) in projects" :key="index" xs12>
         <v-hover v-slot:default="{ hover }">
-            <v-card class="card-margin rounded-card" :color="theme.project_cards" max-width="40%" :elevation="hover ? 12 : 2" v-on:click="open_link(project.url)">
+            <v-card class="card-margin rounded-card" :color="theme.project_cards" :max-width="card_width()" :elevation="hover ? 12 : 2" v-on:click="open_link(project.url)">
                 <v-layout wrap>
-                    <v-flex xs8 xl8>
+                    <v-flex xs12 xl8>
                         <v-card-title>
                             {{ project.title }}
                         </v-card-title>
@@ -18,11 +20,12 @@
                             {{ project.description }}
                         </v-card-text>
                     </v-flex>
-                    <v-flex xs4 xl4 style="padding: 1rem">
+                    <v-flex xs12 xl4 style="padding: 1rem">
                         <v-img :src="project.image_url" aspect-ratio="1" contain></v-img>
                     </v-flex>
                 </v-layout>
             </v-card>
         </v-hover>
     </v-flex>
+
 </v-layout>

@@ -7,10 +7,14 @@
         <v-app>
             {% include 'nav_bar.html' %}
 
+            <v-app-bar v-if="is_mobile()" app color="#101010" dark hide-on-scroll>
+                <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            </v-app-bar>
+
             <!-- Sizes your content based upon application components -->
             <v-content>
                 <!-- Provides the application the proper gutter -->
-                <v-container grid-list-lg style="margin-left: 8rem; width: 92%;">
+                <v-container grid-list-lg grid-list-xs>
                     <div v-show="current_page==='home'" class="animated fadeIn animated-card">
                         {% include 'home.html' %}
                     </div>

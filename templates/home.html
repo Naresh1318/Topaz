@@ -1,7 +1,8 @@
 <v-layout wrap style="font-family: '%%font_family%%', sans-serif;">
-    <v-flex xs2 xl2 offset-xs10 offset-xs10>
+    <v-flex xs7 xl2 offset-xl10 offset-xs5>
         <span style="color: gray">Updated: {{ updated }}</span>
     </v-flex>
+
     <v-flex xs12 xl12 style="height: 40vh; margin-top: 1rem">
         <v-layout wrap>
             <v-flex xs10>
@@ -9,9 +10,9 @@
             </v-flex>
         </v-layout>
         <v-hover v-slot:default="{ hover }">
-            <v-card class="card-margin rounded-card" :color="theme.recent_activity_cards" max-width="40%" :elevation="hover ? 12 : 2" v-on:click="open_link(latest_project.url)">
-                <v-layout wrap>
-                    <v-flex xs8 xl8>
+            <v-card class="card-margin rounded-card" :color="theme.recent_activity_cards" :max-width="card_width()" max-height="100%" :elevation="hover ? 12 : 2" v-on:click="open_link(latest_project.url)">
+                <v-layout>
+                    <v-flex xs12 xl8>
                         <v-card-title>
                             {{ latest_project.title }}
                         </v-card-title>
@@ -21,7 +22,7 @@
                             Latest Commit: {{ latest_project.latest_commit }}
                         </v-card-text>
                     </v-flex>
-                    <v-flex xs4 xl4 style="padding: 1rem">
+                    <v-flex xs12 xl4 style="padding: 1rem">
                         <v-img :src="latest_project.image_url" aspect-ratio="1" contain></v-img>
                     </v-flex>
                 </v-layout>
@@ -32,7 +33,7 @@
     <v-flex xs12 xl12>
         <h1>Recent Activity</h1>
         <v-layout wrap>
-            <v-flex xs4 v-for="k in top_k" :key="k.url" style="margin-top: 1rem">
+            <v-flex xl4 v-for="k in top_k" :key="k.url" style="margin-top: 1rem">
                 <v-hover v-slot:default="{ hover }">
                     <v-card class="ma-4 rounded-card" :color="theme.recent_activity_cards" height="300px" min-width="15%" :elevation="hover ? 12 : 2" v-on:click="open_link(k.url)">
                         <v-img height="200px" :src="k.image_url" aspect-ratio="1"></v-img>

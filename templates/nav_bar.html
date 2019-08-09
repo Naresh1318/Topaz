@@ -1,6 +1,6 @@
-<v-navigation-drawer app style="width: 20%; font-family: '%%font_family%%', sans-serif;">
+<v-navigation-drawer v-model="drawer" app width="375" style="font-family: '%%font_family%%', sans-serif;">
     <v-card dark :color="theme.nav_bar" raised height="100%" style="border-radius: 0;">
-        <v-container grid-list-lg style="height: 70vh">
+        <v-container grid-list-lg grid-list-xs style="height: 60vh">
             <!-- Navigation buttons -->
             <v-layout justify-center align-center column style="margin-top: 30vh">
                 <v-flex>
@@ -21,9 +21,9 @@
             </v-layout>
         </v-container>
 
-        <v-container grid-list-lg>
+        <v-container grid-list-lg grid-list-lg style="margin-top: 7vh;">
             <v-layout justify-center align-center column>
-                <v-flex xl4>
+                <v-flex xl4 xs4>
                     <v-btn class="btn-text" text :href="theme.resume_url">
                         <v-icon left>mdi-download</v-icon> Resume
                     </v-btn>
@@ -32,7 +32,7 @@
         </v-container>
 
         <!-- Navigation footer -->
-        <v-container style="margin-top: 35%;">
+        <v-container style="bottom: 0; position: absolute">
             <v-layout justify-center text-center>
                 <v-container>
                     <v-flex xl12 xs12 style="font-family: '%%name_font_family%%', sans-serif;">

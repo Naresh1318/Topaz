@@ -3,6 +3,7 @@ let index = new Vue({
     vuetify: new Vuetify(),
     data: {
         current_page: "home",
+        drawer: null,
         theme: {},
         projects: [],
         blogs: [],
@@ -18,6 +19,7 @@ let index = new Vue({
          */
         navigate_to: function(page) {
             this.current_page = page
+            this.drawer = false
         },
         /**
          * Open URL in a new window
@@ -84,6 +86,26 @@ let index = new Vue({
                     index.publications = response["data"]["publications"]
                 })
         },
+        is_mobile: function() {
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            }
+            else {
+                return false
+            }
+        },
+        card_width: function() {
+            if (this.is_mobile())
+                return "90%"
+            else
+                return "40%"
+        },
+        nav_margin: function() {
+            if (this.is_mobile())
+                return "0vh"
+            else
+                return "16vh"
+        }
     },
     created: function() {
         this.get_theme()
