@@ -60,7 +60,7 @@ to automatically update as much of my website as possible.
 
 1. Automatically fetch blogs from medium
 2. Fetch publication from google scholar
-3. \# Your thoughtful suggesting goes here :)
+3. \# Your thoughtful suggestions go here :)
 
 
 ## Install
