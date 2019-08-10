@@ -10,7 +10,7 @@
             </v-flex>
         </v-layout>
         <v-hover v-slot:default="{ hover }">
-            <v-card class="card-margin rounded-card" :color="theme.recent_activity_cards" :max-width="card_width()" max-height="100%" :elevation="hover ? 12 : 2" v-on:click="open_link(latest_project.url)">
+            <v-card class="card-margin rounded-card" :color="theme.recent_activity_cards" :max-width="card_width()" max-height="100%" :elevation="hover ? 12 : 2" :href="latest_project.url" target="_blank">
                 <v-layout>
                     <v-flex xs12 xl8>
                         <v-card-title class="hide-overflow">
@@ -35,7 +35,7 @@
         <v-layout wrap>
             <v-flex xl4 v-for="k in top_k" :key="k.url" style=" margin-top: 1rem">
                 <v-hover v-slot:default="{ hover }">
-                    <v-card class="ma-4 rounded-card" :color="theme.recent_activity_cards" height="300px" min-width="15%" :elevation="hover ? 12 : 2" v-on:click="open_link(k.url)">
+                    <v-card class="ma-4 rounded-card" :color="theme.recent_activity_cards" height="300px" min-width="15%" :elevation="hover ? 12 : 2" :href="k.url" target="_blank">
                         <v-img height="200px" :src="k.image_url" aspect-ratio="1"></v-img>
                         <v-card-title class="hide-overflow">
                             {{ k.title }}

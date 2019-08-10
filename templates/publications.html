@@ -9,7 +9,7 @@
 
     <v-flex v-for="(pub, index) in publications" :key="index" xs12>
         <v-hover v-slot:default="{ hover }">
-            <v-card class="card-margin rounded-card" :color="theme.publication_cards" :max-width="card_width()" :elevation="hover ? 12 : 2" v-on:click="open_link(pub.url)">
+            <v-card class="card-margin rounded-card" :color="theme.publication_cards" :max-width="card_width()" :elevation="hover ? 12 : 2" :href="pub.url" target="_blank">
                 <v-layout wrap>
                     <v-flex xs12 xl8>
                         <v-card-title>
