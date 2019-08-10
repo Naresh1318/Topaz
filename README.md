@@ -52,7 +52,7 @@ to automatically update as much of my website as possible.
 4. Mobile friendly (currently working on this)
 
 <p align=center>
-    <img src="https://files.naresh1318.com/public/topaz/mobile.png" alt="simplyServe"/>
+    <img src="https://files.naresh1318.com/public/topaz/mobile.png" alt="simplyServe" width="50%"/>
     <p align="center"> <b>Mobile friendly</b> </p>
 </p>
 
