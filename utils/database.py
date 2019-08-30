@@ -1,10 +1,10 @@
-import time
-import datetime
 from flask import current_app
 from flask_login import UserMixin
-
 from utils.github import update_public_repos
-
+from utils.medium import update_articles
+import datetime
+import json
+import time
 
 # Cache data once every 15 minutes
 cache_rate = 15 * 60  # sec
@@ -56,6 +56,31 @@ def get_public_repos(db_conn):
     all_rows = c.fetchall()
     repos = [dict(row) for row in all_rows[::-1]]
     return repos, updated_time
+
+
+def get_articles(db_conn):
+    """
+    Returns a list of article from medium
+    Args:
+        db_conn: sqlite3 db connection object
+    """
+    c = db_conn.cursor()
+    start_time = current_app.config["CACHED_TIME"]
+    if time.time() - start_time > cache_rate:
+        current_app.config.from_mapping(CACHED_TIME=time.time())
+        with open(current_app.config["THEME_DIR"], "r") as f:
+            data = json.load(f)
+        medium_url = data["medium_url"]
+        update_articles(db_conn, medium_url)
+
+    updated_time = time.strftime(
+        '%Y-%m-%d %H:%M:%S',
+        time.localtime(start_time)
+    )
+    c.execute("SELECT * FROM blogs")
+    all_rows = c.fetchall()
+    blogs = [dict(row) for row in all_rows[::-1]]
+    return blogs, updated_time
 
 
 def get_entries(table, db_conn):
