@@ -17,7 +17,7 @@ class CustomFlask(Flask):
 
 def create_app():
     """
-    Initialize Flask and setup data
+    Initialize Flask and setup database
 
     """
     app = CustomFlask(__name__)
