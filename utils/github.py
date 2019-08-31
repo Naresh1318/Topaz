@@ -2,8 +2,11 @@ import re
 import requests
 
 
-github_key = open("keys.txt", "r").readlines()[0].replace("\n", "")
-headers = {"Authorization": github_key}
+try:
+    github_key = open("keys.txt", "r").readlines()[0].replace("\n", "")
+    headers = {"Authorization": github_key}
+except FileNotFoundError:
+    print("ERROR: keys.txt not found. Ensure you have the keys place in the project root directory")
 
 
 def extract_first_image_url(readme):
