@@ -18,8 +18,8 @@ def home():
     try:
         with open(current_app.config["THEME_DIR"], "r") as f:
             data = json.load(f)
-            formated_font = data["font_family"].replace(" ", "+")
-            return render_template("index.html", icon=data["icon"], formated_font=formated_font,
+            formatted_font = data["font_family"].replace(" ", "+")
+            return render_template("index.html", icon=data["icon"], formated_font=formatted_font,
                                    font_family=data["font_family"], name_font_family=data["name_font_family"])
     except FileNotFoundError as e:
         return jsonify({"ERROR": e})
