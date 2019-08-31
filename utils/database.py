@@ -51,7 +51,7 @@ def get_public_repos(db_conn):
         current_app.config.from_mapping(CACHED_TIME=time.time())
         update_public_repos(db_conn)
 
-    updated_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))
+    updated_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time))
     c.execute("SELECT * FROM public_repos")
     all_rows = c.fetchall()
     repos = [dict(row) for row in all_rows[::-1]]
@@ -108,7 +108,7 @@ def try_pop(l):
     """
     Try popping if not return a None dict
     Args:
-        l: list to try popp'in
+        l: list to try pop'in
 
     Returns: popped value and list
 
