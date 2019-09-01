@@ -5,6 +5,7 @@ from utils.medium import update_articles
 import datetime
 import json
 import time
+import logging
 
 # Cache data once every 15 minutes
 cache_rate = 15 * 60  # sec
@@ -51,7 +52,8 @@ def get_public_repos(db_conn):
         current_app.config.from_mapping(CACHED_TIME=time.time())
         update_public_repos(db_conn)
 
-    updated_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))
+    updated_time = time.strftime(
+        '%Y-%m-%d %H:%M:%S', time.localtime(start_time))
     c.execute("SELECT * FROM public_repos")
     all_rows = c.fetchall()
     repos = [dict(row) for row in all_rows[::-1]]
@@ -157,20 +159,28 @@ def max_times(times):
     date_times = []
     for t in times:
         if t is None:
-            date_times.append(datetime.datetime.now().replace(1970, 1, 1, 0, 0, 0))  # replace Nones with earliest date
+            date_times.append(datetime.datetime.now().replace(
+                1970, 1, 1, 0, 0, 0))  # replace Nones with earliest date
             continue
-        dt = []
-        t = t.split("-")
-        t = [i for i in t]
-        for i in t:
-            if ":" in i:
-                i = i.split(" ")
-                dt.append(i[0])
-                dt.extend([j.strip() for j in i[1].split(":")])
-            else:
-                dt.append(i.strip())
-        dt = list(map(int, dt))
-        date_times.append(datetime.datetime.now().replace(*dt))
+        try:
+            dt = []
+            t = t.split("-")
+            t = [i for i in t]
+            for i in t:
+                if ":" in i:
+                    i = i.split(" ")
+                    dt.append(i[0])
+                    dt.extend([j.strip() for j in i[1].split(":")])
+                else:
+                    dt.append(i.strip())
+            dt = list(map(int, dt))
+            date_times.append(datetime.datetime.now().replace(*dt))
+        except ValueError:
+            logging.error(
+                "[E0007] Error when parsing time. "
+                "It is possible that the input time format is wrong.")
+            date_times.append(
+                datetime.datetime.now().replace(1970, 1, 1, 0, 0, 0))
     return date_times.index(max(date_times))
 
 
