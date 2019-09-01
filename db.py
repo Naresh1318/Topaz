@@ -13,17 +13,17 @@ def init_db():
     """
 
     if os.path.exists(database_path):
-        # Check if table blogs has the field 'manually_added' or not
+        # Check if table blogs has the field 'automatically_added' or not
         # If not, add one
         try:
             db = get_db()
             c = db.cursor()
             # 1: True
             # NULL, 0: False
-            c.execute('ALTER TABLE blogs ADD COLUMN manually_added INTEGER')
+            c.execute('ALTER TABLE blogs ADD COLUMN automatically_added INTEGER')
         except Exception:
             logging.warning(
-                "[W0002] Column 'manually_added' is already exists. "
+                "[W0002] Column 'automatically_added' is already exists. "
                 "No need to add it."
             )
         db.commit()
@@ -37,7 +37,7 @@ def init_db():
     c.execute("CREATE TABLE public_repos (id INTEGER PRIMARY KEY, title TEXT, description TEXT, readme TEXT, "
               "latest_commit TEXT, url TEXT, image_url TEXT, timestamp TEXT)")
     c.execute("CREATE TABLE blogs (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
-              "url TEXT, image_url TEXT, timestamp TEXT, manually_added INTEGER)")
+              "url TEXT, image_url TEXT, timestamp TEXT, automatically_added INTEGER)")
     c.execute("CREATE TABLE publications (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
               "url TEXT, image_url TEXT, timestamp TEXT)")
 
