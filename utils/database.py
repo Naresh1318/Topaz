@@ -186,7 +186,7 @@ def get_top_k_entries(db_conn, k):
     """
     top_k = []
     repos, _ = get_public_repos(db_conn)
-    blogs = get_entries("blogs", db_conn)
+    blogs, _ = get_articles(db_conn)
     publications = get_entries("publications", db_conn)
     repo, repos = try_pop(repos)
     blog, blogs = try_pop(blogs)

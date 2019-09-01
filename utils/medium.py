@@ -16,12 +16,14 @@ def update_articles(db_conn, medium_url):
 
     """
     c = db_conn.cursor()
-    c.execute("DELETE FROM blogs")  # Clear all entries
+    # Clear entries which are automatically added.
+    # It means that manually added blogs are kept.
+    c.execute("DELETE FROM blogs WHERE manually_added = 1")
     try:
         retrieving_posts(medium_url, db_conn)
         db_conn.commit()
     except Exception as e:
-        logging.warning(f"[E0003] {e}")
+        logging.error(f"[E0003] {e}")
 
 
 def retrieving_posts(medium_url, db_conn):
@@ -64,14 +66,14 @@ def retrieving_posts(medium_url, db_conn):
 
         except Exception as e:
             time_stamp = ""
-            logging.warning(f"[E0006] {e}")
+            logging.error(f"[E0006] {e}")
 
         try:
             c.execute(
                 f"INSERT INTO blogs "
-                "(title, description, url, image_url, timestamp) "
-                "VALUES (?, ?, ?, ?, ?)",
-                (title, description, url, image_url, time_stamp))
+                "(title, description, url, image_url, timestamp, manually_added) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                (title, description, url, image_url, time_stamp, 1))
             db_conn.commit()
         except Exception as e:
-            logging.warning(f"[E0004] {e}")
+            logging.error(f"[E0004] {e}")
