@@ -5,6 +5,16 @@ from datetime import datetime
 
 
 def update_articles(db_conn, medium_url):
+    """
+    Update database the list of articles which belongs to the user
+
+    Args:
+        db_conn: sqlite3 db connection
+        medium_url: user's Meidum profile url
+
+    Returns (dict): (no return)
+
+    """
     c = db_conn.cursor()
     c.execute("DELETE FROM blogs")  # Clear all entries
     try:
@@ -15,13 +25,23 @@ def update_articles(db_conn, medium_url):
 
 
 def retrieving_posts(medium_url, db_conn):
+    """
+    Util for updating database the list of articles which belongs to the user
+
+    Args:
+        medium_url: user's Meidum profile url
+        db_conn: sqlite3 db connection
+
+    Returns (dict): (no return)
+
+    """
     api = medium_url + "/latest?format=json"
     res = requests.get(api)
     if not res:
         raise Exception(
             '''[E0001] An error occured when crawling data by page''')
 
-    content = json.loads(res.text.split('])}while(1);</x>')[1])
+    content = json.loads(res.text.split("])}while(1);</x>")[1])
     posts = content['payload']['references']['Post']
     c = db_conn.cursor()
     for idx, post in enumerate(posts):
