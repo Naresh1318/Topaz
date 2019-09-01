@@ -1,11 +1,11 @@
-from flask import current_app
-from flask_login import UserMixin
-from utils.github import update_public_repos
-from utils.medium import update_articles
 import datetime
 import json
 import time
 import logging
+from flask import current_app
+from flask_login import UserMixin
+from utils.github import update_public_repos
+from utils.medium import update_articles
 
 # Cache data once every 15 minutes
 cache_rate = 15 * 60  # sec
