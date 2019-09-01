@@ -94,6 +94,5 @@ def update_public_repos(db_conn):
                       "VALUES (?, ?, ?, ?, ?, ?, ?)",
                       (title, description, readme, latest_commit, url, image_url, timestamp))
         db_conn.commit()
-        db_conn.close()
     except Exception as e:
         print(f"ERROR: {e}")
