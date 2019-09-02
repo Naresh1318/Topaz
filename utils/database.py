@@ -1,10 +1,11 @@
-import time
 import datetime
+import json
+import time
+import logging
 from flask import current_app
 from flask_login import UserMixin
-
 from utils.github import update_public_repos
-
+from utils.medium import update_articles
 
 # Cache data once every 15 minutes
 cache_rate = 15 * 60  # sec
@@ -51,11 +52,37 @@ def get_public_repos(db_conn):
         current_app.config.from_mapping(CACHED_TIME=time.time())
         update_public_repos(db_conn)
 
-    updated_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time))
+    updated_time = time.strftime(
+        '%Y-%m-%d %H:%M:%S', time.localtime(start_time))
     c.execute("SELECT * FROM public_repos")
     all_rows = c.fetchall()
     repos = [dict(row) for row in all_rows[::-1]]
     return repos, updated_time
+
+
+def get_articles(db_conn):
+    """
+    Returns a list of article from medium
+    Args:
+        db_conn: sqlite3 db connection object
+    """
+    c = db_conn.cursor()
+    start_time = current_app.config["CACHED_TIME"]
+    if time.time() - start_time > cache_rate:
+        current_app.config.from_mapping(CACHED_TIME=time.time())
+        with open(current_app.config["THEME_DIR"], "r") as f:
+            data = json.load(f)
+        medium_url = data["medium_url"]
+        update_articles(db_conn, medium_url)
+
+    updated_time = time.strftime(
+        '%Y-%m-%d %H:%M:%S',
+        time.localtime(start_time)
+    )
+    c.execute("SELECT * FROM blogs")
+    all_rows = c.fetchall()
+    blogs = [dict(row) for row in all_rows[::-1]]
+    return blogs, updated_time
 
 
 def get_entries(table, db_conn):
@@ -132,20 +159,28 @@ def max_times(times):
     date_times = []
     for t in times:
         if t is None:
-            date_times.append(datetime.datetime.now().replace(1970, 1, 1, 0, 0, 0))  # replace Nones with earliest date
+            date_times.append(datetime.datetime.now().replace(
+                1970, 1, 1, 0, 0, 0))  # replace Nones with earliest date
             continue
-        dt = []
-        t = t.split("-")
-        t = [i for i in t]
-        for i in t:
-            if ":" in i:
-                i = i.split(" ")
-                dt.append(i[0])
-                dt.extend([j.strip() for j in i[1].split(":")])
-            else:
-                dt.append(i.strip())
-        dt = list(map(int, dt))
-        date_times.append(datetime.datetime.now().replace(*dt))
+        try:
+            dt = []
+            t = t.split("-")
+            t = [i for i in t]
+            for i in t:
+                if ":" in i:
+                    i = i.split(" ")
+                    dt.append(i[0])
+                    dt.extend([j.strip() for j in i[1].split(":")])
+                else:
+                    dt.append(i.strip())
+            dt = list(map(int, dt))
+            date_times.append(datetime.datetime.now().replace(*dt))
+        except ValueError:
+            logging.error(
+                "[E0007] Error when parsing time. "
+                "It is possible that the input time format is wrong.")
+            date_times.append(
+                datetime.datetime.now().replace(1970, 1, 1, 0, 0, 0))
     return date_times.index(max(date_times))
 
 
@@ -161,7 +196,7 @@ def get_top_k_entries(db_conn, k):
     """
     top_k = []
     repos, _ = get_public_repos(db_conn)
-    blogs = get_entries("blogs", db_conn)
+    blogs, _ = get_articles(db_conn)
     publications = get_entries("publications", db_conn)
     repo, repos = try_pop(repos)
     blog, blogs = try_pop(blogs)
