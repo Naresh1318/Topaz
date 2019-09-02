@@ -81,9 +81,9 @@ def blogs():
     """
     db_conn = db.get_db()
     if request.method == "GET":
-        all_blogs = database.get_entries("blogs", db_conn)
+        all_blogs, updated = database.get_articles(db_conn)
         db_conn.close()
-        return jsonify({"blogs": all_blogs})
+        return jsonify({"blogs": all_blogs, "updated": updated})
     if current_user.is_authenticated:
         title = request.json["title"]
         description = request.json["description"]
