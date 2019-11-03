@@ -11,21 +11,52 @@
         </v-layout>
         <v-hover v-slot:default="{ hover }">
             <v-card class="card-margin rounded-card" :color="theme.recent_activity_cards" :max-width="card_width()" max-height="100%" :elevation="hover ? 12 : 2" :href="latest_project.url" target="_blank">
-                <v-layout>
-                    <v-flex xs12 xl8>
-                        <v-card-title class="hide-overflow">
-                            {{ latest_project.title }}
-                        </v-card-title>
+                <v-container fluid>
+                    <v-row align="stretch" no-gutters>
+                        <v-col cols="8">
+                            <v-row style="height: 160px" no-gutters>
+                                <v-card-title class="hide-overflow">
+                                    {{ latest_project.title }}
+                                </v-card-title>
 
-                        <v-card-text>
-                            {{ latest_project.description }} <br>
-                            Latest Commit: {{ latest_project.latest_commit }}
-                        </v-card-text>
-                    </v-flex>
-                    <v-flex xs12 xl4 style="padding: 1rem">
-                        <v-img :src="latest_project.image_url" aspect-ratio="1" contain></v-img>
-                    </v-flex>
-                </v-layout>
+                                <v-card-text>
+                                    <v-row no-gutters>
+                                        {{ latest_project.description }}
+                                    </v-row>
+                                    <v-row no-gutters>
+                                        Latest Commit: {{ latest_project.latest_commit }}
+                                    </v-row>
+                                </v-card-text>
+                            </v-row>
+                            <v-row class="align-self-end" no-gutters>
+                                <v-col>
+                                    <v-container>
+                                        <v-row justify="start" no-gutters>
+                                            <v-col cols="1">
+                                               <span class="dot" :style="{'background-color': latest_project.primary_language_color}"></span>
+                                            </v-col>
+                                            <v-col cols="3">
+                                               {{ latest_project.primary_language }}
+                                            </v-col>
+                                            <v-col cols="1">
+                                               <v-icon>mdi-star</v-icon>
+                                            </v-col>
+                                            <v-col cols="3">
+                                                {{ latest_project.stars }}
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+                                </v-col>
+                            </v-row>
+                        </v-col>
+                        <v-col cols="4">
+                            <v-row align="center" justify="center" style="height: 200px" no-gutters>
+                                <v-img :src="latest_project.image_url" aspect-ratio="1.0" style="max-height: 200px" contain></v-img>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                </v-container>
+
             </v-card>
         </v-hover>
     </v-flex>
@@ -35,7 +66,7 @@
         <v-layout wrap>
             <v-flex xl4 v-for="k in top_k" :key="k.url" style=" margin-top: 1rem">
                 <v-hover v-slot:default="{ hover }">
-                    <v-card class="ma-4 rounded-card" :color="theme.recent_activity_cards" height="300px" min-width="15%" :elevation="hover ? 12 : 2" :href="k.url" target="_blank">
+                    <v-card class="ma-4 rounded-card" :color="theme.recent_activity_cards" min-width="15%" :elevation="hover ? 12 : 2" :href="k.url" target="_blank">
                         <v-img height="200px" :src="k.image_url" aspect-ratio="1"></v-img>
                         <v-card-title class="hide-overflow">
                             {{ k.title }}
@@ -44,6 +75,27 @@
                         <v-card-text class="hide-overflow">
                             {{ k.description }}
                         </v-card-text>
+
+                        <v-row class="align-self-end" no-gutters>
+                            <v-col>
+                                <v-container>
+                                    <v-row justify="start" no-gutters>
+                                        <v-col cols="1">
+                                           <span class="dot" :style="{'background-color': k.primary_language_color}"></span>
+                                        </v-col>
+                                        <v-col cols="3">
+                                           {{ k.primary_language }}
+                                        </v-col>
+                                        <v-col cols="1">
+                                           <v-icon>mdi-star</v-icon>
+                                        </v-col>
+                                        <v-col cols="3">
+                                            {{ k.stars }}
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-col>
+                        </v-row>
                     </v-card>
                 </v-hover>
             </v-flex>
