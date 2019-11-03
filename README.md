@@ -1,5 +1,5 @@
 # Topaz
-![](https://github.com/Naresh1318/Topaz/blob/master/.github/workflows/topaz.yml/bagge.svg)
+[![Actions Status](https://github.com/Naresh1318/topaz/workflows/Topaz/badge.svg)](https://github.com/Naresh1318/Topaz/actions)
 <p align=center>
     <img src="https://files.naresh1318.com/public/topaz/topaz.png" alt="simplyServe"/>
     <p align="center"> <b>A configurable, easy to maintain personal website</b> </p>
