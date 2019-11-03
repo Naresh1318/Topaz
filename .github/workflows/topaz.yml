@@ -21,10 +21,6 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Setting up Environment variables
-      env:
-        USERNAME: admin
-        PASSWORD: test
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
