@@ -10,20 +10,26 @@
     <v-flex v-for="(blog, index) in blogs" :key="index" xs12>
         <v-hover v-slot:default="{ hover }">
             <v-card class="card-margin rounded-card" :color="theme.blog_cards" :max-width="card_width()" :elevation="hover ? 12 : 2" :href="blog.url" target="_blank">
-                <v-layout wrap>
-                    <v-flex xs12 xl8>
-                        <v-card-title>
-                            {{ blog.title }}
-                        </v-card-title>
+                <v-container fluid>
+                    <v-row align="stretch" no-gutters>
+                        <v-col cols="8">
+                            <v-row style="height: 160px" no-gutters>
+                                <v-card-title>
+                                    {{ blog.title }}
+                                </v-card-title>
 
-                        <v-card-text>
-                            {{ blog.description }}
-                        </v-card-text>
-                    </v-flex>
-                    <v-flex xs12 xl4 style="padding: 0;">
-                        <v-img :src="blog.image_url" height="150px" aspect-ratio="1/1" contain style="border-radius: 0 10px 10px 0;"></v-img>
-                    </v-flex>
-                </v-layout>
+                                <v-card-text>
+                                    {{ blog.description }}
+                                </v-card-text>
+                            </v-row>
+                        </v-col>
+                        <v-col cols="4">
+                            <v-row align="center" justify="center" style="height: 200px" no-gutters>
+                                <v-img :src="blog.image_url" aspect-ratio="1.0" style="max-height: 200px"></v-img>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                </v-container
             </v-card>
         </v-hover>
     </v-flex>

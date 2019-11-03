@@ -37,7 +37,9 @@ def retrieving_posts(medium_url, db_conn):
     Returns (dict): (no return)
 
     """
-    api = medium_url + "/latest?format=json"
+    # Limit 10 used to bypass medium's cloudflare integration
+    # https://github.com/gatsbyjs/gatsby/issues/17335
+    api = medium_url + "/?format=json&limit=10"
     res = requests.get(api)
     if not res:
         raise Exception(
