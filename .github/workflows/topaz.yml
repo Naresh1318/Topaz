@@ -26,6 +26,9 @@ jobs:
       env:
         USERNAME: admin
         PASSWORD: test
+    - name: Get keys
+      run: |
+        echo ${{ secrets.github }} >> keys.txt
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
