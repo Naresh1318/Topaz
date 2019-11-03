@@ -22,10 +22,10 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Setting up Environment variables
-      run: echo Username $USERNAME, Password $PASSWORD
       env:
         USERNAME: admin
         PASSWORD: test
+      run: echo Username $USERNAME, Password $PASSWORD
     - name: Get keys
       run: |
         echo ${{ secrets.github }} >> keys.txt
