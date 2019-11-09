@@ -10,20 +10,25 @@
     <v-flex v-for="(pub, index) in publications" :key="index" xs12>
         <v-hover v-slot:default="{ hover }">
             <v-card class="card-margin rounded-card" :color="theme.publication_cards" :max-width="card_width()" :elevation="hover ? 12 : 2" :href="pub.url" target="_blank">
-                <v-layout wrap>
-                    <v-flex xs12 xl8>
-                        <v-card-title>
-                            {{ pub.title }}
-                        </v-card-title>
-
-                        <v-card-text>
-                            {{ pub.description }}
-                        </v-card-text>
-                    </v-flex>
-                    <v-flex xs12 xl4 style="padding: 1rem;">
-                        <v-img :src="pub.image_url" aspect-ratio="1" contain></v-img>
-                    </v-flex>
-                </v-layout>
+                <v-container fluid>
+                    <v-row align="stretch" no-gutters>
+                        <v-col cols="8">
+                            <v-row no-gutters>
+                                <v-card-title class="hide-overflow">
+                                    {{ pub.title }}
+                                </v-card-title>
+                                <v-card-text>
+                                    {{ pub.description }}
+                                </v-card-text>
+                            </v-row>
+                        </v-col>
+                        <v-col cols="4">
+                            <v-row align="center" justify="center" style="height: 200px" no-gutters>
+                                <v-img :src="pub.image_url" aspect-ratio="1.0" style="max-height: 200px" contain></v-img>
+                            </v-row>
+                        </v-col>
+                    </v-row>
+                </v-container>
             </v-card>
         </v-hover>
     </v-flex>

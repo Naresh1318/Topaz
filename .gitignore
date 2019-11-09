@@ -6,6 +6,7 @@ __pycache__
 
 # keys
 keys.txt
+github_webhook_keys.txt
 
 # Database
 ./data/topaz.sqlite
