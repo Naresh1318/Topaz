@@ -1,10 +1,10 @@
+import os
 import json
 from flask import Blueprint, render_template, jsonify, request, current_app
 from flask_login import current_user
 
 import db
 from utils import database
-
 
 bp = Blueprint("home", __name__)
 
@@ -120,3 +120,31 @@ def publications():
         db_conn.close()
         return jsonify({"INFO": "Publication added"})
     return jsonify({"ERROR": "Unauthenticated"})
+
+
+@bp.route("/github/webhook", methods=["POST"])
+def github_webhook():
+    """
+    POST request from github received on push to master
+
+    Returns:
+
+    """
+    import hmac
+    import hashlib
+
+    deployment_script = "./deployment/deploy.sh"
+    github_webhook_path = "./github_webhook_keys.txt"
+    with open(github_webhook_path) as f:
+        local_key = f.readline()
+    digester = hmac.new(key=bytes(local_key, "utf-8"), msg=request.data, digestmod=hashlib.sha1)
+    signature = digester.hexdigest()
+
+    github_webhook_key = request.headers["X-Hub-Signature"]
+
+    if not hmac.compare_digest("sha1=" + signature, github_webhook_key):
+        return json.dumps({"success": False}), 401, {"ContentType": "application/json"}
+    else:
+        # Run deployment script
+        os.system(f"sh {deployment_script}")
+        return json.dumps({"success": True}), 200, {"ContentType": "application/json"}
