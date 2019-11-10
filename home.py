@@ -136,7 +136,10 @@ def github_webhook():
     deployment_script = "./deployment/deploy.sh"
     github_webhook_path = "./github_webhook_keys.txt"
     with open(github_webhook_path) as f:
-        local_key = f.readline()
+        # I don't really know why, but, \n is not removed when using readline when deployed on server
+        local_key = f.read()
+        if "\n" in local_key:
+            local_key = local_key[:-1]
     digester = hmac.new(key=bytes(local_key, "utf-8"), msg=request.data, digestmod=hashlib.sha1)
     signature = digester.hexdigest()
 
