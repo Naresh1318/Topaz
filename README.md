@@ -31,7 +31,7 @@ to automatically update as much of my website as possible.
 2. Admin page that lets you easily add blogs and publication details
 
 <p align=center>
-    <img src="https://files.naresh1318.com/public/topaz/admin.png" alt="simplyServe"/>
+    <img src="https://files.naresh1318.com/public/topaz/admin.png" alt="simplyServe" width="400px"/>
     <p align="center"> <b>Add blogs and publications details</b> </p>
 </p>
 
