@@ -15,7 +15,7 @@ we automate things. Thereby giving us time to, idk, complain about our laziness.
 to automatically update as much of my website as possible.
 
 ### Recent updates:
-* Admin page lets you choose projects you want to display (thanks @abhinuvpitale)
+* Admin page lets you choose projects you want to display (thanks [@abhinuvpitale](https://github.com/abhinuvpitale)
 * Github stars added on project cards
 * Github primary language added to project cards
 
