@@ -90,6 +90,12 @@ def update_public_repos(db_conn):
 
     result = run_query(query)  # Execute the query
     c = db_conn.cursor()
+
+    # Cache stored projects
+    c.execute("SELECT * FROM public_repos")
+    projects = c.fetchall()
+    projects = {p["url"]: dict(p) for p in projects}
+
     c.execute("DELETE FROM public_repos")  # Clear all entries
     try:
         for node in result["data"]["viewer"]["repositories"]["nodes"]:
@@ -108,12 +114,16 @@ def update_public_repos(db_conn):
             latest_commit = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["message"]
             timestamp = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["committedDate"]\
                 .replace("T", " ").replace("Z", "")  # Remove T and Z
+            if url in projects:
+                visible = projects[url]["visible"]
+            else:
+                visible = 1  # 1 -> True; 0 -> False
             c.execute("INSERT INTO public_repos "
                       "(title, primary_language, primary_language_color, stars, description, readme, "
-                      "latest_commit, url, image_url, timestamp) "
-                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                      "latest_commit, url, image_url, timestamp, visible) "
+                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                       (title, primary_language, primary_language_color, stars, description, readme, latest_commit, url,
-                       image_url, timestamp))
+                       image_url, timestamp, visible))
         db_conn.commit()
     except Exception as e:
         print(f"ERROR: {e}")

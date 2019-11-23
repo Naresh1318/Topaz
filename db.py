@@ -36,11 +36,11 @@ def init_db():
     c.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT UNIQUE, password TEXT)")
     c.execute("CREATE TABLE public_repos (id INTEGER PRIMARY KEY, primary_language TEXT, primary_language_color TEXT, "
               "stars TEXT, title TEXT, description TEXT, readme TEXT, latest_commit TEXT, url TEXT, image_url TEXT, "
-              "timestamp TEXT)")
+              "timestamp TEXT, visible INTEGER)")
     c.execute("CREATE TABLE blogs (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
-              "url TEXT, image_url TEXT, timestamp TEXT, automatically_added INTEGER)")
+              "url TEXT, image_url TEXT, timestamp TEXT, automatically_added INTEGER, visible INTEGER)")
     c.execute("CREATE TABLE publications (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
-              "url TEXT, image_url TEXT, timestamp TEXT)")
+              "url TEXT, image_url TEXT, timestamp TEXT, visible INTEGER)")
 
     # Create admin
     c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (os.getenv("USERNAME"),

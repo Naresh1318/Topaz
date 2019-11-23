@@ -1,6 +1,6 @@
 from werkzeug.security import check_password_hash
 from flask import Blueprint, request, render_template, jsonify, redirect, url_for
-from flask_login import login_required, logout_user, login_user, current_user
+from flask_login import logout_user, login_user, current_user
 
 from db import get_db
 from utils.database import get_user
@@ -42,10 +42,11 @@ def logout():
 
 
 @bp.route("/admin", methods=["GET"])
-@login_required
 def admin():
     """
     Render admin page
 
     """
-    return render_template("admin.html")
+    if current_user.is_authenticated:
+        return render_template("admin.html")
+    return redirect(url_for("auth.login"))

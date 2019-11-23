@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/Naresh1318/topaz/workflows/Topaz/badge.svg)](https://github.com/Naresh1318/Topaz/actions)
 
 <p align=center>
-    <img src="https://files.naresh1318.com/public/topaz/topaz.png" alt="simplyServe"/>
+    <img src="https://files.naresh1318.com/public/topaz/index.png" alt="simplyServe"/>
     <p align="center"> <b>A configurable, easy to maintain personal website</b> </p>
 </p>
 
@@ -12,14 +12,19 @@ After working on a project the last thing I usually think of is updating my pers
 Adding links, images, description and pushing changes to the server every single time I work 
 on something new is kinda boring especially if you are lazy like me. What do we do when we're lazy?
 we automate things. Thereby giving us time to, idk, complain about our laziness. I designed Topaz 
-to automatically update as much of my website as possible. 
+to automatically update as much of my website as possible.
+
+### Recent updates:
+* Admin page lets you choose projects you want to display
+* Github stars added on project cards
+* Github primary language added to project cards
 
 ## Here's what it can currently do:
 
 1. Automatically fetch public repos from your github account
 
 <p align=center>
-    <img src="https://files.naresh1318.com/public/topaz/projects.png" alt="simplyServe"/>
+    <img src="https://files.naresh1318.com/public/projects.png" alt="simplyServe"/>
     <p align="center"> <b>Projects from github</b> </p>
 </p>
 
@@ -30,7 +35,15 @@ to automatically update as much of my website as possible.
     <p align="center"> <b>Add blogs and publications details</b> </p>
 </p>
 
-3. Customize website by editing `theme.json` file
+3. Choose what gets shown
+
+<p align=center>
+    <img src="https://files.naresh1318.com/public/topaz/admin_projects.png" alt="simplyServe"/>
+    <p align="center"> <b>Manage what gets shown</b> </p>
+</p>
+
+
+4. Customize website by editing `theme.json` file
 
 ```json
 {

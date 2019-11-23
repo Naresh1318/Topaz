@@ -1,8 +1,9 @@
 import os
 import time
+import json
+
 from flask import Flask
 from flask_login import LoginManager
-import json
 from utils.database import get_user
 
 

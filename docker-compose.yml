@@ -10,5 +10,3 @@ services:
         environment:
             USERNAME: "admin"
             PASSWORD: "test"
-
-

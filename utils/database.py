@@ -131,6 +131,30 @@ def add_entry(table, db_conn, title, description, url, image_url, time_stamp):
     return True
 
 
+def update_visibility(table, db_conn, entry_id, visibility):
+    """
+    Update visibility flag of entry
+    Args:
+        table (str): table name
+        db_conn: sqlite3 db connection object
+        entry_id (int): Row entry id to update
+        visibility (int): visibility flag
+
+    Returns (bool): True  -> Visibility updated
+                    False -> Visibility not updated
+
+    """
+    c = db_conn.cursor()
+    try:
+        c.execute(f"UPDATE {table} SET visible = {int(visibility)} WHERE id={int(entry_id)}")
+        db_conn.commit()
+        db_conn.close()
+    except Exception as e:
+        print(f"ERROR: {e}")
+        return False
+    return True
+
+
 def try_pop(l):
     """
     Try popping if not return a None dict

@@ -9,48 +9,50 @@
 
     <v-flex v-for="(project, index) in projects" :key="index" xs12>
         <v-hover v-slot:default="{ hover }">
-            <v-card class="card-margin rounded-card" :color="theme.project_cards" :max-width="card_width()" :elevation="hover ? 12 : 2" :href="project.url" target="_blank">
-                <v-container fluid>
-                    <v-row align="stretch" no-gutters>
-                        <v-col cols="8">
-                            <v-row style="height: 160px" no-gutters>
-                                <v-card-title class="hide-overflow">
-                                    {{ project.title }}
-                                </v-card-title>
+            <div v-if="project.visible === 1">
+                <v-card class="card-margin rounded-card" :color="theme.project_cards" :max-width="card_width()" :elevation="hover ? 12 : 2" :href="project.url" target="_blank">
+                    <v-container fluid>
+                        <v-row align="stretch" no-gutters>
+                            <v-col cols="8">
+                                <v-row style="height: 160px" no-gutters>
+                                    <v-card-title class="hide-overflow">
+                                        {{ project.title }}
+                                    </v-card-title>
 
-                                <v-card-text>
-                                    {{ project.description }}
-                                </v-card-text>
-                            </v-row>
-                            <v-row class="align-self-end" no-gutters>
-                                <v-col>
-                                    <v-container>
-                                        <v-row justify="start" no-gutters>
-                                            <v-col cols="1">
-                                               <span class="dot" :style="{'background-color': project.primary_language_color}"></span>
-                                            </v-col>
-                                            <v-col cols="3">
-                                               {{ project.primary_language }}
-                                            </v-col>
-                                            <v-col cols="1">
-                                               <v-icon>mdi-star</v-icon>
-                                            </v-col>
-                                            <v-col cols="3">
-                                                {{ project.stars }}
-                                            </v-col>
-                                        </v-row>
-                                    </v-container>
-                                </v-col>
-                            </v-row>
-                        </v-col>
-                        <v-col cols="4">
-                            <v-row align="center" justify="center" style="height: 200px" no-gutters>
-                                <v-img :src="project.image_url" aspect-ratio="1.0" style="max-height: 200px" contain></v-img>
-                            </v-row>
-                        </v-col>
-                    </v-row>
-                </v-container>
-            </v-card>
+                                    <v-card-text>
+                                        {{ project.description }}
+                                    </v-card-text>
+                                </v-row>
+                                <v-row class="align-self-end" no-gutters>
+                                    <v-col>
+                                        <v-container>
+                                            <v-row justify="start" no-gutters>
+                                                <v-col cols="1">
+                                                   <span class="dot" :style="{'background-color': project.primary_language_color}"></span>
+                                                </v-col>
+                                                <v-col cols="3">
+                                                   {{ project.primary_language }}
+                                                </v-col>
+                                                <v-col cols="1">
+                                                   <v-icon>mdi-star</v-icon>
+                                                </v-col>
+                                                <v-col cols="3">
+                                                    {{ project.stars }}
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-col>
+                                </v-row>
+                            </v-col>
+                            <v-col cols="4">
+                                <v-row align="center" justify="center" style="height: 200px" no-gutters>
+                                    <v-img :src="project.image_url" aspect-ratio="1.0" style="max-height: 200px" contain></v-img>
+                                </v-row>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-card>
+            </div>
         </v-hover>
     </v-flex>
 

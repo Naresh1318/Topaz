@@ -48,6 +48,26 @@
                     </v-card>
                 </v-flex>
             </v-layout>
+
+            <v-row justify="center" style="margin-top: 2rem" no-gutters>
+                <v-col lg="4">
+                    <h2>Projects</h2>
+                </v-col>
+                <v-col lg="4">
+                    <v-text-field v-model="search" label="Search" single-line hide-details ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row justify="center">
+                <v-col lg="8">
+                    <v-data-table :headers="projects_header" :items="projects" :search="search">
+                        <template v-slot:item.visibility="{ item }">
+                            <v-icon small class="mr-2" @click="toggle_visibility(item)">
+                                {{ item_visibility_text[item.visible] }}
+                            </v-icon>
+                        </template>
+                    </v-data-table>
+                </v-col>
+            </v-row>
         </v-container>
         <v-snackbar v-model="show_alert"> {{ alert_text }} <v-btn color="#fff" text @click="show_alert=false">Close</v-btn></v-snackbar>
     </v-app>

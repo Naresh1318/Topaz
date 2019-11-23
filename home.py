@@ -1,4 +1,3 @@
-import os
 import json
 from flask import Blueprint, render_template, jsonify, request, current_app
 from flask_login import current_user
@@ -55,12 +54,13 @@ def top_k():
     return jsonify({"top_k": top_ks})
 
 
-@bp.route("/public_repos", methods=["GET"])
+@bp.route("/public_repos", methods=["GET", "POST"])
 def public_repos():
     """
     List all public repos from github
 
-    Returns (JSON): a list of repos and updated timestamp
+    Returns (JSON): GET  -> a list of repos and updated timestamp
+                    POST -> set visibility of projects
 
     """
     db_conn = db.get_db()
@@ -68,6 +68,15 @@ def public_repos():
         repos, updated = database.get_public_repos(db_conn)
         db_conn.close()
         return jsonify({"repos": repos, "updated": updated})
+    if current_user.is_authenticated:
+        selected = request.json["projects"]
+        for s in selected:
+            entry_id = s["id"]
+            visible = s["visible"]
+            database.update_visibility("public_repos", db_conn, entry_id, visible)
+        db_conn.close()
+        return jsonify({"INFO": "Updated"})
+    return jsonify({"ERROR": "Unauthenticated"})
 
 
 @bp.route("/blogs", methods=["GET", "POST"])
