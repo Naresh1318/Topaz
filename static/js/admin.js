@@ -116,21 +116,12 @@ let vue_admin = new Vue({
          * @param item, project object
          */
         toggle_visibility: function (item) {
-            // Find project index
-            let i = 0
-            for (let p of vue_admin.projects) {
-                if (p.url === item.url)
-                    break
-                i += 1
-            }
-
             if (item.visible === 1) {
                 item.visible = 0
             } else {
                 item.visible = 1
             }
-            vue_admin.projects[i].visible = item.visible
-            vue_admin.send_selection([vue_admin.projects[i]])
+            vue_admin.send_selection([item])
         }
     },
     created: function() {
