@@ -25,7 +25,7 @@ to automatically update as much of my website as possible.
 1. Automatically fetch public repos from your github account
 
 <p align=center>
-    <img src="https://files.naresh1318.com/public/projects.png" alt="simplyServe"/>
+    <img src="https://files.naresh1318.com/public/topaz/projects.png" alt="simplyServe"/>
     <p align="center"> <b>Projects from github</b> </p>
 </p>
 
