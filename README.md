@@ -16,7 +16,7 @@ we automate things. Thereby giving us time to, idk, complain about our laziness.
 to automatically update as much of my website as possible.
 
 ### Recent updates:
-* Admin page lets you choose projects you want to display (thanks [@abhinuvpitale](https://github.com/abhinuvpitale)
+* Admin page lets you choose projects you want to display (thanks [@abhinuvpitale](https://github.com/abhinuvpitale))
 * Github stars added on project cards
 * Github primary language added to project cards
 
@@ -81,7 +81,7 @@ to automatically update as much of my website as possible.
 ## Install
 Super easy as always. Clone before you start!
 
-1. Edit theme.json file to reflect what you want. Here's another example:
+1. Edit `data/theme.json` file to reflect what you want. Here's another example:
 
 ```json
 {
@@ -111,11 +111,11 @@ echo "token <your key>" >> keys.txt
 ```
 
 4. Install docker if you don't have it already using this link: 
-https://docs.docker.com/install/ or just google it for your os
+https://docs.docker.com/install
 
 5. Add an admin account
 
-   * Open any editor and modify `Dockerfile`:
+   * Modify `Dockerfile` under project root:
 
      ```bash
         ENV USERNAME "<username>"
@@ -147,7 +147,7 @@ https://docs.docker.com/install/ or just google it for your os
 
 6. Finally, go to `localhost:<port forwarded to>` on your browser
 
-7. You can access the login page using `localhost:<port forwarded to>/login`. Example `localhost:4000\login`. 
+7. You can access the login page using `localhost:<port forwarded to>/login`. Example `localhost:4000/login`. 
 Login using the username and password you setup earlier.
 
 
