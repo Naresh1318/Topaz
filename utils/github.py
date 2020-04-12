@@ -37,7 +37,7 @@ def run_query(query):
     if request.status_code == 200:
         return request.json()
     else:
-        raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query))
+        raise Exception("Query failed to run. Error code received {}: {}".format(request.status_code, query))
 
 
 def update_public_repos(db_conn):

@@ -110,6 +110,8 @@ and select the repo checkbox. Give it a name if you want and copy the token.
 echo "token <your key>" >> keys.txt
 ```
 
+**Note: ** Do not ignore the "token " prefix
+
 4. Install docker if you don't have it already using this link: 
 https://docs.docker.com/install
 
