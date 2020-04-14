@@ -32,16 +32,16 @@
                                 <v-col>
                                     <v-container>
                                         <v-row justify="start" no-gutters>
-                                            <v-col cols="1">
+                                            <v-col class="ma-1 pa-1" sm="1">
                                                <span class="dot" :style="{'background-color': latest_project.primary_language_color}"></span>
                                             </v-col>
-                                            <v-col cols="3">
+                                            <v-col class="ma-1 pa-1" sm="4">
                                                {{ latest_project.primary_language }}
                                             </v-col>
-                                            <v-col cols="1">
-                                               <v-icon>mdi-star</v-icon>
+                                            <v-col class="ma-1 pa-1" sm="1">
+                                               <v-icon>fa-star</v-icon>
                                             </v-col>
-                                            <v-col cols="3">
+                                            <v-col class="ma-1 pa-1" sm="1">
                                                 {{ latest_project.stars }}
                                             </v-col>
                                         </v-row>
@@ -80,16 +80,16 @@
                             <v-col>
                                 <v-container>
                                     <v-row justify="start" no-gutters>
-                                        <v-col cols="1">
+                                        <v-col class="ma-1 pa-1" sm="1">
                                            <span class="dot" :style="{'background-color': k.primary_language_color}"></span>
                                         </v-col>
-                                        <v-col cols="3">
+                                        <v-col class="ma-1 pa-1" sm="4">
                                            {{ k.primary_language }}
                                         </v-col>
-                                        <v-col cols="1">
-                                           <v-icon>mdi-star</v-icon>
+                                        <v-col class="ma-1 pa-1" sm="1">
+                                           <v-icon>fa-star</v-icon>
                                         </v-col>
-                                        <v-col cols="3">
+                                        <v-col class="ma-1 pa-1" sm="1">
                                             {{ k.stars }}
                                         </v-col>
                                     </v-row>
