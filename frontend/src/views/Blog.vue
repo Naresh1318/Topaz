@@ -1,16 +1,20 @@
 <template>
-  <div class="about">
+  <div class="blog">
     <p>{{ page_name }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'About',
+  name: 'Blog',
   data() {
     return {
-      page_name: 'About',
+      page_name: 'Blog',
     };
   },
 };
 </script>
+
+<style scoped>
+
+</style>
