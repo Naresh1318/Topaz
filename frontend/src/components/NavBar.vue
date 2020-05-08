@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer class="nav_bar" app width="300">
-      <v-card class="nav_bar_card" dark color="#101010" raised height="100%">
+      <v-card class="nav_bar_card" dark raised height="100%">
         <v-container style="height: 90vh">
           <v-row align="center" style="height: 100%">
             <v-col>
@@ -31,24 +31,10 @@
             </v-col>
           </v-row>
           <v-row justify="center">
-            <v-col cols="2" style="text-align: center">
-              <a href="" style="text-decoration: none">
-                <v-icon>fa-github</v-icon>
-              </a>
-            </v-col>
-            <v-col cols="2" style="text-align: center">
-              <a href="" style="text-decoration: none">
-                <v-icon>fa-medium</v-icon>
-              </a>
-            </v-col>
-            <v-col cols="2" style="text-align: center">
-              <a href="" style="text-decoration: none">
-                <v-icon>fa-linkedin</v-icon>
-              </a>
-            </v-col>
-            <v-col cols="2" style="text-align: center">
-              <a href="" style="text-decoration: none">
-                <v-icon>fa-twitter</v-icon>
+            <v-col v-for="website in footer" cols="2" style="text-align: center"
+                   :key="website.link">
+              <a :href="website.link" style="text-decoration: none">
+                <v-icon>{{ website.icon }}</v-icon>
               </a>
             </v-col>
           </v-row>
@@ -70,6 +56,24 @@ export default {
         Blog: '/blog',
         About: '/about',
       },
+      footer: {
+        github: {
+          link: 'https://github.com/Naresh1318',
+          icon: 'fa-github',
+        },
+        medium: {
+          link: 'https://medium.com/@rnaresh.n',
+          icon: 'fa-medium',
+        },
+        linkedin: {
+          link: 'https://www.linkedin.com/in/naresh-nagabushan-2946b013a',
+          icon: 'fa-linkedin',
+        },
+        twitter: {
+          link: 'https://twitter.com/Naresh_Reddy_',
+          icon: 'fa-twitter',
+        },
+      },
     };
   },
 };
@@ -82,6 +86,7 @@ export default {
 
 .nav_bar_card {
   border-radius: 0 !important;
+  background-color: #101010 !important;
 }
 
 .btn-text {
