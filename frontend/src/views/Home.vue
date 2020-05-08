@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <p>{{ page_name }}</p>
-    <nav-bar text="Calling from home"></nav-bar>
+    <nav-bar active_page="Home"></nav-bar>
   </div>
 </template>
 

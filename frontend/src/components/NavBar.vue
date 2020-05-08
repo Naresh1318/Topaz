@@ -1,40 +1,20 @@
 <template>
   <div>
-    <v-navigation-drawer
-      class="nav_bar"
-      app
-      width="300"
-    >
-      <v-card
-        class="nav_bar_card"
-        dark
-        color="#101010"
-        raised
-        height="100%"
-      >
-        <v-container
-          style="height: 90vh"
-        >
+    <v-navigation-drawer class="nav_bar" app width="300">
+      <v-card class="nav_bar_card" dark color="#101010" raised height="100%">
+        <v-container style="height: 90vh">
           <v-row align="center" style="height: 100%">
             <v-col>
-              <v-row>
-                <v-col>
-                  <a class="btn-text">Home</a>
+              <v-row v-for="(page, name) in pages" :key="name">
+                <v-col v-if="name === active_page">
+                  <a class="btn-text" :href="page" style="text-decoration: underline">
+                    {{ name }}
+                  </a>
                 </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <a class="btn-text">Projects</a>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <a class="btn-text">Blog</a>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <a class="btn-text">About me</a>
+                <v-col v-else>
+                  <a class="btn-text" :href="page">
+                    {{ name }}
+                  </a>
                 </v-col>
               </v-row>
             </v-col>
@@ -81,9 +61,15 @@
 <script>
 export default {
   name: 'NavBar',
-  props: ['text'],
+  props: ['active_page'],
   data() {
     return {
+      pages: {
+        Home: '/',
+        Projects: '/projects',
+        Blog: '/blog',
+        About: '/about',
+      },
     };
   },
 };
@@ -107,6 +93,7 @@ export default {
   text-align: center;
   color: #fff;
   padding: 0.75rem;
+  text-decoration: none;
 }
 
 .btn-text:hover {
