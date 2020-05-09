@@ -7,14 +7,14 @@
             <v-col>
               <v-row v-for="(page, name) in pages" :key="name">
                 <v-col v-if="name === active_page">
-                  <a class="btn-text" :href="page" style="text-decoration: underline">
+                  <router-link class="btn-text" :to="page" style="text-decoration: underline">
                     {{ name }}
-                  </a>
+                  </router-link>
                 </v-col>
                 <v-col v-else>
-                  <a class="btn-text" :href="page">
+                  <router-link class="btn-text" :to="page">
                     {{ name }}
-                  </a>
+                  </router-link>
                 </v-col>
               </v-row>
             </v-col>

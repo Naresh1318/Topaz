@@ -17,7 +17,7 @@ with open("data/github_language_colors.json") as f:
 def extract_first_image_url(readme):
     s = re.search(r"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)", readme)
     if s is None:
-        return "/static/img/personal-website-logo.webp"
+        return ""
     return s.group()
 
 
