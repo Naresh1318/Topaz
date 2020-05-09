@@ -1,5 +1,5 @@
 <template>
-  <v-container style="position: relative">
+  <v-container>
     <v-row>
       <v-col cols="8">
         <v-row>
@@ -7,46 +7,40 @@
             <a :href="url">{{ title }}</a>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row style="height: 50%">
           <v-col>
-            <p class="hide-overflow">{{ description }}</p>
+            <p>{{ description }}</p>
           </v-col>
         </v-row>
-        <v-row style="position: absolute; bottom: 5px">
-          <v-col cols="6">
-            <v-row no-gutters>
-              <v-col>
-                <v-row no-gutters>
-                  <v-col>
-                    <span class="dot"
-                          :style="{'background-color': primary_language_color}">
-                    </span>
-                  </v-col>
-                  <v-col>
-                    {{primary_language}}
-                  </v-col>
-                </v-row>
+        <v-row no-gutters>
+          <v-col cols="3">
+            <v-row>
+              <v-col cols="1">
+                <span class="dot"
+                      :style="{'background-color': primary_language_color}">
+                </span>
+              </v-col>
+              <v-col cols="8" class="hide-overflow">
+                {{primary_language}}
               </v-col>
             </v-row>
           </v-col>
-          <v-col cols="6">
-            <v-row no-gutters>
-              <v-col>
-                <v-row no-gutters>
-                  <v-col cols="6">
-                    <v-icon>fa-star</v-icon>
-                  </v-col>
-                  <v-col cols="6">
-                    {{ stars }}
-                  </v-col>
-                </v-row>
+          <v-col cols="4">
+            <v-row>
+              <v-col cols="2">
+                <v-icon style="font-size: 20px; margin-bottom: 1px; margin-bottom: 3px">
+                  fa-star
+                </v-icon>
+              </v-col>
+              <v-col cols="8">
+                {{ stars }}
               </v-col>
             </v-row>
           </v-col>
         </v-row>
       </v-col>
       <v-col cols="4">
-        <v-img height="200px" :src="image_url" contain></v-img>
+        <v-img height="175px" :src="image_url" contain></v-img>
       </v-col>
     </v-row>
     <v-divider></v-divider>
