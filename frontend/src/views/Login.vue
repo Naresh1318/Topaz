@@ -52,7 +52,7 @@ export default {
             this.password = '';
             this.show_alert = true;
           } else {
-            window.location.href = '/admin';
+            this.$router.push('admin');
           }
         });
     },

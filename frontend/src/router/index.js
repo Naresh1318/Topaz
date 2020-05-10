@@ -31,13 +31,14 @@ const routes = [
     component: () => import('../views/Admin.vue'),
     // eslint-disable-next-line no-unused-vars
     beforeEnter(to, from, next) {
-      // eslint-disable-next-line no-debugger
-      debugger;
-      if (!Vue.prototype.$is_authenticated()) {
-        next('/login');
-      } else {
-        next();
-      }
+      Vue.prototype.$is_authenticated()
+        .then((response) => {
+          if (!response.data.is_authenticated) {
+            next('/login');
+          } else {
+            next();
+          }
+        });
     },
   },
   {
@@ -45,10 +46,10 @@ const routes = [
     name: 'Logout',
     component: () => import('../views/Login.vue'),
     beforeEnter(to, from, next) {
-      if (Vue.prototype.$logout()) {
-        next('/login');
-      }
-      next();
+      Vue.prototype.$logout()
+        .then(() => {
+          next('/login');
+        });
     },
   },
 ];
