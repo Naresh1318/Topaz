@@ -1,26 +1,30 @@
 <template>
   <div>
-    <v-layout align-center>
+    <v-container class="centered">
       <v-card style="margin: auto; padding: 2rem" :max-width="card_width()">
-        <v-container grid-list-md>
-          <v-layout justify-center wrap>
-            <v-flex xl3>
-              <h1>Topaz</h1>
-            </v-flex>
-            <v-flex xl10>
-              <v-text-field v-model="username" label="Name" required color="dark"></v-text-field>
-            </v-flex>
-            <v-flex xl10>
-              <v-text-field v-model="password" type="password" label="Password"
-                            required color="dark"></v-text-field>
-            </v-flex>
-            <v-flex xl3>
-              <v-btn @click="login()" color="dark" dark>Login</v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+        <v-row>
+          <v-col xl="3">
+            <h1>Topaz</h1>
+          </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-col xl="10">
+            <v-text-field v-model="username" label="Name" required color="dark"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-col xl="10">
+            <v-text-field v-model="password" type="password" label="Password"
+                          required color="dark"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col xl="3">
+            <v-btn @click="login()" color="dark" dark>Login</v-btn>
+          </v-col>
+        </v-row>
       </v-card>
-  </v-layout>
+    </v-container>
   <v-snackbar v-model="show_alert">
       Wrong username or password <v-btn color="#fff" text @click="show_alert=false">Close</v-btn>
   </v-snackbar>
@@ -73,5 +77,11 @@ export default {
 </script>
 
 <style scoped>
-
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
 </style>
