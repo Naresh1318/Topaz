@@ -43,7 +43,6 @@
         <v-img height="175px" :src="image_url" contain></v-img>
       </v-col>
     </v-row>
-    <v-divider></v-divider>
   </v-container>
 </template>
 

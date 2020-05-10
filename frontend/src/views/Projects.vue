@@ -3,6 +3,7 @@
     <nav-bar active_page="Projects"></nav-bar>
     <v-content>
       <div class="pa-1" v-for="project in projects" :key="project.title">
+        <v-divider></v-divider>
         <project-card :title="project.title" :url="project.url"
         :description="project.description" :stars="project.stars"
         :primary_language="project.primary_language"
