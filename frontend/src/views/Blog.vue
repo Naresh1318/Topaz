@@ -3,6 +3,7 @@
     <nav-bar active_page="Blog"></nav-bar>
     <v-content>
       <div class="pa-1" v-for="blog in blogs" :key="blog.title">
+        <v-divider></v-divider>
         <regular-old-card :title="blog.title" :description="blog.description"
         :url="blog.url" :image_url="blog.image_url"></regular-old-card>
       </div>

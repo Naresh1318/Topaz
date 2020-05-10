@@ -14,10 +14,11 @@
         </v-row>
       </v-col>
       <v-col cols="4">
-        <v-img height="175px" :src="image_url" contain></v-img>
+        <v-card elevation="5" style="border-radius: 5px;">
+          <v-img height="175px" :src="image_url"></v-img>
+        </v-card>
       </v-col>
     </v-row>
-    <v-divider></v-divider>
   </v-container>
 </template>
 
