@@ -21,9 +21,35 @@ const routes = [
     component: () => import('../views/Blog.vue'),
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue'),
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue'),
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/Admin.vue'),
+    // eslint-disable-next-line no-unused-vars
+    beforeEnter(to, from, next) {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      if (!Vue.prototype.$is_authenticated()) {
+        next('/login');
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: () => import('../views/Login.vue'),
+    beforeEnter(to, from, next) {
+      if (Vue.prototype.$logout()) {
+        next('/login');
+      }
+      next();
+    },
   },
 ];
 

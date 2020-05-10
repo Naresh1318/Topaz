@@ -50,7 +50,15 @@
 <script>
 export default {
   name: 'ProjectCard',
-  props: ['title', 'url', 'description', 'primary_language', 'primary_language_color', 'stars', 'image_url'],
+  props: {
+    title: String,
+    url: String,
+    description: String,
+    primary_language: String,
+    primary_language_color: String,
+    stars: String,
+    image_url: String,
+  },
   data() {
     return {
     };
@@ -64,7 +72,6 @@ a {
   display: inline-block;
   font-size: 24px;
   font-weight: 500;
-  text-align: center;
   color: #000 !important;
   text-decoration: none;
 }

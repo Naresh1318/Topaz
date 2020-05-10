@@ -37,8 +37,13 @@ def logout():
     """
     if current_user.is_authenticated:
         logout_user()
-        return redirect(url_for("home.home"))
-    return redirect(url_for("auth.login"))
+        return jsonify({"logged_out": True})
+    return jsonify({"logged_out": False})
+
+
+@bp.route("/is_authenticated", methods=["GET"])
+def is_authenticated():
+    return jsonify({"is_authenticated": current_user.is_authenticated})
 
 
 @bp.route("/admin", methods=["GET"])

@@ -9,6 +9,11 @@
         :primary_language_color="project.primary_language_color"
         :image_url="project.image_url"></project-card>
       </div>
+      <v-footer style="background-color: white;">
+        <p style="color: gray">
+          {{ updated }}
+        </p>
+      </v-footer>
     </v-content>
   </div>
 </template>
@@ -24,7 +29,7 @@ export default {
       page_name: 'Projects',
       projects: [],
       latest_project: {},
-      updated: {},
+      updated: '',
     };
   },
   methods: {
