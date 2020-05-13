@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="8">
+      <v-col md="8" sm="12">
         <v-row>
           <v-col>
             <a :href="url">{{ title }}</a>
@@ -13,14 +13,14 @@
           </v-col>
         </v-row>
         <v-row no-gutters>
-          <v-col cols="3">
+          <v-col md="3" sm="6">
             <v-row>
               <v-col cols="1">
                 <span class="dot"
                       :style="{'background-color': primary_language_color}">
                 </span>
               </v-col>
-              <v-col cols="8" class="hide-overflow">
+              <v-col md="8" sm="6" class="hide-overflow">
                 {{primary_language}}
               </v-col>
             </v-row>
@@ -39,7 +39,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="4">
+      <v-col v-if="image_url" md="4" sm="12">
         <v-img height="175px" :src="image_url" contain></v-img>
       </v-col>
     </v-row>

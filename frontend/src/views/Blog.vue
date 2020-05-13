@@ -50,8 +50,5 @@ export default {
 </script>
 
 <style scoped>
-.blog {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
+
 </style>
