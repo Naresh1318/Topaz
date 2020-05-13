@@ -1,9 +1,11 @@
 import datetime
 import json
-import time
 import logging
+import time
+
 from flask import current_app
 from flask_login import UserMixin
+
 from utils.github import update_public_repos
 from utils.medium import update_articles
 

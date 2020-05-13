@@ -1,7 +1,8 @@
-import requests
 import json
 import logging
 from datetime import datetime
+
+import requests
 
 
 def update_articles(db_conn, medium_url):

@@ -1,7 +1,7 @@
-import re
 import json
-import requests
+import re
 
+import requests
 
 try:
     github_key = open("keys.txt", "r").readlines()[0].replace("\n", "")
