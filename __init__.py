@@ -44,7 +44,7 @@ def create_app():
     db_conn = db.get_db()
     with open(app.config["THEME_DIR"], "r") as f:
         data = json.load(f)
-        medium_url = data["medium_url"]
+        medium_url = data["nav_bar_footer"]["medium"]["link"]
     from utils.medium import update_articles
     update_articles(db_conn, medium_url)
 

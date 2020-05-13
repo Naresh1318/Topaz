@@ -31,8 +31,6 @@ export default {
   },
   methods: {
     get_bogs() {
-      // eslint-disable-next-line no-debugger
-      debugger;
       // Get all public repos
       this.$http.get(`${this.$backend_address}/blogs`)
         .then((response) => {
