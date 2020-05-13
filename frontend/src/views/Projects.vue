@@ -58,8 +58,5 @@ export default {
 </script>
 
 <style scoped>
-.projects {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
+
 </style>

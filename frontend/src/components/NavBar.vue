@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-if="mobile()">
+    <div v-if="is_mobile()">
       <v-app-bar color="#101010" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
     </div>
-    <v-navigation-drawer class="nav_bar" app width="300" v-model="drawer">
+    <v-navigation-drawer class="nav_bar" app :width="get_width()" v-model="drawer">
       <v-card class="nav_bar_card" dark raised height="100%">
         <v-container style="height: 90vh">
           <v-row align="center" style="height: 100%">
@@ -75,7 +75,13 @@ export default {
           this.hacker = response.data.theme.name;
         });
     },
-    mobile() {
+    get_width() {
+      if (this.is_mobile()) {
+        return '100%';
+      }
+      return '300';
+    },
+    is_mobile() {
       if (mobile.isMobile()) {
         return true;
       }

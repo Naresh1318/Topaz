@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="8">
+      <v-col md="8" sm="12" order-md="1" order-sm="12">
         <v-row>
           <v-col>
             <a :href="url">{{ title }}</a>
@@ -13,7 +13,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="4">
+      <v-col md="4" sm="12" order-md="2" order-sm="1">
         <v-card elevation="5" style="border-radius: 5px;">
           <v-img height="175px" :src="image_url"></v-img>
         </v-card>
