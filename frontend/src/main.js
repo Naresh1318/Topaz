@@ -1,4 +1,3 @@
-/* eslint-disable arrow-body-style */
 import Vue from 'vue';
 import axios from 'axios';
 import App from './App.vue';
@@ -21,7 +20,8 @@ function logout() {
 }
 
 Vue.prototype.$http = axios;
-Vue.prototype.$backend_address = 'http://localhost:5000';
+// Vue.prototype.$backend_address = 'http://localhost:5000';  // debugging only
+Vue.prototype.$backend_address = '';
 Vue.prototype.$is_authenticated = isAuthenticated;
 Vue.prototype.$logout = logout;
 Vue.config.productionTip = false;

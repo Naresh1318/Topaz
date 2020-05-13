@@ -63,7 +63,7 @@
         </v-col>
       </v-row>
       <v-row justify="center">
-        <v-col lg="10">
+        <v-col>
           <v-data-table :headers="projects_header" :items="projects" :search="search">
             <template v-slot:item.visibility="{ item }">
               <v-icon small class="mr-2" @click="toggle_visibility(item)">

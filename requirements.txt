@@ -1,6 +1,7 @@
 wheel
 pytest==5.2.2
 Flask==1.0.3
-uWSGI==2.0.18
 requests==2.20.0
+gunicorn==20.0.4
 Flask-Login==0.4.1
+Flask-Cors==3.0.8
