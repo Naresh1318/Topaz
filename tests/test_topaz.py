@@ -13,7 +13,7 @@ def client():
 
 
 def test_home(client):
-    rv = client.get("/")
+    rv = client.get("/ping")
     assert rv._status_code == 200, "Failed to load home page"
 
 
