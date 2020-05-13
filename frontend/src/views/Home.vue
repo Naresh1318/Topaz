@@ -18,11 +18,11 @@ export default {
   name: 'Home',
   data() {
     return {
+      drawer: false,
       page_name: 'Home',
     };
   },
-  methods: {
-  },
+  methods: {},
   components: {
     navBar: NavBar,
   },

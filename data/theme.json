@@ -1,16 +1,21 @@
 {
   "name": "Naresh Nagabushan",
-  "icon": "./static/img/personal-website-logo.webp",
-  "name_font_family": "Beth Ellen",
-  "font_family": "Source Sans Pro",
-  "nav_bar": "#101010",
-  "recent_activity_cards": "#f1f1f1",
-  "project_cards": "#f1f1f1",
-  "blog_cards": "#f1f1f1",
-  "publication_cards": "#f1f1f1",
-  "resume_url": "https://files.naresh1318.com/public/Me/Naresh_Nagabushan.pdf",
-  "github_url": "https://github.com/Naresh1318",
-  "medium_url": "https://medium.com/@rnaresh.n",
-  "linkedin_url": "https://www.linkedin.com/in/naresh-nagabushan-2946b013a",
-  "twitter_url": "https://twitter.com/Naresh_Reddy_"
+  "nav_bar_footer": {
+      "github": {
+        "link": "https://github.com/Naresh1318",
+        "icon": "fa-github"
+      },
+      "medium": {
+        "link": "https://medium.com/@rnaresh.n",
+        "icon": "fa-medium"
+      },
+      "linkedin": {
+        "link": "https://www.linkedin.com/in/naresh-nagabushan-2946b013a",
+        "icon": "fa-linkedin"
+      },
+      "twitter": {
+        "link": "https://twitter.com/Naresh_Reddy_",
+        "icon": "fa-twitter"
+      }
+    }
 }

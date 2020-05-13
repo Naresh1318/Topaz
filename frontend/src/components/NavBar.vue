@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-navigation-drawer class="nav_bar" app width="300">
+    <div v-if="mobile()">
+      <v-app-bar color="#101010" dark>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      </v-app-bar>
+    </div>
+    <v-navigation-drawer class="nav_bar" app width="300" v-model="drawer">
       <v-card class="nav_bar_card" dark raised height="100%">
         <v-container style="height: 90vh">
           <v-row align="center" style="height: 100%">
@@ -26,7 +31,7 @@
           <v-row>
             <v-col cols="12" style="text-align: center">
               <div style="font-family: 'Beth Ellen', sans-serif">
-                Naresh Nagabushan
+                {{ hacker }}
               </div>
             </v-col>
           </v-row>
@@ -45,35 +50,41 @@
 </template>
 
 <script>
+import mobile from '../js/utils';
+
 export default {
   name: 'NavBar',
   props: ['active_page'],
   data() {
     return {
+      drawer: false,
       pages: {
         Home: '/',
         Projects: '/projects',
         Blog: '/blog',
       },
-      footer: {
-        github: {
-          link: 'https://github.com/Naresh1318',
-          icon: 'fa-github',
-        },
-        medium: {
-          link: 'https://medium.com/@rnaresh.n',
-          icon: 'fa-medium',
-        },
-        linkedin: {
-          link: 'https://www.linkedin.com/in/naresh-nagabushan-2946b013a',
-          icon: 'fa-linkedin',
-        },
-        twitter: {
-          link: 'https://twitter.com/Naresh_Reddy_',
-          icon: 'fa-twitter',
-        },
-      },
+      footer: {},
+      hacker: '',
     };
+  },
+  methods: {
+    get_theme() {
+      this.$http.get(`${this.$backend_address}/theme`)
+        .then((response) => {
+          this.footer = response.data.theme.nav_bar_footer;
+          this.hacker = response.data.theme.name;
+        });
+    },
+    mobile() {
+      if (mobile.isMobile()) {
+        return true;
+      }
+      this.drawer = true;
+      return false;
+    },
+  },
+  created() {
+    this.get_theme();
   },
 };
 </script>

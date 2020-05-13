@@ -3,12 +3,14 @@
     <nav-bar active_page="Projects"></nav-bar>
     <v-content>
       <div class="pa-1" v-for="project in projects" :key="project.title">
-        <v-divider></v-divider>
-        <project-card :title="project.title" :url="project.url"
-        :description="project.description" :stars="project.stars"
-        :primary_language="project.primary_language"
-        :primary_language_color="project.primary_language_color"
-        :image_url="project.image_url"></project-card>
+        <div v-if="project.visible === 1">
+          <v-divider></v-divider>
+          <project-card :title="project.title" :url="project.url"
+          :description="project.description" :stars="project.stars"
+          :primary_language="project.primary_language"
+          :primary_language_color="project.primary_language_color"
+          :image_url="project.image_url"></project-card>
+        </div>
       </div>
       <v-footer style="background-color: white;">
         <p style="color: gray">
@@ -35,8 +37,6 @@ export default {
   },
   methods: {
     get_repos() {
-      // eslint-disable-next-line no-debugger
-      debugger;
       // Get all public repos
       this.$http.get(`${this.$backend_address}/public_repos`)
         .then((response) => {
