@@ -1,5 +1,6 @@
 import json
-from flask import Blueprint, render_template, jsonify, request, current_app
+
+from flask import Blueprint, jsonify, request, current_app
 from flask_login import current_user
 
 import db

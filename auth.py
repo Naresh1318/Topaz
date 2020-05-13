@@ -1,6 +1,6 @@
-from werkzeug.security import check_password_hash
-from flask import Blueprint, request, render_template, jsonify, redirect, url_for
+from flask import Blueprint, request, jsonify
 from flask_login import logout_user, login_user, current_user
+from werkzeug.security import check_password_hash
 
 from db import get_db
 from utils.database import get_user
@@ -8,15 +8,13 @@ from utils.database import get_user
 bp = Blueprint("auth", __name__)
 
 
-@bp.route("/login", methods=["GET", "POST"])
+@bp.route("/login", methods=["POST"])
 def login():
     """
     GET -> Returns login page
     POST -> Try authenticating user
 
     """
-    if request.method == "GET":
-        return render_template("login.html")
     username = request.json["username"]
     password = request.json["password"]
 
@@ -44,14 +42,3 @@ def logout():
 @bp.route("/is_authenticated", methods=["GET"])
 def is_authenticated():
     return jsonify({"is_authenticated": current_user.is_authenticated})
-
-
-@bp.route("/admin", methods=["GET"])
-def admin():
-    """
-    Render admin page
-
-    """
-    if current_user.is_authenticated:
-        return render_template("admin.html")
-    return redirect(url_for("auth.login"))
