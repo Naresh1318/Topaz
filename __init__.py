@@ -1,10 +1,11 @@
+import json
 import os
 import time
-import json
 
 from flask import Flask
-from flask_login import LoginManager
 from flask_cors import CORS
+from flask_login import LoginManager
+
 from utils.database import get_user
 
 
