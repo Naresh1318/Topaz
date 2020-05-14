@@ -1,26 +1,31 @@
 <template>
   <v-container>
     <v-row>
-      <v-col md="8" sm="12">
+      <v-col md="8" xs="12">
         <v-row>
           <v-col cols="12" class="hide-overflow">
             <a :href="url">{{ title }}</a>
           </v-col>
         </v-row>
-        <v-row style="height: 50%">
+        <v-row>
           <v-col cols="12">
             <p>{{ description }}</p>
           </v-col>
         </v-row>
+        <v-row v-if="is_mobile && image_url !== ''">
+          <v-col>
+            <v-img height="175px" :src="image_url" contain style="min-width: 100%"></v-img>
+          </v-col>
+        </v-row>
         <v-row no-gutters>
-          <v-col md="3" sm="6">
+          <v-col md="3" xs="6">
             <v-row>
               <v-col cols="1">
                 <span class="dot"
                       :style="{'background-color': primary_language_color}">
                 </span>
               </v-col>
-              <v-col md="8" sm="6" class="hide-overflow">
+              <v-col md="8" xs="6" class="hide-overflow">
                 {{primary_language}}
               </v-col>
             </v-row>
@@ -39,8 +44,8 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col v-if="image_url" md="4" sm="12">
-        <v-img height="175px" :src="image_url" contain></v-img>
+      <v-col v-if="!is_mobile && image_url !== ''" md="4" xs="12">
+        <v-img height="175px" :src="image_url" contain style="min-width: 100%"></v-img>
       </v-col>
     </v-row>
   </v-container>
@@ -57,6 +62,7 @@ export default {
     primary_language_color: String,
     stars: String,
     image_url: String,
+    is_mobile: Boolean,
   },
   data() {
     return {

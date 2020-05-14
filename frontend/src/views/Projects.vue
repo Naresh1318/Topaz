@@ -9,7 +9,7 @@
           :description="project.description" :stars="project.stars"
           :primary_language="project.primary_language"
           :primary_language_color="project.primary_language_color"
-          :image_url="project.image_url"></project-card>
+          :image_url="project.image_url" :is_mobile="is_mobile"></project-card>
         </div>
       </div>
       <v-footer style="background-color: white;">
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import mobile from '../js/utils';
 import NavBar from '../components/NavBar.vue';
 import ProjectCard from '../components/ProjectCard.vue';
 
@@ -33,6 +34,7 @@ export default {
       projects: [],
       latest_project: {},
       updated: '',
+      is_mobile: false,
     };
   },
   methods: {
@@ -53,6 +55,9 @@ export default {
   },
   created() {
     this.get_repos();
+    if (mobile.isMobile()) {
+      this.is_mobile = true;
+    }
   },
 };
 </script>
