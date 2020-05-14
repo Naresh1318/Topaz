@@ -8,7 +8,7 @@ from utils.database import get_user
 bp = Blueprint("auth", __name__)
 
 
-@bp.route("/login", methods=["POST"])
+@bp.route("/login_user", methods=["POST"])
 def login():
     """
     GET -> Returns login page

@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     login() {
-      this.$http.post(`${this.$backend_address}/login`, {
+      this.$http.post(`${this.$backend_address}/login_user`, {
         username: this.username,
         password: this.password,
       },
