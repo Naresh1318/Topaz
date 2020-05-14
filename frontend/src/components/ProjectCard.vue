@@ -3,12 +3,12 @@
     <v-row>
       <v-col md="8" sm="12">
         <v-row>
-          <v-col>
+          <v-col cols="12" class="hide-overflow">
             <a :href="url">{{ title }}</a>
           </v-col>
         </v-row>
         <v-row style="height: 50%">
-          <v-col>
+          <v-col cols="12">
             <p>{{ description }}</p>
           </v-col>
         </v-row>
