@@ -2,16 +2,18 @@
   <div class="projects">
     <nav-bar active_page="Projects"></nav-bar>
     <v-content>
-      <div class="pa-1" v-for="project in projects" :key="project.title">
-        <div v-if="project.visible === 1">
-          <v-divider></v-divider>
-          <project-card :title="project.title" :url="project.url"
-          :description="project.description" :stars="project.stars"
-          :primary_language="project.primary_language"
-          :primary_language_color="project.primary_language_color"
-          :image_url="project.image_url" :is_mobile="is_mobile"></project-card>
+      <v-container :style="main_content_css">
+        <div class="pa-1" v-for="project in projects" :key="project.title">
+          <div v-if="project.visible === 1">
+            <v-divider></v-divider>
+            <project-card :title="project.title" :url="project.url"
+                          :description="project.description" :stars="project.stars"
+                          :primary_language="project.primary_language"
+                          :primary_language_color="project.primary_language_color"
+                          :image_url="project.image_url" :is_mobile="is_mobile"></project-card>
+          </div>
         </div>
-      </div>
+      </v-container>
       <v-footer style="background-color: white;">
         <p style="color: gray">
           {{ updated }}
@@ -49,6 +51,20 @@ export default {
         });
     },
   },
+  computed: {
+    main_content_css() {
+      if (this.is_mobile) {
+        return {
+          paddingRight: '0rem',
+          paddingLeft: '0rem',
+        };
+      }
+      return {
+        paddingRight: '2rem',
+        paddingLeft: '2rem',
+      };
+    },
+  },
   components: {
     navBar: NavBar,
     projectCard: ProjectCard,
@@ -61,7 +77,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>
