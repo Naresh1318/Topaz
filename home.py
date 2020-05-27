@@ -124,8 +124,7 @@ def publications():
 @bp.route("/markdown_content", methods=["GET"])
 def markdown_content():
     if request.method == "GET":
-        # TODO: Users must only be able to access whatever in under docs dir
-        document_path = request.args.get("path")  # TODO: Make this secure
+        document_path = request.args.get("path")
         if ".." in document_path or "~" in document_path:
             return jsonify({"INFO": "Invalid path"}), 550
         with open(f"{current_app.config['MARKDOWN_DIR']}/{document_path}", "r") as f:
