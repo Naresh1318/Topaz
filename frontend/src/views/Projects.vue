@@ -3,6 +3,9 @@
     <nav-bar active_page="Projects"></nav-bar>
     <v-content>
       <v-container :style="main_content_css">
+        <v-progress-linear :active="loading" indeterminate="loading"
+                           absolute top color="black accent-4">
+        </v-progress-linear>
         <div class="pa-1" v-for="project in projects" :key="project.title">
           <div v-if="project.visible === 1">
             <v-divider></v-divider>
@@ -37,6 +40,7 @@ export default {
       latest_project: {},
       updated: '',
       is_mobile: false,
+      loading: true,
     };
   },
   methods: {
@@ -44,6 +48,7 @@ export default {
       // Get all public repos
       this.$http.get(`${this.$backend_address}/public_repos`)
         .then((response) => {
+          this.loading = false;
           this.projects = response.data.repos;
           // eslint-disable-next-line prefer-destructuring
           this.latest_project = this.projects[0];

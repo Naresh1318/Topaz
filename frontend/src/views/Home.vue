@@ -3,6 +3,9 @@
     <nav-bar active_page="Home"></nav-bar>
     <v-content>
       <v-container :style="main_content_css">
+        <v-progress-linear :active="loading" indeterminate="loading"
+                           absolute top color="black accent-4">
+        </v-progress-linear>
         <v-row>
           <v-col md="4" xs="12" order-md="2">
             <v-card elevation="8"
@@ -32,6 +35,7 @@ export default {
       page_name: 'Home',
       markdown_content: null,
       profile_picture_url: '',
+      loading: true,
     };
   },
   methods: {
@@ -50,6 +54,7 @@ export default {
         },
       })
         .then((response) => {
+          this.loading = false;
           this.markdown_content = response.data.markdown;
           this.render_markdown();
         });
