@@ -6,7 +6,7 @@ I am primarily interested in machine learning and linear algebra. During my time
 * [Adversarial Autoencoder blogs](https://github.com/Naresh1318/Adversarial_Autoencoder): My series of adversarial autoencoder blogs
 * [SimplyServe](https://github.com/Naresh1318/simplyServe): My version of google drive. I admit it's nowhere as functional and as nice as Drive, but, it has some cool little things in it that I find myself using regularly.
 * [Dopamine](https://github.com/Naresh1318/Dopamine): Allows one to play multi-player pong and spell characters using 
-Brain-Computer Interface. Built this for a module in my Introduction to Neuroscience Lab TA class at Virginia Tech. Here's media [link](https://video.vt.edu/media/Neuroscience+students+play+Pong+with+their+brains/1_iisvk154)
+Brain-Computer Interface. Built this for a module in my Introduction to Neuroscience Lab TA class at Virginia Tech. Here's a media [link](https://video.vt.edu/media/Neuroscience+students+play+Pong+with+their+brains/1_iisvk154).
 * [Topaz](https://github.com/Naresh1318/Topaz): Website you are currently on :)
 
 *You can find more on my [Projects](https://naresh1318.com/projects) page.*
