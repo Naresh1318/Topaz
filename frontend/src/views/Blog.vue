@@ -3,6 +3,9 @@
     <nav-bar active_page="Blog"></nav-bar>
     <v-content>
       <v-container :style="main_content_css">
+        <v-progress-linear :active="loading" indeterminate="loading"
+                           absolute top color="black accent-4">
+        </v-progress-linear>
         <div class="pa-1" v-for="blog in blogs" :key="blog.title">
           <v-divider></v-divider>
           <regular-old-card :title="blog.title" :description="blog.description"
@@ -30,6 +33,7 @@ export default {
       page_name: 'Blog',
       blogs: [],
       updated: '',
+      loading: true,
     };
   },
   methods: {
@@ -37,6 +41,7 @@ export default {
       // Get all public repos
       this.$http.get(`${this.$backend_address}/blogs`)
         .then((response) => {
+          this.loading = false;
           this.blogs = response.data.blogs;
           this.updated = response.data.updated;
         });
