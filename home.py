@@ -119,3 +119,14 @@ def publications():
         db_conn.close()
         return jsonify({"INFO": "Publication added"})
     return jsonify({"ERROR": "Unauthenticated"})
+
+
+@bp.route("/markdown_content", methods=["GET"])
+def markdown_content():
+    if request.method == "GET":
+        # TODO: Users must only be able to access whatever in under docs dir
+        document_path = request.args.get("path")  # TODO: Make this secure
+        if ".." in document_path or "~" in document_path:
+            return jsonify({"INFO": "Invalid path"}), 550
+        with open(f"{current_app.config['MARKDOWN_DIR']}/{document_path}", "r") as f:
+            return jsonify({"INFO": "Document found", "markdown": f.read()})

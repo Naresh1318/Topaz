@@ -1,5 +1,6 @@
 {
   "name": "Naresh Nagabushan",
+  "profile_picture_url": "https://files.naresh1318.com/public/Me/IMG_2831.webp",
   "nav_bar_footer": {
       "github": {
         "link": "https://github.com/Naresh1318",
@@ -17,5 +18,5 @@
         "link": "https://twitter.com/Naresh_Reddy_",
         "icon": "fa-twitter"
       }
-    }
+  }
 }

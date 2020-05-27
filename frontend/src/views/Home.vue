@@ -3,15 +3,24 @@
     <nav-bar active_page="Home"></nav-bar>
     <v-content>
       <v-container :style="main_content_css">
-        <p>
-          Omelette du fromage
-        </p>
+        <v-row>
+          <v-col md="4" xs="12" order-md="2">
+            <v-card elevation="8"
+                    style="border-radius: 4px; box-shadow: 0 0 50px 2px #e3dcdc !important;">
+              <v-img height="300px" :src="profile_picture_url"></v-img>
+            </v-card>
+          </v-col>
+          <v-col md="8" xs="12" order-md="1">
+            <div class="content_html" id="content_html"></div>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </div>
 </template>
-
 <script>
+import showdown from 'showdown';
+import showdownHighlight from 'showdown-highlight';
 import NavBar from '../components/NavBar.vue';
 import mobile from '../js/utils';
 
@@ -21,9 +30,37 @@ export default {
     return {
       drawer: false,
       page_name: 'Home',
+      markdown_content: null,
+      profile_picture_url: '',
     };
   },
-  methods: {},
+  methods: {
+    render_markdown() {
+      const converter = new showdown.Converter({
+        extensions: [showdownHighlight],
+      });
+      converter.setFlavor('github');
+      const contentElement = document.getElementById('content_html');
+      contentElement.innerHTML = converter.makeHtml(this.markdown_content);
+    },
+    get_n_render_markdown() {
+      this.$http.get(`${this.$backend_address}/markdown_content`, {
+        params: {
+          path: 'Home.md',
+        },
+      })
+        .then((response) => {
+          this.markdown_content = response.data.markdown;
+          this.render_markdown();
+        });
+    },
+    get_theme() {
+      this.$http.get(`${this.$backend_address}/theme`)
+        .then((response) => {
+          this.profile_picture_url = response.data.theme.profile_picture_url;
+        });
+    },
+  },
   computed: {
     main_content_css() {
       if (this.is_mobile) {
@@ -45,6 +82,17 @@ export default {
     if (mobile.isMobile()) {
       this.is_mobile = true;
     }
+    this.get_theme();
+  },
+  beforeMount() {
+    this.get_n_render_markdown();
   },
 };
 </script>
+
+<style>
+#content_html a {
+  text-decoration: underline;
+  color: black;
+}
+</style>

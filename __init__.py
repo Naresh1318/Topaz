@@ -27,7 +27,8 @@ def create_app():
     app.config.from_mapping(
         SECRET_KEY=os.urandom(16),
         CACHED_TIME=time.time(),
-        THEME_DIR="./data/theme.json"
+        THEME_DIR="./data/theme.json",
+        MARKDOWN_DIR="./data/docs",
     )
 
     CORS(app, supports_credentials=True)
