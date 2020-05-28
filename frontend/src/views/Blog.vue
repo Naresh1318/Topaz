@@ -3,7 +3,7 @@
     <nav-bar active_page="Blog"></nav-bar>
     <v-content>
       <v-container :style="main_content_css">
-        <v-progress-linear :active="loading" indeterminate="loading"
+        <v-progress-linear :active="loading" :indeterminate="loading"
                            absolute top color="black accent-4">
         </v-progress-linear>
         <div class="pa-1" v-for="blog in blogs" :key="blog.title">

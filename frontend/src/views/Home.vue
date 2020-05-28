@@ -3,7 +3,7 @@
     <nav-bar active_page="Home"></nav-bar>
     <v-content>
       <v-container :style="main_content_css">
-        <v-progress-linear :active="loading" indeterminate="loading"
+        <v-progress-linear :active="loading" :indeterminate="loading"
                            absolute top color="black accent-4">
         </v-progress-linear>
         <v-row>
