@@ -1,0 +1,13 @@
+version: "3"
+services:
+  topaz:
+    image: topaz:latest
+    ports:
+      - "4000:5000"
+    environment:
+      - "USERNAME=admin"
+      - "PASSWORD=test"
+      - "PORT=5000"
+    restart: always
+    volumes:
+      - /home/naresh/Projects/Topaz/data/:/app/data/
