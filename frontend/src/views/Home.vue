@@ -2,6 +2,14 @@
   <div class="home">
     <nav-bar active_page="Home"></nav-bar>
     <v-content>
+      <v-app-bar v-if="show_app_bar()" color="#fff" light flat>
+       <v-toolbar-title>Logged in as admin</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <v-icon>fa-edit</v-icon>
+        </v-btn>
+        <v-btn href="/logout" color="dark" dark>Logout</v-btn>
+      </v-app-bar>
       <v-container :style="main_content_css">
         <v-progress-linear :active="loading" :indeterminate="loading"
                            absolute top color="black accent-4">
@@ -36,6 +44,7 @@ export default {
       markdown_content: null,
       profile_picture_url: '',
       loading: true,
+      is_admin: false,
     };
   },
   methods: {
@@ -65,6 +74,12 @@ export default {
           this.profile_picture_url = response.data.theme.profile_picture_url;
         });
     },
+    show_app_bar() {
+      if (mobile.isMobile()) {
+        return false;
+      }
+      return this.is_admin;
+    },
   },
   computed: {
     main_content_css() {
@@ -88,6 +103,12 @@ export default {
       this.is_mobile = true;
     }
     this.get_theme();
+    this.$is_authenticated()
+      .then((response) => {
+        if (response.data.is_authenticated) {
+          this.is_admin = true;
+        }
+      });
   },
   beforeMount() {
     this.get_n_render_markdown();

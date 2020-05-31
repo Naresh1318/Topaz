@@ -2,6 +2,17 @@
   <div class="projects">
     <nav-bar active_page="Projects"></nav-bar>
     <v-content>
+      <v-app-bar v-if="show_app_bar()" color="#fff" light flat>
+       <v-toolbar-title>Logged in as admin</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn @click="show_visibility_toggle = !show_visibility_toggle" icon>
+          <v-icon v-if="!show_visibility_toggle">fa-eye-slash</v-icon>
+          <v-icon v-else>fa-close</v-icon>
+        </v-btn>
+        <v-btn href="/logout" color="dark" dark>Logout</v-btn>
+      </v-app-bar>
+      <github-project-selector v-if="show_visibility_toggle" @submitted="get_repos">
+      </github-project-selector>
       <v-container :style="main_content_css">
         <v-progress-linear :active="loading" :indeterminate="loading"
                            absolute top color="black accent-4">
@@ -29,6 +40,7 @@
 <script>
 import mobile from '../js/utils';
 import NavBar from '../components/NavBar.vue';
+import GithubProjectSelector from '../components/GithubProjectSelector.vue';
 import ProjectCard from '../components/ProjectCard.vue';
 
 export default {
@@ -41,6 +53,8 @@ export default {
       updated: '',
       is_mobile: false,
       loading: true,
+      is_admin: false,
+      show_visibility_toggle: false,
     };
   },
   methods: {
@@ -54,6 +68,12 @@ export default {
           this.latest_project = this.projects[0];
           this.updated = response.data.updated;
         });
+    },
+    show_app_bar() {
+      if (mobile.isMobile()) {
+        return false;
+      }
+      return this.is_admin;
     },
   },
   computed: {
@@ -73,12 +93,19 @@ export default {
   components: {
     navBar: NavBar,
     projectCard: ProjectCard,
+    githubProjectSelector: GithubProjectSelector,
   },
   created() {
     this.get_repos();
     if (mobile.isMobile()) {
       this.is_mobile = true;
     }
+    this.$is_authenticated()
+      .then((response) => {
+        if (response.data.is_authenticated) {
+          this.is_admin = true;
+        }
+      });
   },
 };
 </script>
