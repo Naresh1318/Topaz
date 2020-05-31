@@ -24,19 +24,14 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import('../views/Admin.vue'),
     // eslint-disable-next-line no-unused-vars
     beforeEnter(to, from, next) {
       Vue.prototype.$is_authenticated()
         .then((response) => {
           if (!response.data.is_authenticated) {
-            next('/login');
-          } else {
             next();
+          } else {
+            next('/');
           }
         });
     },
@@ -48,7 +43,7 @@ const routes = [
     beforeEnter(to, from, next) {
       Vue.prototype.$logout()
         .then(() => {
-          next('/login');
+          next('/');
         });
     },
   },

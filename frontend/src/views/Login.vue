@@ -56,7 +56,7 @@ export default {
             this.password = '';
             this.show_alert = true;
           } else {
-            this.$router.push('admin');
+            this.$router.push('/');
           }
         });
     },

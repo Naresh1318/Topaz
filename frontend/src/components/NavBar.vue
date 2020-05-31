@@ -2,7 +2,7 @@
   <div>
     <div v-if="is_mobile()">
       <v-app-bar color="#101010" dark>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
     </div>
     <v-navigation-drawer class="nav_bar" app :width="get_width()" v-model="drawer">
@@ -54,7 +54,9 @@ import mobile from '../js/utils';
 
 export default {
   name: 'NavBar',
-  props: ['active_page'],
+  props: {
+    active_page: String,
+  },
   data() {
     return {
       drawer: false,
@@ -76,11 +78,12 @@ export default {
         });
     },
     get_width() {
-      if (this.is_mobile()) {
+      if (mobile.isMobile()) {
         return '100%';
       }
       return '300';
     },
+
     is_mobile() {
       if (mobile.isMobile()) {
         return true;
