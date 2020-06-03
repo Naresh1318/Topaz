@@ -5,7 +5,7 @@
       <v-app-bar v-if="show_app_bar()" color="#fff" light flat>
        <v-toolbar-title>Logged in as admin</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon>
+        <v-btn icon @click="open_editor()">
           <v-icon>fa-edit</v-icon>
         </v-btn>
         <v-btn href="/logout" color="dark" dark>Logout</v-btn>
@@ -83,6 +83,9 @@ export default {
         return false;
       }
       return this.is_admin;
+    },
+    open_editor() {
+      this.$router.push('/editor');
     },
   },
   computed: {

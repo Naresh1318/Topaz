@@ -21,6 +21,22 @@ const routes = [
     component: () => import('../views/Blog.vue'),
   },
   {
+    path: '/editor',
+    name: 'Editor',
+    component: () => import('../views/Editor.vue'),
+    // eslint-disable-next-line no-unused-vars
+    beforeEnter(to, from, next) {
+      Vue.prototype.$is_authenticated()
+        .then((response) => {
+          if (!response.data.is_authenticated) {
+            next('/');
+          } else {
+            next();
+          }
+        });
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
