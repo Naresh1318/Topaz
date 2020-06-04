@@ -1,4 +1,4 @@
-Hi! I'm Naresh. I'm a Computer Vision Engineer at [Verkada](https://www.verkada.com/). I got my Master's degree in Computer Engineering from Virginia Tech. At Virginia Tech, I was advised by [Dr. Sujith Vijayan](https://neuroscience.vt.edu/people/core-faculty/vijayan-s.html) and worked in the [Neural Dynamics and Neural Engineering Lab](https://www.vijayan.neuroscience.vt.edu/).
+Hi! I'm Naresh. I'm a Computer Vision Engineer at [Verkada] (https://www.verkada.com/). I got my Master's degree in Computer Engineering from Virginia Tech. At Virginia Tech, I was advised by [Dr. Sujith Vijayan](https://neuroscience.vt.edu/people/core-faculty/vijayan-s.html) and worked in the [Neural Dynamics and Neural Engineering Lab](https://www.vijayan.neuroscience.vt.edu/).
 I am primarily interested in machine learning and linear algebra. During my time at Virginia Tech, I was working on developing an Intracranial Electroencephalography (iEEG) based Brain-Computer Interface device.
 
 ### Here are some of my favorite projects I have worked on:
