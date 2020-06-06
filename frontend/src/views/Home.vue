@@ -27,6 +27,9 @@
         </v-row>
       </v-container>
     </v-content>
+    <div v-if="this.is_mobile">
+      <footer-comp></footer-comp>
+    </div>
   </div>
 </template>
 <script>
@@ -34,6 +37,7 @@ import showdown from 'showdown';
 import showdownHighlight from 'showdown-highlight';
 import NavBar from '../components/NavBar.vue';
 import mobile from '../js/utils';
+import Footer from '../components/Footer.vue';
 
 export default {
   name: 'Home',
@@ -97,6 +101,7 @@ export default {
   },
   components: {
     navBar: NavBar,
+    footerComp: Footer,
   },
   created() {
     if (mobile.isMobile()) {
