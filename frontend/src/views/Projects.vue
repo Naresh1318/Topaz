@@ -30,7 +30,7 @@
       </v-container>
       <v-footer style="background-color: white;">
         <p style="color: gray">
-          {{ updated }}
+          Last updated: {{ updated }}
         </p>
       </v-footer>
     </v-content>

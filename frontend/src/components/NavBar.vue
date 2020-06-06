@@ -1,11 +1,29 @@
 <template>
   <div>
-    <div v-if="is_mobile()">
-      <v-app-bar color="#101010" dark>
-          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      </v-app-bar>
-    </div>
-    <v-navigation-drawer class="nav_bar" app :width="get_width()" v-model="drawer">
+    <v-app-bar v-if="is_mobile()" height="175px"
+         style="background-color: black;">
+      <v-toolbar-title style="margin: auto">
+        <v-row>
+          <v-col cols="12" style="text-align: center">
+            <div style="font-family: 'Beth Ellen', sans-serif; color: white">
+              {{ hacker }}
+            </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col v-for="(page, name) in pages" :key="name">
+            <router-link v-if="name === active_page" class="btn-text" :to="page"
+                         style="text-decoration: underline">
+              {{ name }}
+            </router-link>
+            <router-link v-else class="btn-text" :to="page">
+              {{ name }}
+            </router-link>
+          </v-col>
+        </v-row>
+      </v-toolbar-title>
+    </v-app-bar>
+    <v-navigation-drawer v-else class="nav_bar" app :width="get_width()" v-model="drawer">
       <v-card class="nav_bar_card" dark raised height="100%">
         <v-container style="height: 90vh">
           <v-row align="center" style="height: 100%">
