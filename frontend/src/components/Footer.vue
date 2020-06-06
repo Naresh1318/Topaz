@@ -1,5 +1,5 @@
 <template>
-  <v-footer absolute>
+  <v-footer>
     <v-row>
       <v-col style="text-align: center">
         {{ new Date().getFullYear() }} — <strong>{{ this.hacker }}</strong>
