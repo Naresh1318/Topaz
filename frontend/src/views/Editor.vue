@@ -6,8 +6,17 @@
                            absolute top color="black accent-4">
         </v-progress-linear>
         <v-row>
-          <v-col>
+          <v-col cols="9">
             <h1>Editor</h1>
+            <p>{{ this.saved }}</p>
+            <v-btn @click="save_file">Save</v-btn>
+            <v-btn>Publish</v-btn>
+          </v-col>
+          <v-col>
+            <v-btn href="/" color="dark" dark>Home</v-btn>
+          </v-col>
+          <v-col>
+            <v-btn href="/logout" color="dark" dark>Logout</v-btn>
           </v-col>
         </v-row>
         <v-row>
@@ -34,11 +43,13 @@ export default {
   name: 'Editor',
   data() {
     return {
+      page: '',
       markdown_content: '',
       converter: new showdown.Converter({
         extensions: [showdownHighlight],
       }),
       loading: true,
+      saved: false,
     };
   },
   computed: {
@@ -51,11 +62,12 @@ export default {
     // eslint-disable-next-line func-names
     update: loadsh.debounce(function (e) {
       this.markdown_content = e.target.value;
+      this.saved = false;
     }, 300),
-    get_markdown(page) {
+    get_markdown() {
       this.$http.get(`${this.$backend_address}/markdown_content`, {
         params: {
-          path: page,
+          path: this.page,
         },
       })
         .then((response) => {
@@ -63,20 +75,40 @@ export default {
           this.markdown_content = response.data.markdown;
         });
     },
+    start_file_saver() {
+      window.setInterval(this.save_file, 60000);
+    },
+    save_file() {
+      this.$http.post(`${this.$backend_address}/markdown_content`, {
+        markdown: this.markdown_content,
+      }, {
+        params: {
+          path: this.page,
+        },
+        withCredentials: true,
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            this.saved = true;
+          }
+        });
+    },
   },
   created() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     if (urlParams.has('page')) {
-      this.get_markdown(urlParams.get('page'));
+      this.page = urlParams.get('page');
+      this.get_markdown();
     } else {
       this.markdown_content = '';
     }
+    this.start_file_saver();
   },
 };
 </script>
 
-<style scoped>
+<style>
 .content_html a {
   text-decoration: underline;
   color: black;
@@ -90,5 +122,4 @@ export default {
   font-size: 16px;
   padding: 20px;
 }
-
 </style>
