@@ -28,18 +28,17 @@
           </div>
         </div>
       </v-container>
-      <v-footer style="background-color: white;">
-        <p style="color: gray">
-          Last updated: {{ updated }}
-        </p>
-      </v-footer>
     </v-content>
+    <div v-if="this.is_mobile">
+      <footer-comp></footer-comp>
+    </div>
   </div>
 </template>
 
 <script>
 import mobile from '../js/utils';
 import NavBar from '../components/NavBar.vue';
+import Footer from '../components/Footer.vue';
 import GithubProjectSelector from '../components/GithubProjectSelector.vue';
 import ProjectCard from '../components/ProjectCard.vue';
 
@@ -94,6 +93,7 @@ export default {
     navBar: NavBar,
     projectCard: ProjectCard,
     githubProjectSelector: GithubProjectSelector,
+    footerComp: Footer,
   },
   created() {
     this.get_repos();

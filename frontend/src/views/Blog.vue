@@ -23,18 +23,17 @@
                             :url="blog.url" :image_url="blog.image_url"></regular-old-card>
         </div>
       </v-container>
-      <v-footer style="background-color: white">
-        <p style="color: gray">
-          Last updated: {{ updated }}
-        </p>
-      </v-footer>
     </v-content>
+    <div v-if="this.is_mobile">
+      <footer-comp></footer-comp>
+    </div>
   </div>
 </template>
 
 <script>
 import AddExternalBlogLinks from '../components/AddExternalBlogLinks.vue';
 import NavBar from '../components/NavBar.vue';
+import Footer from '../components/Footer.vue';
 import RegularOldCard from '../components/RegularOldCard.vue';
 import mobile from '../js/utils';
 
@@ -48,6 +47,7 @@ export default {
       loading: true,
       is_admin: false,
       show_add_blog: false,
+      is_mobile: false,
     };
   },
   methods: {
@@ -85,6 +85,7 @@ export default {
     navBar: NavBar,
     regularOldCard: RegularOldCard,
     addExternalBlogLinks: AddExternalBlogLinks,
+    footerComp: Footer,
   },
   created() {
     this.get_bogs();
