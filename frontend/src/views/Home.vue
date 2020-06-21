@@ -124,7 +124,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #content_html a {
   text-decoration: underline;
   color: black;
