@@ -1,12 +1,12 @@
 import datetime
 import json
-import subprocess
 
 from flask import Blueprint, jsonify, request, current_app
 from flask_login import current_user
 
 import db
 from utils import database
+from utils.file_manager import FileManager, FileType
 
 bp = Blueprint("home", __name__)
 
@@ -125,34 +125,37 @@ def publications():
 
 @bp.route("/markdown_content", methods=["GET", "POST"])
 def markdown_content():
-    document_path = request.args.get("path")
-    if ".." in document_path or "~" in document_path:
-        return jsonify({"INFO": "Invalid path"}), 550
-    local_path = f"{current_app.config['MARKDOWN_DIR']}/{document_path}"
-
-    try:
-        subprocess.run(["git", "checkout", "local"], check=True)
-    except subprocess.CalledProcessError:
-        subprocess.run(["git", "checkout", "-b", "local"], check=True)
+    file_name: str = request.args.get("path")
+    file_type: FileType = FileType(request.args.get("file_type"))
+    fm: FileManager = current_app.config["FILE_MANAGER"]
+    if ".." in file_name or "~" in file_name or "/" in file_name:
+        return jsonify({"INFO": "Invalid file name"}), 550
 
     if request.method == "GET":
-        with open(local_path, "r") as f:
-            subprocess.run(["git", "checkout", "-"])
-            return jsonify({"INFO": "Document found", "markdown": f.read()})
+        if request.args.get("version"):
+            content = fm.read_version(file_name, request.args.get("version"), file_type)
+        else:
+            content = fm.read(file_name, file_type)
+        return jsonify({"INFO": "Document found", "markdown": content})
     elif current_user.is_authenticated:
         content = request.json["markdown"]
-        with open(local_path, "w") as f:
-            f.write(content)
-
-        # Commit changes
-        try:
-            saved_time = datetime.datetime.now()
-            subprocess.run(["git", "add", local_path], check=True)
-            subprocess.run(["git", "commit", "-m", f"{document_path}: {saved_time}"], check=True)
-            subprocess.run(["git", "checkout", "-"])
-            return jsonify({"INFO": "Document written", "time": str(saved_time)})
-        except subprocess.CalledProcessError:
-            subprocess.run(["git", "checkout", "-"])
-            return jsonify({"INFO": "Document not written"})
+        fm.write(file_name, content, file_type)
+        return jsonify({"INFO": "Document written", "time": str(datetime.datetime.now())})
     else:
         return jsonify({"ERROR": "Unauthenticated"}), 401
+
+
+@bp.route("/list_published", methods=["GET"])
+def list_published():
+    fm: FileManager = current_app.config["FILE_MANAGER"]
+    published_files = fm.list(as_list=True, file_type=FileType.PUBLISHED)
+    return jsonify({"published": published_files})
+
+
+@bp.route("/list_unpublished", methods=["GET"])
+def list_unpublished():
+    if current_user.is_authenticated:
+        fm: FileManager = current_app.config["FILE_MANAGER"]
+        unpublished_files = fm.list(as_list=True, file_type=FileType.UNPUBLISHED)
+        return jsonify({"unpublished": unpublished_files})
+    return jsonify({"ERROR": "Unauthenticated"}), 401

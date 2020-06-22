@@ -1,13 +1,13 @@
 import json
 import os
 import time
-import subprocess
 
 from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager
 
 from utils.database import get_user
+from utils.file_manager import FileManager
 
 
 # Change jinja template syntax
@@ -32,15 +32,9 @@ def create_app():
         THEME_DIR="./data/theme.json",
         REAL_MARKDOWN_DIR=os.path.join(project_dir, "../topaz_docs"),
         MARKDOWN_DIR="./data/docs",
+        FILE_MANAGER=FileManager(file_src_dir=os.path.join(project_dir, "../topaz_docs") + "/",
+                                 symbolic_link_dst="./data/docs")
     )
-
-    if not os.path.exists(app.config["REAL_MARKDOWN_DIR"]):
-        os.makedirs(app.config["REAL_MARKDOWN_DIR"])
-        subprocess.call(["echo", "'Topaz'", ">", "init.txt"])
-        subprocess.call(["git", "init"], cwd=app.config["REAL_MARKDOWN_DIR"])
-        subprocess.call(["git", "add", "."], cwd=app.config["REAL_MARKDOWN_DIR"])
-        subprocess.call(["git", "commit", "-m", "init"], cwd=app.config["REAL_MARKDOWN_DIR"])
-        subprocess.run(["ln", "-s", app.config["REAL_MARKDOWN_DIR"]+"/", app.config["MARKDOWN_DIR"]])
 
     CORS(app, supports_credentials=True)
 
