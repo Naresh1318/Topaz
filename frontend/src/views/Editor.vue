@@ -11,6 +11,17 @@
           </v-col>
         </v-row>
         <v-row>
+          <v-col>
+            Last saved: {{ last_saved }}
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn @click="set_markdown"> Save </v-btn>
+            <v-btn @click="publish"> Publish </v-btn>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col md="6" xs="12">
             <textarea :value="markdown_content" @input="update"
                       style="width: 100%; height: 100%">
@@ -22,6 +33,9 @@
         </v-row>
       </v-container>
     </v-content>
+    <v-snackbar v-model="show_alert">
+      {{ alert_msg }} <v-btn color="#fff" text @click="show_alert=false">Close</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -39,6 +53,10 @@ export default {
         extensions: [showdownHighlight],
       }),
       loading: true,
+      show_alert: false,
+      alert_msg: '',
+      page: '',
+      last_saved: '',
     };
   },
   computed: {
@@ -52,10 +70,11 @@ export default {
     update: loadsh.debounce(function (e) {
       this.markdown_content = e.target.value;
     }, 300),
-    get_markdown(page) {
+    get_markdown() {
       this.$http.get(`${this.$backend_address}/markdown_content`, {
         params: {
-          path: page,
+          path: this.page,
+          file_type: 1,
         },
       })
         .then((response) => {
@@ -63,12 +82,48 @@ export default {
           this.markdown_content = response.data.markdown;
         });
     },
+    set_markdown() {
+      this.$http.post(`${this.$backend_address}/markdown_content`, {
+        markdown: this.markdown_content,
+      }, {
+        withCredentials: true,
+        params: {
+          path: this.page,
+          file_type: 1,
+        },
+      })
+        .then((response) => {
+          if (response.data.INFO) {
+            this.last_saved = response.data.time;
+          } else {
+            this.last_saved = 'unable to save';
+            this.show_alert = true;
+            this.alert_msg = 'unable to save';
+          }
+        });
+    },
+    publish() {
+      this.$http.get(`${this.$backend_address}/publish`, {
+        withCredentials: true,
+        params: {
+          path: this.page,
+        },
+      })
+        .then((response) => {
+          this.loading = false;
+          if (response.data.INFO) {
+            this.show_alert = true;
+            this.alert_msg = response.data.INFO;
+          }
+        });
+    },
   },
   created() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     if (urlParams.has('page')) {
-      this.get_markdown(urlParams.get('page'));
+      this.page = urlParams.get('page');
+      this.get_markdown();
     } else {
       this.markdown_content = '';
     }

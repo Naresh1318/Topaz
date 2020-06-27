@@ -126,7 +126,7 @@ def publications():
 @bp.route("/markdown_content", methods=["GET", "POST"])
 def markdown_content():
     file_name: str = request.args.get("path")
-    file_type: FileType = FileType(request.args.get("file_type"))
+    file_type: FileType = FileType(int(request.args.get("file_type")))
     fm: FileManager = current_app.config["FILE_MANAGER"]
     if ".." in file_name or "~" in file_name or "/" in file_name:
         return jsonify({"INFO": "Invalid file name"}), 550
@@ -143,6 +143,19 @@ def markdown_content():
         return jsonify({"INFO": "Document written", "time": str(datetime.datetime.now())})
     else:
         return jsonify({"ERROR": "Unauthenticated"}), 401
+
+
+@bp.route("/publish", methods=["GET"])
+def publish():
+    if current_user.is_authenticated:
+        file_name: str = request.args.get("path")
+        fm: FileManager = current_app.config["FILE_MANAGER"]
+        if ".." in file_name or "~" in file_name or "/" in file_name:
+            return jsonify({"INFO": "Invalid file name"}), 550
+        published = fm.publish(file_name=file_name)
+        info = "published" if published else "not published"
+        return jsonify({"INFO": info})
+    return jsonify({"ERROR": "Unauthenticated"}), 401
 
 
 @bp.route("/list_published", methods=["GET"])

@@ -64,6 +64,7 @@ export default {
       this.$http.get(`${this.$backend_address}/markdown_content`, {
         params: {
           path: 'Home.md',
+          file_type: 0,
         },
       })
         .then((response) => {
