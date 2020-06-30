@@ -1,6 +1,9 @@
 # docs
 data/docs
 
+# debug files
+playground/
+
 # Pycharm files
 .idea/
 

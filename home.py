@@ -161,7 +161,7 @@ def publish():
 @bp.route("/list_published", methods=["GET"])
 def list_published():
     fm: FileManager = current_app.config["FILE_MANAGER"]
-    published_files = fm.list(as_list=True, file_type=FileType.PUBLISHED)
+    published_files = fm.list(as_dict=True, file_type=FileType.PUBLISHED)
     return jsonify({"published": published_files})
 
 
@@ -169,6 +169,6 @@ def list_published():
 def list_unpublished():
     if current_user.is_authenticated:
         fm: FileManager = current_app.config["FILE_MANAGER"]
-        unpublished_files = fm.list(as_list=True, file_type=FileType.UNPUBLISHED)
+        unpublished_files = fm.list(as_dict=True, file_type=FileType.UNPUBLISHED)
         return jsonify({"unpublished": unpublished_files})
     return jsonify({"ERROR": "Unauthenticated"}), 401
