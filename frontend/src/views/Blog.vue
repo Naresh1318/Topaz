@@ -5,11 +5,17 @@
       <v-app-bar v-if="show_app_bar()" color="#fff" light flat>
        <v-toolbar-title>Logged in as admin</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn @click="show_add_blog = !show_add_blog" icon>
-          <v-icon v-if="!show_add_blog">fa-plus</v-icon>
-          <v-icon v-else>fa-close</v-icon>
-        </v-btn>
-        <v-btn href="/logout" color="dark" dark>Logout</v-btn>
+        <v-row justify="end">
+<!--          <v-col>-->
+<!--            <v-btn> New Blog </v-btn>-->
+<!--          </v-col>-->
+          <v-col md="3">
+            <v-btn @click="show_add_blog = !show_add_blog"> External Link </v-btn>
+          </v-col>
+          <v-col md="2">
+            <v-btn href="/logout" color="dark" dark>Logout</v-btn>
+          </v-col>
+        </v-row>
       </v-app-bar>
       <add-external-blog-links v-if="show_add_blog" @submitted="get_bogs" style="margin: auto">
       </add-external-blog-links>
@@ -65,6 +71,9 @@ export default {
         return false;
       }
       return this.is_admin;
+    },
+    open_editor(page) {
+      this.$router.push(`/editor?page=${page}`);
     },
   },
   computed: {

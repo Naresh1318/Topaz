@@ -5,7 +5,7 @@
       <v-app-bar v-if="show_app_bar()" color="#fff" light flat>
        <v-toolbar-title>Logged in as admin</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon>
+        <v-btn icon @click="open_editor('Home.md')">
           <v-icon>fa-edit</v-icon>
         </v-btn>
         <v-btn href="/logout" color="dark" dark>Logout</v-btn>
@@ -64,6 +64,7 @@ export default {
       this.$http.get(`${this.$backend_address}/markdown_content`, {
         params: {
           path: 'Home.md',
+          file_type: 0,
         },
       })
         .then((response) => {
@@ -83,6 +84,9 @@ export default {
         return false;
       }
       return this.is_admin;
+    },
+    open_editor(page) {
+      this.$router.push(`/editor?page=${page}`);
     },
   },
   computed: {

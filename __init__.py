@@ -7,6 +7,7 @@ from flask_cors import CORS
 from flask_login import LoginManager
 
 from utils.database import get_user
+from utils.file_manager import FileManager
 
 
 # Change jinja template syntax
@@ -23,12 +24,16 @@ def create_app():
     Initialize Flask and setup database
 
     """
+    project_dir = os.path.dirname(os.path.abspath(__file__))
     app = CustomFlask(__name__)
     app.config.from_mapping(
         SECRET_KEY=os.urandom(16),
         CACHED_TIME=time.time(),
         THEME_DIR="./data/theme.json",
+        REAL_MARKDOWN_DIR=os.path.join(project_dir, "../topaz_docs"),
         MARKDOWN_DIR="./data/docs",
+        FILE_MANAGER=FileManager(file_src_dir=os.path.join(project_dir, "../topaz_docs") + "/",
+                                 symbolic_link_dst="./data/docs")
     )
 
     CORS(app, supports_credentials=True)

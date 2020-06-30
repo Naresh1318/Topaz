@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from flask import Blueprint, jsonify, request, current_app
@@ -5,6 +6,7 @@ from flask_login import current_user
 
 import db
 from utils import database
+from utils.file_manager import FileManager, FileType
 
 bp = Blueprint("home", __name__)
 
@@ -92,7 +94,7 @@ def blogs():
         database.add_entry("blogs", db_conn, title, description, url, image_url, time_stamp)
         db_conn.close()
         return jsonify({"INFO": "Blog added"})
-    return jsonify({"ERROR": "Unauthenticated"})
+    return jsonify({"ERROR": "Unauthenticated"}), 401
 
 
 @bp.route("/publications", methods=["GET", "POST"])
@@ -118,14 +120,55 @@ def publications():
         database.add_entry("publications", db_conn, title, description, url, image_url, time_stamp)
         db_conn.close()
         return jsonify({"INFO": "Publication added"})
-    return jsonify({"ERROR": "Unauthenticated"})
+    return jsonify({"ERROR": "Unauthenticated"}), 401
 
 
-@bp.route("/markdown_content", methods=["GET"])
+@bp.route("/markdown_content", methods=["GET", "POST"])
 def markdown_content():
+    file_name: str = request.args.get("path")
+    file_type: FileType = FileType(int(request.args.get("file_type")))
+    fm: FileManager = current_app.config["FILE_MANAGER"]
+    if ".." in file_name or "~" in file_name or "/" in file_name:
+        return jsonify({"INFO": "Invalid file name"}), 550
+
     if request.method == "GET":
-        document_path = request.args.get("path")
-        if ".." in document_path or "~" in document_path:
-            return jsonify({"INFO": "Invalid path"}), 550
-        with open(f"{current_app.config['MARKDOWN_DIR']}/{document_path}", "r") as f:
-            return jsonify({"INFO": "Document found", "markdown": f.read()})
+        if request.args.get("version"):
+            content = fm.read_version(file_name, request.args.get("version"), file_type)
+        else:
+            content = fm.read(file_name, file_type)
+        return jsonify({"INFO": "Document found", "markdown": content})
+    elif current_user.is_authenticated:
+        content = request.json["markdown"]
+        fm.write(file_name, content, file_type)
+        return jsonify({"INFO": "Document written", "time": str(datetime.datetime.now())})
+    else:
+        return jsonify({"ERROR": "Unauthenticated"}), 401
+
+
+@bp.route("/publish", methods=["GET"])
+def publish():
+    if current_user.is_authenticated:
+        file_name: str = request.args.get("path")
+        fm: FileManager = current_app.config["FILE_MANAGER"]
+        if ".." in file_name or "~" in file_name or "/" in file_name:
+            return jsonify({"INFO": "Invalid file name"}), 550
+        published = fm.publish(file_name=file_name)
+        info = "published" if published else "not published"
+        return jsonify({"INFO": info})
+    return jsonify({"ERROR": "Unauthenticated"}), 401
+
+
+@bp.route("/list_published", methods=["GET"])
+def list_published():
+    fm: FileManager = current_app.config["FILE_MANAGER"]
+    published_files = fm.list(as_dict=True, file_type=FileType.PUBLISHED)
+    return jsonify({"published": published_files})
+
+
+@bp.route("/list_unpublished", methods=["GET"])
+def list_unpublished():
+    if current_user.is_authenticated:
+        fm: FileManager = current_app.config["FILE_MANAGER"]
+        unpublished_files = fm.list(as_dict=True, file_type=FileType.UNPUBLISHED)
+        return jsonify({"unpublished": unpublished_files})
+    return jsonify({"ERROR": "Unauthenticated"}), 401
