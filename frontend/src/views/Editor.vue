@@ -16,8 +16,13 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
+          <v-col md="1">
+            <v-btn href="/"> Home </v-btn>
+          </v-col>
+          <v-col md="1">
             <v-btn @click="set_markdown"> Save </v-btn>
+          </v-col>
+          <v-col md="1">
             <v-btn @click="publish"> Publish </v-btn>
           </v-col>
         </v-row>
