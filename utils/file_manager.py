@@ -24,10 +24,11 @@ class FileManager:
         self.data_dir = pathlib.Path(symbolic_link_dst)
         self.published_dir = self.file_src_dir / "published"
         self.unpublished_dir = self.file_src_dir / "unpublished"
-        if not os.path.exists(file_src_dir) or not os.path.exists(symbolic_link_dst):
+        if not os.path.exists(file_src_dir):
             os.mkdir(self.file_src_dir / "published")
             os.mkdir(self.file_src_dir / "unpublished")
-            subprocess.run(["ln", "-s", file_src_dir + "/", symbolic_link_dst])
+        if not os.path.exists(symbolic_link_dst):
+            subprocess.run(["ln", "-s", file_src_dir, symbolic_link_dst])
 
     def read(self, file_name: str, file_type: FileType) -> str:
         data_dir = self._get_dir(file_type)

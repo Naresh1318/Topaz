@@ -11,3 +11,4 @@ services:
     restart: always
     volumes:
       - /home/naresh/Projects/Topaz/data/:/app/data/
+      - /home/naresh/Projects/topaz_docs:/topaz_docs
