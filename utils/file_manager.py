@@ -24,8 +24,9 @@ class FileManager:
         self.data_dir = pathlib.Path(symbolic_link_dst)
         self.published_dir = self.file_src_dir / "published"
         self.unpublished_dir = self.file_src_dir / "unpublished"
-        if not os.path.exists(file_src_dir):
+        if not os.path.exists(self.file_src_dir / "published"):
             os.mkdir(self.file_src_dir / "published")
+        if not os.path.exists(self.file_src_dir / "unpublished"):
             os.mkdir(self.file_src_dir / "unpublished")
         if not os.path.exists(symbolic_link_dst):
             subprocess.run(["ln", "-s", file_src_dir, symbolic_link_dst])
