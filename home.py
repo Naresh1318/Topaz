@@ -74,7 +74,7 @@ def public_repos():
 @bp.route("/blogs", methods=["GET", "POST"])
 def blogs():
     """
-    GET or POST blogs
+    GET all published blogs and external blog links
 
     Returns (JSON): GET  -> a list of all blogs
                     POST -> INFO message
@@ -82,10 +82,27 @@ def blogs():
     """
     db_conn = db.get_db()
     if request.method == "GET":
+        # external links
         all_blogs, updated = database.get_articles(db_conn)
         db_conn.close()
+
+        # internal blogs
+        fm: FileManager = current_app.config["FILE_MANAGER"]
+        published_files = fm.list(as_dict=True, file_type=FileType.PUBLISHED)
+        published_files = list(published_files.values())
+        all_blogs.extend(published_files)
+        if current_user.is_authenticated:
+            fm: FileManager = current_app.config["FILE_MANAGER"]
+            unpublished_files = fm.list(as_dict=True, file_type=FileType.UNPUBLISHED)
+            unpublished_files = list(unpublished_files.values())
+            all_blogs.extend(unpublished_files)
         return jsonify({"blogs": all_blogs, "updated": updated})
+
+
+@bp.route("/blogs/external_link", methods=["POST"])
+def add_external_blog_link():
     if current_user.is_authenticated:
+        db_conn = db.get_db()
         title = request.json["title"]
         description = request.json["description"]
         url = request.json["url"]
@@ -130,6 +147,9 @@ def markdown_content():
     fm: FileManager = current_app.config["FILE_MANAGER"]
     if ".." in file_name or "~" in file_name or "/" in file_name:
         return jsonify({"INFO": "Invalid file name"}), 550
+
+    if file_type == FileType.UNPUBLISHED and not current_user.is_authenticated:
+        return jsonify({"ERROR": "Unauthenticated"}), 401
 
     if request.method == "GET":
         if request.args.get("version"):

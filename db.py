@@ -38,7 +38,8 @@ def init_db():
               "stars TEXT, title TEXT, description TEXT, readme TEXT, latest_commit TEXT, url TEXT, image_url TEXT, "
               "timestamp TEXT, visible INTEGER)")
     c.execute("CREATE TABLE blogs (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
-              "url TEXT, image_url TEXT, timestamp TEXT, automatically_added INTEGER, visible INTEGER)")
+              "url TEXT, image_url TEXT, timestamp TEXT, automatically_added INTEGER, "
+              "file_type INTEGER, file_name TEXT)")
     c.execute("CREATE TABLE publications (id INTEGER PRIMARY KEY, title TEXT, description TEXT, "
               "url TEXT, image_url TEXT, timestamp TEXT, visible INTEGER)")
 

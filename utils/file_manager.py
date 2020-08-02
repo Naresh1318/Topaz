@@ -1,5 +1,6 @@
 import datetime
 import os
+import time
 import pathlib
 import subprocess
 import functools
@@ -107,7 +108,10 @@ class FileManager:
             content = self.read(file_name=file_name, file_type=file_type)
             title, description = self.extract_title_n_description(content)
             image_url = self.extract_image(content)
-            return {"title": title, "image_url": image_url, "description": description}
+            git_data = self.list_versions(file_name=file_name, file_type=file_type).keys()
+            timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(list(git_data)[0]))
+            return {"file_name": file_name, "title": title, "image_url": image_url, "description": description,
+                    "file_type": file_type.value, "timestamp": timestamp}
 
     def _commit_file(self, file_name: str, file_type: FileType):
         saved_time = self._generate_timestamp()
@@ -131,7 +135,10 @@ class FileManager:
         content_lines = content.split("\n")
         i = 0
         while title is None:
-            line = content_lines[i]
+            try:
+                line = content_lines[i]
+            except IndexError:
+                return "", ""
             i += 1
             if line:
                 if line.startswith("#"):
@@ -141,7 +148,10 @@ class FileManager:
                             break
                 else:
                     title = line.strip()
-            description = content_lines[i + 1]
+            try:
+                description = content_lines[i + 1]
+            except IndexError:
+                description = ""
         return title, description
 
     @staticmethod

@@ -122,9 +122,14 @@ def add_entry(table, db_conn, title, description, url, image_url, time_stamp):
     """
     c = db_conn.cursor()
     try:
-        c.execute(f"INSERT INTO {table} (title, description, url, image_url, timestamp) VALUES "
-                  "(?, ?, ?, ?, ?)",
-                  (title, description, url, image_url, time_stamp))
+        if table == "blogs":
+            c.execute(f"INSERT INTO {table} (title, description, url, image_url, timestamp, file_type) VALUES "
+                      "(?, ?, ?, ?, ?, ?)",
+                      (title, description, url, image_url, time_stamp, 1))
+        else:
+            c.execute(f"INSERT INTO {table} (title, description, url, image_url, timestamp) VALUES "
+                      "(?, ?, ?, ?, ?)",
+                      (title, description, url, image_url, time_stamp))
         db_conn.commit()
         db_conn.close()
     except Exception as e:

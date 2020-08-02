@@ -4,7 +4,8 @@
       <v-col md="8" sm="12" order-md="1" order-sm="12">
         <v-row>
           <v-col>
-            <a :href="url">{{ title }}</a>
+            <a v-if="!name" :href="url">{{ title }}</a>
+            <a v-else @click="navigate_to_blog(name, file_type)">{{ title }}</a>
           </v-col>
         </v-row>
         <v-row style="height: 50%">
@@ -30,10 +31,17 @@ export default {
     url: String,
     description: String,
     image_url: String,
+    name: String,
+    file_type: Number,
   },
   data() {
     return {
     };
+  },
+  methods: {
+    navigate_to_blog(name, fileType) {
+      this.$router.push(`/blog/post?page=${name}&file_type=${fileType}`);
+    },
   },
 };
 </script>

@@ -68,7 +68,7 @@ export default {
         this.show_alert = true;
         return;
       }
-      this.$http.post(`${this.$backend_address}/blogs`, {
+      this.$http.post(`${this.$backend_address}/blogs/external_link`, {
         title: this.title,
         description: this.description,
         url: this.url,
