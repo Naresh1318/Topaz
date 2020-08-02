@@ -81,6 +81,7 @@ export default {
           path: this.page,
           file_type: 1,
         },
+        withCredentials: true,
       })
         .then((response) => {
           this.loading = false;
