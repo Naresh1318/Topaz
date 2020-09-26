@@ -13,6 +13,11 @@
             <p>{{ description }}</p>
           </v-col>
         </v-row>
+        <v-row v-if="name">
+          <v-col>
+            <v-btn @click="open_editor(name)">Edit</v-btn>
+          </v-col>
+        </v-row>
       </v-col>
       <v-col md="4" sm="12" order-md="2" order-sm="1">
         <v-card elevation="5" style="border-radius: 5px;">
@@ -41,6 +46,9 @@ export default {
   methods: {
     navigate_to_blog(name, fileType) {
       this.$router.push(`/blog/post?page=${name}&file_type=${fileType}`);
+    },
+    open_editor(name) {
+      this.$router.push(`/editor?page=${name}`);
     },
   },
 };

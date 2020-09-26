@@ -24,10 +24,18 @@
                            absolute top color="black accent-4">
         </v-progress-linear>
         <div class="pa-1" v-for="blog in blogs" :key="blog.title">
-          <v-divider></v-divider>
-          <regular-old-card :title="blog.title" :description="blog.description"
-                            :url="blog.url" :image_url="blog.image_url"
-                            :name="blog.file_name" :file_type="blog.file_type"></regular-old-card>
+          <div v-if="is_admin && blog.file_type === fileType.UNPUBLISHED">
+            <v-divider></v-divider>
+            <regular-old-card :title="blog.title" :description="blog.description"
+                              :url="blog.url" :image_url="blog.image_url"
+                              :name="blog.file_name" :file_type="blog.file_type"></regular-old-card>
+          </div>
+          <div v-if="!is_admin">
+            <v-divider></v-divider>
+            <regular-old-card :title="blog.title" :description="blog.description"
+                              :url="blog.url" :image_url="blog.image_url"
+                              :name="blog.file_name" :file_type="blog.file_type"></regular-old-card>
+          </div>
         </div>
       </v-container>
     </v-content>
@@ -55,6 +63,10 @@ export default {
       is_admin: false,
       show_add_blog: false,
       is_mobile: false,
+      fileType: {
+        PUBLISHED: 0,
+        UNPUBLISHED: 1,
+      },
     };
   },
   methods: {

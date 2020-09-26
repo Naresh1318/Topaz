@@ -55,12 +55,13 @@ def public_repos():
                     POST -> set visibility of projects
 
     """
-    db_conn = db.get_db()
     if request.method == "GET":
+        db_conn = db.get_db()
         repos, updated = database.get_public_repos(db_conn)
         db_conn.close()
         return jsonify({"repos": repos, "updated": updated})
     if current_user.is_authenticated:
+        db_conn = db.get_db()
         selected = request.json["projects"]
         for s in selected:
             entry_id = s["id"]
@@ -80,9 +81,9 @@ def blogs():
                     POST -> INFO message
 
     """
-    db_conn = db.get_db()
     if request.method == "GET":
         # external links
+        db_conn = db.get_db()
         all_blogs, updated = database.get_articles(db_conn)
         db_conn.close()
 
@@ -123,12 +124,13 @@ def publications():
                     POST -> INFO message
 
     """
-    db_conn = db.get_db()
     if request.method == "GET":
+        db_conn = db.get_db()
         all_blogs = database.get_entries("publications", db_conn)
         db_conn.close()
         return jsonify({"publications": all_blogs})
     if current_user.is_authenticated:
+        db_conn = db.get_db()
         title = request.json["title"]
         description = request.json["description"]
         url = request.json["url"]
