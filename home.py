@@ -180,6 +180,19 @@ def publish():
     return jsonify({"ERROR": "Unauthenticated"}), 401
 
 
+@bp.route("/unpublish", methods=["GET"])
+def unpublish():
+    if current_user.is_authenticated:
+        file_name: str = request.args.get("path")
+        fm: FileManager = current_app.config["FILE_MANAGER"]
+        if ".." in file_name or "~" in file_name or "/" in file_name:
+            return jsonify({"INFO": "Invalid file name"}), 550
+        unpublished = fm.unpublish(file_name=file_name)
+        info = "unpublished" if unpublished else "not unpublished"
+        return jsonify({"INFO": info})
+    return jsonify({"ERROR": "Unauthenticated"}), 401
+
+
 @bp.route("/list_published", methods=["GET"])
 def list_published():
     fm: FileManager = current_app.config["FILE_MANAGER"]

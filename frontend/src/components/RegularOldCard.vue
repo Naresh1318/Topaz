@@ -13,7 +13,7 @@
             <p>{{ description }}</p>
           </v-col>
         </v-row>
-        <v-row v-if="name">
+        <v-row v-if="admin && name">
           <v-col>
             <v-btn @click="open_editor(name)">Edit</v-btn>
           </v-col>
@@ -38,6 +38,11 @@ export default {
     image_url: String,
     name: String,
     file_type: Number,
+    admin: Boolean,
+    fileType: {
+      PUBLISHED: 0,
+      UNPUBLISHED: 1,
+    },
   },
   data() {
     return {

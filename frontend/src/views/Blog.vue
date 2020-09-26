@@ -27,13 +27,13 @@
           <div v-if="is_admin && blog.file_type === fileType.UNPUBLISHED">
             <v-divider></v-divider>
             <regular-old-card :title="blog.title" :description="blog.description"
-                              :url="blog.url" :image_url="blog.image_url"
+                              :url="blog.url" :image_url="blog.image_url" :admin="is_admin"
                               :name="blog.file_name" :file_type="blog.file_type"></regular-old-card>
           </div>
-          <div v-if="!is_admin">
+          <div v-if="!is_admin && blog.file_name !== 'Home.md'">
             <v-divider></v-divider>
             <regular-old-card :title="blog.title" :description="blog.description"
-                              :url="blog.url" :image_url="blog.image_url"
+                              :url="blog.url" :image_url="blog.image_url" :admin="is_admin"
                               :name="blog.file_name" :file_type="blog.file_type"></regular-old-card>
           </div>
         </div>

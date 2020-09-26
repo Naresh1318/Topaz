@@ -57,6 +57,16 @@ class FileManager:
             return True
         return False
 
+    def unpublish(self, file_name: str) -> bool:
+        if file_name in self.list(as_dict=False, file_type=FileType.PUBLISHED):
+            try:
+                file_path = self.published_dir / file_name
+                os.remove(file_path)
+                return True
+            except FileNotFoundError:
+                return False
+        return False
+
     def list(self, as_dict: bool, file_type: FileType):
         data_dir = self._get_dir(file_type)
         if as_dict:
