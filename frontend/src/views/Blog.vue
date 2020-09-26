@@ -6,9 +6,9 @@
        <v-toolbar-title>Logged in as admin</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-row justify="end">
-<!--          <v-col>-->
-<!--            <v-btn> New Blog </v-btn>-->
-<!--          </v-col>-->
+          <v-col md="3">
+            <v-btn @click="open_editor()"> Write </v-btn>
+          </v-col>
           <v-col md="3">
             <v-btn @click="show_add_blog = !show_add_blog"> External Link </v-btn>
           </v-col>
@@ -24,9 +24,18 @@
                            absolute top color="black accent-4">
         </v-progress-linear>
         <div class="pa-1" v-for="blog in blogs" :key="blog.title">
-          <v-divider></v-divider>
-          <regular-old-card :title="blog.title" :description="blog.description"
-                            :url="blog.url" :image_url="blog.image_url"></regular-old-card>
+          <div v-if="is_admin && blog.file_type === fileType.UNPUBLISHED">
+            <v-divider></v-divider>
+            <regular-old-card :title="blog.title" :description="blog.description"
+                              :url="blog.url" :image_url="blog.image_url" :admin="is_admin"
+                              :name="blog.file_name" :file_type="blog.file_type"></regular-old-card>
+          </div>
+          <div v-if="!is_admin && blog.file_name !== 'Home.md'">
+            <v-divider></v-divider>
+            <regular-old-card :title="blog.title" :description="blog.description"
+                              :url="blog.url" :image_url="blog.image_url" :admin="is_admin"
+                              :name="blog.file_name" :file_type="blog.file_type"></regular-old-card>
+          </div>
         </div>
       </v-container>
     </v-content>
@@ -54,12 +63,18 @@ export default {
       is_admin: false,
       show_add_blog: false,
       is_mobile: false,
+      fileType: {
+        PUBLISHED: 0,
+        UNPUBLISHED: 1,
+      },
     };
   },
   methods: {
     get_bogs() {
       // Get all public repos
-      this.$http.get(`${this.$backend_address}/blogs`)
+      this.$http.get(`${this.$backend_address}/blogs`, {
+        withCredentials: true,
+      })
         .then((response) => {
           this.loading = false;
           this.blogs = response.data.blogs;
@@ -73,7 +88,12 @@ export default {
       return this.is_admin;
     },
     open_editor(page) {
-      this.$router.push(`/editor?page=${page}`);
+      // eslint-disable-next-line no-debugger
+      let pageName = page;
+      if (!pageName) {
+        pageName = `${Math.random().toString(36).substr(2, 11)}.md`;
+      }
+      this.$router.push(`/editor?page=${pageName}`);
     },
   },
   computed: {

@@ -16,14 +16,21 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col md="1">
-            <v-btn href="/"> Home </v-btn>
-          </v-col>
-          <v-col md="1">
-            <v-btn @click="set_markdown"> Save </v-btn>
-          </v-col>
-          <v-col md="1">
-            <v-btn @click="publish"> Publish </v-btn>
+          <v-col md="6">
+            <v-row>
+              <v-col>
+                <v-btn href="/"> Home </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn @click="set_markdown"> Save </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn @click="publish"> Publish </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn @click="unpublish"> Unpublish </v-btn>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
         <v-row>
@@ -81,6 +88,7 @@ export default {
           path: this.page,
           file_type: 1,
         },
+        withCredentials: true,
       })
         .then((response) => {
           this.loading = false;
@@ -109,6 +117,21 @@ export default {
     },
     publish() {
       this.$http.get(`${this.$backend_address}/publish`, {
+        withCredentials: true,
+        params: {
+          path: this.page,
+        },
+      })
+        .then((response) => {
+          this.loading = false;
+          if (response.data.INFO) {
+            this.show_alert = true;
+            this.alert_msg = response.data.INFO;
+          }
+        });
+    },
+    unpublish() {
+      this.$http.get(`${this.$backend_address}/unpublish`, {
         withCredentials: true,
         params: {
           path: this.page,

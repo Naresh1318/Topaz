@@ -74,9 +74,9 @@ def retrieving_posts(medium_url, db_conn):
         try:
             c.execute(
                 f"INSERT INTO blogs "
-                "(title, description, url, image_url, timestamp, automatically_added) "
-                "VALUES (?, ?, ?, ?, ?, ?)",
-                (title, description, url, image_url, time_stamp, 1))
+                "(title, description, url, image_url, timestamp, automatically_added, file_type) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (title, description, url, image_url, time_stamp, 1, 1))
             db_conn.commit()
         except Exception as e:
             logging.error(f"[E0004] {e}")
