@@ -16,9 +16,8 @@ we automate things. Thereby giving us time to, idk, complain about our laziness.
 to automatically update as much of my website as possible.
 
 ### Recent updates:
+* Added ability to write and publish blogs
 * Revamped home, project and blpg pages
-* Added ability to add page content using markdown
-* Admin page lets you choose projects you want to display (thanks [@abhinuvpitale](https://github.com/abhinuvpitale))
 
 ## Here's what it can currently do:
 
