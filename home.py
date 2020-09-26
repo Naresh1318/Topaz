@@ -169,6 +169,10 @@ def markdown_content():
 
 @bp.route("/publish", methods=["GET"])
 def publish():
+    """
+    Publish blog by moving file to published dir
+
+    """
     if current_user.is_authenticated:
         file_name: str = request.args.get("path")
         fm: FileManager = current_app.config["FILE_MANAGER"]
@@ -182,6 +186,10 @@ def publish():
 
 @bp.route("/unpublish", methods=["GET"])
 def unpublish():
+    """
+    Unpublish blog by removed it from published fir
+
+    """
     if current_user.is_authenticated:
         file_name: str = request.args.get("path")
         fm: FileManager = current_app.config["FILE_MANAGER"]
