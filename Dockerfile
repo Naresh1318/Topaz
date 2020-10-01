@@ -1,4 +1,4 @@
-# build
+# build site 
 FROM node:11.12.0-alpine as build-vue
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
@@ -7,7 +7,7 @@ RUN npm install
 COPY ./frontend .
 RUN npm run build
 
-# production
+# production of pakage to apk and caches 
 FROM nginx:stable-alpine as production
 WORKDIR /app
 RUN apk update && apk add --no-cache python3 && \
@@ -36,3 +36,4 @@ ENV PORT 5000
 CMD gunicorn -b 0.0.0.0:6000 wsgi:app --daemon && \
     sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && \
     nginx -g 'daemon off;'
+no
