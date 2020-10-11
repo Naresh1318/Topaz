@@ -27,6 +27,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.21.1",
     "eslint-plugin-vue": "^6.2.2",
+    "material-design-icons-iconfont": "^6.1.0",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "~2.0.5",
