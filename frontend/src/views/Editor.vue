@@ -5,7 +5,7 @@
         <v-progress-linear :active="loading" :indeterminate="loading"
                            absolute top color="black accent-4">
         </v-progress-linear>
-        <v-row>
+        <v-row justify="space-between">
           <v-col>
             <h1>Editor</h1>
           </v-col>
@@ -15,31 +15,36 @@
             Last saved: {{ last_saved }}
           </v-col>
         </v-row>
-        <v-row>
-          <v-col md="6">
-            <v-row>
+        <v-row justify="space-between">
+          <v-col md="2">
+            <v-row no-gutters>
               <v-col>
-                <v-btn href="/"> Home </v-btn>
+                <v-btn href="/" icon> <v-icon> home </v-icon> </v-btn>
               </v-col>
               <v-col>
-                <v-btn @click="set_markdown"> Save </v-btn>
+                <v-btn @click="set_markdown" icon> <v-icon> save </v-icon> </v-btn>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col md="4">
+            <v-row no-gutters>
+              <v-col>
+                <v-btn @click="publish"> Publish <v-icon> check_circle </v-icon> </v-btn>
               </v-col>
               <v-col>
-                <v-btn @click="publish"> Publish </v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="unpublish"> Unpublish </v-btn>
+                <v-btn @click="unpublish"> Unpublish <v-icon> unpublished </v-icon> </v-btn>
               </v-col>
             </v-row>
           </v-col>
         </v-row>
+        <v-divider></v-divider>
         <v-row>
-          <v-col md="6" xs="12">
+          <v-col md="6" xs="12" style="height: 75vh">
             <textarea :value="markdown_content" @input="update"
                       style="width: 100%; height: 100%">
             </textarea>
           </v-col>
-          <v-col md="6" xs="12">
+          <v-col md="6" xs="12" style="height: 75vh">
             <div v-html="render_markdown" class="content_html"></div>
           </v-col>
         </v-row>
