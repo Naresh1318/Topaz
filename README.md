@@ -17,7 +17,7 @@ to automatically update as much of my website as possible.
 
 ### Recent updates:
 * Added ability to write and publish blogs
-* Revamped home, project and blpg pages
+* Revamped home, project and blog pages
 
 ## Here's what it can currently do:
 
