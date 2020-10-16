@@ -18,7 +18,7 @@ to automatically update as much of my website as possible.
 ### Recent updates:
 * Added ability to write and publish blogs
 * Revamped home, project and blpg pages
-
+* visualization of the contents
 ## Here's what it can currently do:
 
 1. Automatically fetch public repos from your github account
@@ -35,7 +35,7 @@ to automatically update as much of my website as possible.
     <p align="center"> <b>Add blogs and publications details</b> </p>
 </p>
 
-3. Choose what gets shown
+3. Choose what you want gets shown 
 
 <p align=center>
     <img src="https://files.naresh1318.com/public/topaz/admin_projects.png" alt="simplyServe"/>
