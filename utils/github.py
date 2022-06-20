@@ -111,9 +111,13 @@ def update_public_repos(db_conn):
             readme = "" if node["object"] is None else node["object"]["text"]
             image_url = extract_first_image_url(readme)
             url = node["url"]
-            latest_commit = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["message"]
-            timestamp = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["committedDate"]\
-                .replace("T", " ").replace("Z", "")  # Remove T and Z
+            try:
+                latest_commit = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["message"]
+                timestamp = node["defaultBranchRef"]["target"]["history"]["nodes"][0]["committedDate"] \
+                    .replace("T", " ").replace("Z", "")  # Remove T and Z
+            except TypeError:
+                latest_commit = ""
+                timestamp = 0
             if url in projects:
                 visible = projects[url]["visible"]
             else:
