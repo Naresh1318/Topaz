@@ -30,10 +30,10 @@ def create_app():
         SECRET_KEY=os.urandom(16),
         CACHED_TIME=time.time(),
         THEME_DIR="./data/theme.json",
-        REAL_MARKDOWN_DIR=os.path.join(project_dir, "../topaz_docs"),
+        REAL_MARKDOWN_DIR=os.path.join(project_dir, "./data/topaz_docs"),
         MARKDOWN_DIR="./data/docs",
-        FILE_MANAGER=FileManager(file_src_dir=os.path.join(project_dir, "../topaz_docs") + "/",
-                                 symbolic_link_dst="./data/docs")
+        FILE_MANAGER=FileManager(file_src_dir=os.path.join(project_dir, "./data/topaz_docs") + "/",
+                                 symbolic_link_dst="./data/topaz_docs")
     )
 
     CORS(app, supports_credentials=True)
